@@ -22,6 +22,12 @@ public interface DataModelInterface {
     public boolean initializeDataModel();
     
     /**
+     * Saves the datamodel to disk
+     * @return whether save was successful 
+     */
+    public boolean saveToDisk();
+    
+    /**
      * Returns all the data associated with a user, which at this time, is all the data there is.
      * @return A treemodel containing all docs and cards associated with a user
      */

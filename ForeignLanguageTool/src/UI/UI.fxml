@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+/*
+File: UI.fxml
+Author: Matt Rieser
+Date: July 1, 2019
+Purpose:
+*/
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FLT.Controller">
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <children>
+      <BorderPane prefHeight="600.0" prefWidth="1000.0" GridPane.rowIndex="1">
+         <top>
+            <MenuBar prefHeight="0.0" prefWidth="403.0" BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="New Document" />
+                        <MenuItem mnemonicParsing="false" text="New Flashcard" />
+                        <MenuItem mnemonicParsing="false" text="Save" />
+                        <MenuItem mnemonicParsing="false" text="Load" />
+                        <MenuItem mnemonicParsing="false" text="Create new Language Pair" />
+                        <MenuItem mnemonicParsing="false" text="Import Documents" />
+                        <MenuItem mnemonicParsing="false" text="Export Documents" />
+                        <MenuItem mnemonicParsing="false" text="Save and Exit" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Text" />
+                        <MenuItem mnemonicParsing="false" text="Flashcard" />
+                        <MenuItem mnemonicParsing="false" text="Note" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="View">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Current Deck" />
+                        <MenuItem mnemonicParsing="false" text="Quiz Settings" />
+                        <MenuItem mnemonicParsing="false" text="Quiz" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Help">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                     </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+         <left>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <content>
+                  <TreeView prefHeight="550.0" prefWidth="169.0">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </TreeView>
+               </content>
+            </ScrollPane>
+         </left>
+         <center>
+            <TextArea prefHeight="549.0" prefWidth="248.0" promptText="Enter Text to Begin Making Flashcards" BorderPane.alignment="CENTER" />
+         </center></BorderPane>
+   </children>
+</GridPane>

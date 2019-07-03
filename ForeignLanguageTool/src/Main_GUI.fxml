@@ -5,34 +5,35 @@ Author: Matt Rieser
 Date: July 1, 2019
 Purpose:
 */
-
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FLT.Controller">
+<GridPane alignment="center" prefHeight="632.0" prefWidth="947.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FLT.Controller">
    <rowConstraints>
       <RowConstraints />
       <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
+      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
    </rowConstraints>
    <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
+      <ColumnConstraints maxWidth="960.0" minWidth="945.0" prefWidth="945.0" />
+      <ColumnConstraints maxWidth="17.0" minWidth="2.0" prefWidth="17.0" />
    </columnConstraints>
    <children>
-      <BorderPane prefHeight="600.0" prefWidth="1000.0" GridPane.rowIndex="1">
+      <BorderPane prefHeight="949.0" prefWidth="945.0" GridPane.rowIndex="1">
          <top>
-            <MenuBar prefHeight="0.0" prefWidth="403.0" BorderPane.alignment="CENTER">
+            <MenuBar prefHeight="0.0" prefWidth="945.0" BorderPane.alignment="CENTER">
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
@@ -81,6 +82,18 @@ Purpose:
          </left>
          <center>
             <TextArea prefHeight="549.0" prefWidth="248.0" promptText="Enter Text to Begin Making Flashcards" BorderPane.alignment="CENTER" />
-         </center></BorderPane>
+         </center>
+         <bottom>
+            <SplitPane dividerPositions="0.5174973488865323" prefHeight="206.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <TextArea layoutX="1.0" prefHeight="200.0" prefWidth="450.0" />
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </bottom></BorderPane>
    </children>
 </GridPane>

@@ -7,6 +7,8 @@ Purpose:
 
 package DataModel;
 
+import org.dom4j.*;
+
 
 public class NewClass {
 

@@ -147,7 +147,7 @@ class Card extends Item{
     
     
         //method is called on a read operation
-    public Card constructObject(Node node) throws JAXBException{
+    public static Card constructObject(Node node) throws JAXBException{
         JAXBContext context = JAXBContext.newInstance(Card.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         Object retval = unmarshaller.unmarshal(node);

@@ -64,6 +64,23 @@ public class Test {
             
             System.out.println(doc.toString());
             
+            exp = xpath.compile("User/LanguagePair/Group/Document/Card");
+            
+            NodeList result4 = (NodeList)exp.evaluate(document, XPathConstants.NODESET);
+            
+            Card card = Card.constructObject(result4.item(0));
+            
+            System.out.println(card.toString());
+            
+            exp = xpath.compile("User/LanguagePair/Group/Document/Note");
+            
+            NodeList result5 = (NodeList)exp.evaluate(document, XPathConstants.NODESET);
+            
+            Note note = Note.constructObject(result5.item(0));
+            
+            System.out.println(note.toString());
+            
+            
             
         } catch (ParserConfigurationException ex) {
             ex.printStackTrace();

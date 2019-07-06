@@ -80,6 +80,10 @@ public class Test {
             
             System.out.println(note.toString());
             
+            System.out.println(Item.getCount());
+            
+            Utils.validateSchema(document);
+            
             
             
         } catch (ParserConfigurationException ex) {

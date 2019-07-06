@@ -18,12 +18,12 @@ and open the template in the editor.
                 <title>Geld zum Fenster hinauswerfen</title>
                 <text>Mit Geld kann nicht jeder umgehen. Der eine spart jeden Cent, während der andere schon am Monatsanfang wieder pleite ist und gar nicht weiß, wofür er das Geld eigentlich ausgegeben hat.</text>
                 <translation>You can't always get by with just money. blah blah blah</translation>
-                <Notes ID='8'>
+                <Note ID='8'>
                     <content>kann is the present form of konnen</content>
                     <index>1</index>
                     <startChar>0</startChar>
                     <endChar>13</endChar>
-                </Notes>
+                </Note>
                 <Card ID='9'>
                     <index>1</index>
                     <wordAsAppears>umgehen</wordAsAppears>

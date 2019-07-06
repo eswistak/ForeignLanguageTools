@@ -10,7 +10,17 @@ package DataModel;
 import Logic.MotherTree;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.XMLConstants;
 import javax.xml.parsers.*;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -25,6 +35,25 @@ public class Utils {
         Document document = builder.parse(xmlFile);
         MotherTree tree = MotherTree.getInstance();
         tree.setNodes(document);
+    }
+    
+    public static boolean validateSchema(Document document){
+        SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        try {
+            Schema schema = factory.newSchema(new File("DataModel\\Schema.xsd"));
+            Validator validator = schema.newValidator();
+            
+            DOMSource source = new DOMSource(document);
+            validator.validate(source);
+            
+            
+        } catch (SAXException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
+        return true;
     }
 
 }

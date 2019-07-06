@@ -61,8 +61,6 @@ public class Item {
         node.getChildNodes().item(index).setNodeValue(text);
     }
     
-    public abstract void update();
-    
     //method is called on delete operation
     public void delete(Node node) {
         this.getNode().getParentNode().removeChild(this.getNode());

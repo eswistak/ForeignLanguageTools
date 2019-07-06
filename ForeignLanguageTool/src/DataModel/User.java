@@ -45,7 +45,7 @@ class User extends Item {
     
 
     //method is called on a read operation
-    public User constructObject(Node node) throws JAXBException{
+    public static User constructObject(Node node) throws JAXBException{
         JAXBContext context = JAXBContext.newInstance(User.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         Object retval = unmarshaller.unmarshal(node);
@@ -58,7 +58,6 @@ class User extends Item {
     }
     
     //method is called on an update operation
-    @Override
     public void update(){
         super.updateNode(0, name);
         super.updateNode(1, nativeLanguage);

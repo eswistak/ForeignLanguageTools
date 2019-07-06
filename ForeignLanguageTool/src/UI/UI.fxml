@@ -19,8 +19,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<Scene xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FLT.Controller">
+<Scene xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
    <root>
       <TitledPane prefHeight="626.0" prefWidth="909.0">
          <content>

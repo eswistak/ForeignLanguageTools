@@ -5,6 +5,10 @@ Date: Jul 5, 2019
 Purpose:
 */
 
+//Added a comment for example purposes
+
+//blah blah blah blah blah is this comment long enough yet?
+
 package DataModel;
 
 import Logic.MotherTree;

@@ -5,6 +5,8 @@ Date: Jul 5, 2019
 Purpose:
 */
 
+//Added a comment for example purposes
+
 package DataModel;
 
 import Logic.MotherTree;

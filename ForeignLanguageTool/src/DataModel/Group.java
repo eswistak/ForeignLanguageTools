@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name="Group")
 @XmlAccessorType(XmlAccessType.NONE)
-class Group extends Item {
+public class Group extends Item {
     
     @XmlElement(name="name")
     private String name = "";
@@ -64,4 +64,9 @@ class Group extends Item {
         group.setNode(node);
         return group;
    }
+    
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }

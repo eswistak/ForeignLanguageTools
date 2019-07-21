@@ -19,14 +19,14 @@ import org.w3c.dom.*;
 
 @XmlRootElement(name="LanguagePair")
 @XmlAccessorType(XmlAccessType.NONE)
-class LanguagePair extends Item {
+public class LanguagePair extends Item {
 
     @XmlElement(name="native")
     private String nat = "";
     @XmlElement(name="target")
     private String target = "";
     
-    private LanguagePair(){
+    public LanguagePair(){
         super();
     }
 
@@ -77,4 +77,9 @@ class LanguagePair extends Item {
         langpair.setNode(node);
         return langpair;
    }
+    
+    @Override
+    public String toString(){
+        return (this.nat + " -> " + this.target);
+    }
 }

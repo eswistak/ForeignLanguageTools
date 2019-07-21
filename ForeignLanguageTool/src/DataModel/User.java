@@ -15,14 +15,14 @@ import org.w3c.dom.*;
 
 @XmlRootElement(name="User")
 @XmlAccessorType(XmlAccessType.NONE)
-class User extends Item {
+public class User extends Item {
     
     @XmlElement(name="name")
     String name = "";
     @XmlElement(name="NativeLanguage")
     String nativeLanguage = "";
 
-    private User(){
+    public User(){
         super();
     }
 

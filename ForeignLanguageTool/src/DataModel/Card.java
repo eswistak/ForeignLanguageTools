@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name="Card")
 @XmlAccessorType(XmlAccessType.NONE)
-class Card extends Item{
+public class Card extends Item{
     
     @XmlElement(name="index")
     private int index = 0;

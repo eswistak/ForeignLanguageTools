@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name="Document")
 @XmlAccessorType(XmlAccessType.NONE)
-class Doc extends Item{
+public class Doc extends Item{
 
     @XmlElement(name="title")
     private String title = "";
@@ -86,5 +86,10 @@ class Doc extends Item{
         doc.setNode(node);
         return doc;
     
+    }
+    
+    @Override
+    public String toString(){
+        return this.title;
     }
 }

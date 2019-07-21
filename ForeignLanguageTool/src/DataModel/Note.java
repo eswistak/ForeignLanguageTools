@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name="Note")
 @XmlAccessorType(XmlAccessType.NONE)
-class Note extends Item {
+public class Note extends Item {
     
     @XmlElement(name="content")
     private String content = "";

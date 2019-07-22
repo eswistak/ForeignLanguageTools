@@ -18,45 +18,30 @@ import DataModel.Group;
 import DataModel.Item;
 import DataModel.LanguagePair;
 import DataModel.Note;
-import Logic.MockAPI;
+import Logic.ActualAPI;
 import java.io.File;
-
 import java.net.URL;
-
+import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.BooleanProperty;
-
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
-
 import javafx.collections.ObservableList;
-
 import javafx.event.ActionEvent;
-
 import javafx.fxml.FXML;
-
 import javafx.fxml.Initializable;
-
 import javafx.scene.control.Alert;
-
 import javafx.scene.control.MenuItem;
-
 import javafx.scene.control.SelectionMode;
-
 import javafx.scene.control.TableColumn;
-
 import javafx.scene.control.TableView;
-
 import javafx.scene.control.TextArea;
-
 import javafx.scene.control.TreeItem;
-
+import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeView;
-
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import javafx.scene.input.MouseEvent;
-
 import javafx.stage.FileChooser;
+import javafx.util.Callback;
 
 
 
@@ -144,11 +129,11 @@ public class UIController implements Initializable {
 
     @FXML
 
-    private TableView<TestItem> cardsTableView;
+    private TableView<Card> cardsTableView;
 
     @FXML
 
-    private TableView<TestItem> notesTableView;
+    private TableView<Note> notesTableView;
 
     @FXML
 
@@ -166,26 +151,12 @@ public class UIController implements Initializable {
 
     private TableColumn<TestItem, String> notesNoteColumn;
 
-    
-
-    
-
-    
 
     // other variables
 
     private File openedFile;
 
     private File importedFile;
-
-    
-
-    
-
-    
-
-    
-
 
 
     /**
@@ -206,15 +177,15 @@ public class UIController implements Initializable {
 
         // testing tableView
 
-        createCardTableView();
-
-        createNoteTableView();
+//        createCardTableView();
+//
+//        createNoteTableView();
 
         
 
-        // testing treeView
+        // testing buildTreeView
 
-        treeViewTest();
+        buildTreeView();
 
         treeViewMain.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
@@ -397,6 +368,20 @@ public class UIController implements Initializable {
     }
 
     
+    // treeview handling
+
+    private void handle(TreeItem<Item> newValue) {
+        
+        if(newValue.getValue() instanceof Doc){
+            
+            Doc doc = (Doc)newValue.getValue();
+
+            textAreaMain.setText(doc.getText());
+            createCardTableView(doc);
+            createNoteTableView(doc);
+        }
+
+    }
 
    // open file explorer
 
@@ -436,30 +421,20 @@ public class UIController implements Initializable {
 
     
 
-    // treeview testing
 
-    private void handle(TreeItem<Item> newValue) {
+
+
+    private void buildTreeView() {
         
-        if(newValue.getValue() instanceof Doc){
-
-            textAreaMain.setText(((Doc)newValue.getValue()).getText());
-        }
-
-    }
-
-
-
-    private void treeViewTest() {
+        TreeItem<Item> root = new TreeItem(ActualAPI.getInstance().getUser());
         
-        TreeItem<Item> root = new TreeItem(MockAPI.getInstance().getUser());
-        
-        for(LanguagePair langPair : MockAPI.getInstance().getLangPair()){
+        for(LanguagePair langPair : ActualAPI.getInstance().getLangPair()){
             TreeItem<Item> langItem = new TreeItem(langPair);
             root.getChildren().add(langItem);
-            for(Group group : MockAPI.getInstance().getGroups(langPair)){
+            for(Group group : ActualAPI.getInstance().getGroups(langPair)){
                 TreeItem<Item> groupItem = new TreeItem(group);
                 langItem.getChildren().add(groupItem);
-                for(Doc doc : MockAPI.getInstance().getDocuments(group)){
+                for(Doc doc : ActualAPI.getInstance().getDocuments(group)){
                     TreeItem<Item> docItem = new TreeItem(doc);
                     groupItem.getChildren().add(docItem);
                 }
@@ -477,51 +452,77 @@ public class UIController implements Initializable {
 
     // testing tableView
 
-    private void createCardTableView() {
+    private void createCardTableView(Doc doc) {
 
-        cardsWordColumn.setCellValueFactory
+        cardsWordColumn.setCellValueFactory(new Callback(){
+            @Override
+            public Object call(Object obj){
+                final Object dataObj = ((TableColumn.CellDataFeatures) obj).getValue();
+                if(dataObj instanceof Card){
+                    return new ReadOnlyStringWrapper(String.valueOf(((Card)dataObj).getWordAsAppears()));
+                }
+                return null;
+            }
+        });
 
-                        (new PropertyValueFactory<>("name"));
+        cardsDefinitionColumn.setCellValueFactory(new Callback(){
+            @Override
+            public Object call(Object obj){
+                final Object dataObj = ((TableColumn.CellDataFeatures) obj).getValue();
+                if(dataObj instanceof Card){
+                    return new ReadOnlyStringWrapper(String.valueOf(((Card)dataObj).getTransInContext()));
+                }
+                return null;
+                }
+        });
 
-        cardsDefinitionColumn.setCellValueFactory
-
-                        (new PropertyValueFactory<>("value"));
-
-        cardsTableView.setItems(getCardsData());
-
-    }
-
-    
-
-    private void createNoteTableView() {
-
-        notesIndexColumn.setCellValueFactory
-
-                        (new PropertyValueFactory<>("name"));
-
-        notesNoteColumn.setCellValueFactory
-
-                        (new PropertyValueFactory<>("value"));
-
-        notesTableView.setItems(getNotesData());
+        cardsTableView.setItems(getCardsData(doc));
 
     }
 
     
 
-    private ObservableList<Card> getCardsData() {
+    private void createNoteTableView(Doc doc) {
 
-        ObservableList<TestItem> data = FXCollections.observableArrayList();
+        notesIndexColumn.setCellValueFactory(new Callback(){
+            @Override
+            public Object call(Object obj){
+                final Object dataObj = ((TableColumn.CellDataFeatures) obj).getValue();
+                if(dataObj instanceof Note){
+                    return new ReadOnlyStringWrapper(String.valueOf(((Note)dataObj).getIndex()));
+                }
+                return null;
+                }
+        });
 
-        data.add(new TestItem("Card 1", "Def 1"));
+                        
 
-        data.add(new TestItem("Card 2", "Def 2"));
+        notesNoteColumn.setCellValueFactory(new Callback(){
+            @Override
+            public Object call(Object obj){
+                final Object dataObj = ((TableColumn.CellDataFeatures) obj).getValue();
+                if(dataObj instanceof Note){
+                    return new ReadOnlyStringWrapper(String.valueOf(((Note)dataObj).getContent()));
+                }
+                return null;
+                }
+        });
 
-        data.add(new TestItem("Card 3", "Def 3"));
+                      
 
-        data.add(new TestItem("Card 4", "Def 4"));
+        notesTableView.setItems(getNotesData(doc));
 
+    }
+
+    
+
+    private ObservableList<Card> getCardsData(Doc doc) {
+
+        ObservableList<Card> data = FXCollections.observableArrayList();
+
+        List<Card> cards = ActualAPI.getInstance().getCards(doc);
         
+        data.addAll(cards);
 
         return data;
 
@@ -529,19 +530,13 @@ public class UIController implements Initializable {
 
 
 
-    private ObservableList<Note> getNotesData() {
+    private ObservableList<Note> getNotesData(Doc doc) {
 
-        ObservableList<TestItem> data = FXCollections.observableArrayList();
+        ObservableList<Note> data = FXCollections.observableArrayList();
 
-        data.add(new TestItem("Index 1", "Note 1"));
-
-        data.add(new TestItem("Index 2", "Note 2"));
-
-        data.add(new TestItem("Index 3", "Note 3"));
-
-        data.add(new TestItem("Index 4", "Note 4"));
-
+        List<Note> notes = ActualAPI.getInstance().getNote(doc);
         
+        data.addAll(notes);
 
         return data;
 

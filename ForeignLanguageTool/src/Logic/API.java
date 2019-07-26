@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Logic;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface API {
     public List<Card> getCards(Doc doc);
     public List<Note> getNote(Doc doc);
     public List<Card> getAllCards(LanguagePair langPair);
+    
+    //TODO Hyung add write, update, delete methods
 }

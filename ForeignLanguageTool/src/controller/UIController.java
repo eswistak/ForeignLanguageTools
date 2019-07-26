@@ -8,7 +8,7 @@
 
  */
 
-package UI;
+package controller;
 
 
 
@@ -192,11 +192,11 @@ public class UIController implements Initializable {
         
 
     }    
-
+    //TODO Actually implement any method with a println
 
 
     @FXML
-
+    //TODO Implement Hyung Kang
     private void menuFileNewDocEvent(ActionEvent event) {
 
         System.out.println("File -> New Document");
@@ -206,7 +206,7 @@ public class UIController implements Initializable {
 
 
     @FXML
-
+    //TODO Implement Ethan Swistak
     private void menuFileNewFlashcardEvent(ActionEvent event) {
 
         System.out.println("File -> New Falshcard");
@@ -216,7 +216,7 @@ public class UIController implements Initializable {
 
 
     @FXML
-
+    //TODO Implement Matt Rieser
     private void menuFileSaveEvent(ActionEvent event) {
 
         System.out.println("File -> Save");
@@ -226,7 +226,7 @@ public class UIController implements Initializable {
 
 
     @FXML
-
+    //TODO Implement Matt Rieser
     private void menuFileLoadEvent(ActionEvent event) {
 
         System.out.println("File -> Load");
@@ -242,7 +242,7 @@ public class UIController implements Initializable {
     
 
     @FXML
-
+    //TODO Implement Hyung Kang
     private void menuFileCreateNewLangPairEvent(ActionEvent event) {
 
         System.out.println("File -> Create New Language Pair");
@@ -252,7 +252,7 @@ public class UIController implements Initializable {
 
 
     @FXML
-
+    //TODO Implement Matt Rieser
     private void menuFileImportDocEvent(ActionEvent event) {
 
         System.out.println("File -> Import Document");
@@ -268,7 +268,7 @@ public class UIController implements Initializable {
     
 
     @FXML
-
+    //TODO Implement Matt Rieser
     private void menuFileExportDocEvent(ActionEvent event) {
 
         System.out.println("File -> Export Document");
@@ -278,7 +278,7 @@ public class UIController implements Initializable {
 
 
     @FXML
-
+    //TODO Implement Matt Rieser
     private void menuFileSaveExitEvent(ActionEvent event) {
 
         System.out.println("File -> Save & Exit");
@@ -288,7 +288,7 @@ public class UIController implements Initializable {
     
 
     @FXML
-
+    //TODO Implement Hyung Kang
     private void menuEditTextEvent(ActionEvent event) {
 
         System.out.println("Edit -> Text");
@@ -298,17 +298,17 @@ public class UIController implements Initializable {
 
 
     @FXML
-
+    //TODO Implement Ethan Swistak
     private void menuEditFlashcardEvent(ActionEvent event) {
 
-        System.out.println("Edit -> Flashcard");
+        System.out.println("Edit -> Edit Flashcard");
 
     }
 
 
 
     @FXML
-
+    //TODO Implement Hyung Kang, we don't yet have a note edit screen, should build one
     private void menuEditNoteEvent(ActionEvent event) {
 
         System.out.println("Edit -> Note");
@@ -318,7 +318,7 @@ public class UIController implements Initializable {
 
 
     @FXML
-
+    //TODO Implement Tim Waite
     private void menuViewCurrentDeckEvent(ActionEvent event) {
 
         System.out.println("View -> Current Deck");
@@ -338,11 +338,13 @@ public class UIController implements Initializable {
 
 
     @FXML
-
+    //TODO Tim
     private void menuViewQuizEvent(ActionEvent event) {
 
         System.out.println("View -> Quiz");
-
+        //Get the parent of document being viewed or parent of group selected
+        //pass to getallcards
+        //pass result to quiz controller
     }
 
 

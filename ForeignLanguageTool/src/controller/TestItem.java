@@ -8,7 +8,7 @@
 
  */
 
-package UI;
+package controller;
 
 
 

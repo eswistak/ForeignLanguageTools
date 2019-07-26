@@ -26,6 +26,18 @@ public interface API {
     public List<Card> getCards(Doc doc);
     public List<Note> getNote(Doc doc);
     public List<Card> getAllCards(LanguagePair langPair);
-    
+
     //TODO Hyung add write, update, delete methods
+    /*
+    public void write();
+    public void updateGroup(LanguagePair langPair);
+    public void updateDocument(Doc doc);
+    public void updateCard(Card card);
+    public void updateNote(Note note);
+    
+    public void deleteGroup(LanguagePair langPair);
+    public void deleteDocument(Doc doc);
+    public void deleteCard(Card card);
+    public void deleteNote(Note note);
+    */
 }

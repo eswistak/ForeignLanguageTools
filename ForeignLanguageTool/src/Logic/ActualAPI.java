@@ -27,7 +27,7 @@ import org.w3c.dom.NodeList;
 
 /**
  *
- * @author Ethan Swistak
+ * @author Andrew Barbarosa
  */
 public class ActualAPI implements API {
     
@@ -171,5 +171,28 @@ public class ActualAPI implements API {
         return null;
     }
     
+    
+        /*
+    call Card.createNew()
+    return a blank card object
+    Doc the doc object that was passed in argument
+    Lookup the XML node in the MotherTree using @ID
+    Add card.getNode();
+    return that card
+    */
+    
+    /*
+    Create news
+        Card
+        Note
+        Doc
+        Group   
+        LangPair
+    */
+    
+    /*
+    Deletes
+    this.getNode().getParentNode().removeChild(this.getNode());
+    */
     
 }

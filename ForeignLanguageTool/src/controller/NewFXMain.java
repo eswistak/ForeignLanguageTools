@@ -43,11 +43,7 @@ public class NewFXMain extends Application {
     public static void main(String[] args) {
         try {
             Utils.load();
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(NewFXMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(NewFXMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (ParserConfigurationException | SAXException | IOException ex) {
             Logger.getLogger(NewFXMain.class.getName()).log(Level.SEVERE, null, ex);
         }
         launch(args);

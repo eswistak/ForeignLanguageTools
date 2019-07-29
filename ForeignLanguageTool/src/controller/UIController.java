@@ -18,12 +18,19 @@ import DataModel.Group;
 import DataModel.Item;
 import DataModel.LanguagePair;
 import DataModel.Note;
+import DataModel.Utils;
 import Logic.ActualAPI;
+import UI.CardCreationController;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
@@ -31,8 +38,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -51,8 +60,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Pair;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
 
 
 
@@ -136,7 +150,7 @@ public class UIController implements Initializable {
 
     @FXML
 
-    private TreeView<Item> treeViewMain;
+    protected TreeView<Item> treeViewMain;
 
     @FXML
 
@@ -161,6 +175,8 @@ public class UIController implements Initializable {
     @FXML
 
     private TableColumn<TestItem, String> notesNoteColumn;
+    
+    public Doc viewingDoc;
 
 
     // other variables
@@ -192,9 +208,6 @@ public class UIController implements Initializable {
         buildTreeView();
 
         treeViewMain.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-        
-
     }    
     //TODO Actually implement any method with a println
 
@@ -249,11 +262,9 @@ public class UIController implements Initializable {
 
 
     @FXML
-    //TODO Implement Ethan Swistak
-    private void menuFileNewFlashcardEvent(ActionEvent event) {
+    private void menuFileNewFlashcardEvent(ActionEvent event){
 
-        System.out.println("File -> New Falshcard");
-
+        CardCreationController newCard = new CardCreationController(viewingDoc);
     }
 
 
@@ -262,14 +273,22 @@ public class UIController implements Initializable {
     //TODO Implement Matt Rieser
     private void menuFileSaveEvent(ActionEvent event) {
 
-        System.out.println("File -> Save");
-
+        try {
+            Utils.save();
+        } catch (ParserConfigurationException ex) {
+            System.out.println("Parser not configured correctly");
+        } catch (SAXException ex) {
+            System.out.println("SAX messed up");
+        } catch (IOException ex) {
+            System.out.println("The file was not found");
+        } catch (TransformerException ex) {
+            System.out.println("TransformerS! More than meets the eye!");
+        }
     }
 
 
 
     @FXML
-    //TODO Implement Matt Rieser
     private void menuFileLoadEvent(ActionEvent event) {
 
         System.out.println("File -> Load");
@@ -278,7 +297,15 @@ public class UIController implements Initializable {
 
         
 
-        System.out.println("LOAD: " + openedFile.getAbsolutePath());
+        try {
+            Utils.load(openedFile.getAbsolutePath());
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(UIController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(UIController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(UIController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -439,11 +466,13 @@ public class UIController implements Initializable {
 
 
     @FXML
-    //TODO Implement Ethan Swistak
     private void menuEditFlashcardEvent(ActionEvent event) {
-
-        System.out.println("Edit -> Edit Flashcard");
-
+        
+        if(viewingDoc == null){
+            
+        }else{
+            CardCreationController subWindow = new CardCreationController(this.viewingDoc, this.cardsTableView.getSelectionModel().getSelectedItem());
+        }
     }
 
 
@@ -526,6 +555,8 @@ public class UIController implements Initializable {
         if(newValue.getValue() instanceof Doc){
             
             Doc doc = (Doc)newValue.getValue();
+            doc.getID();
+            this.viewingDoc = doc;
 
             textAreaMain.setText(doc.getText());
             createCardTableView(doc);

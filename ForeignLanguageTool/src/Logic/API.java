@@ -27,17 +27,27 @@ public interface API {
     public List<Note> getNote(Doc doc);
     public List<Card> getAllCards(LanguagePair langPair);
 
-    //TODO Hyung add write, update, delete methods
-    /*
-    public void write();
-    public void updateGroup(LanguagePair langPair);
-    public void updateDocument(Doc doc);
+    //Create methods
+    public LanguagePair createLangPair(LanguagePair langPair);
+    public Group createGroup(LanguagePair langPair, Group group);
+    public Doc createDoc(Group group, Doc doc);
+    public Card createCard(Doc doc, Card card);
+    public Note createNote(Doc doc, Note note);
+
+    //Overloaded
+    //public Group createGroup(Group group, LangPair langpair);
+
+    //Update methods
+    public void updateGroup(Group group);
+    public void updateDoc(Doc doc);
     public void updateCard(Card card);
     public void updateNote(Note note);
-    
-    public void deleteGroup(LanguagePair langPair);
-    public void deleteDocument(Doc doc);
+
+    //Delete methods
+    public void deleteLangPair(LanguagePair langPair);
+    public void deleteGroup(Group group);
+    public void deleteDoc(Doc doc);
     public void deleteCard(Card card);
     public void deleteNote(Note note);
-    */
+
 }

@@ -14,35 +14,36 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import org.w3c.dom.Node;
 import javax.xml.bind.annotation.*;
+import javax.xml.transform.dom.DOMResult;
 
 @XmlRootElement(name="Card")
 @XmlAccessorType(XmlAccessType.NONE)
 public class Card extends Item{
     
     @XmlElement(name="index")
-    private int index = 0;
+    private int index = 1;
     @XmlElement(name="wordAsAppears")
-    private String wordAsAppears = "";
+    private String wordAsAppears = "   ";
     @XmlElement(name="generic")
-    private String generic = "";
+    private String generic = "   ";
     @XmlElement(name="partOfSpeech")
-    private String partOfSpeech = "";
+    private String partOfSpeech = "   ";
     @XmlElement(name="translationInContext")
-    private String transInContext = "";
+    private String transInContext = "   ";
     @XmlElement(name="otherTranslation")
-    private String otherTrans = "";
+    private String otherTrans = "   ";
     @XmlElement(name="startChar")
-    private int startChar = 0;
+    private int startChar = 1;
     @XmlElement(name="endChar")
-    private int endChar = 0;
+    private int endChar = 1;
     @XmlElement(name="timesCorrect")
-    private int timesCorrect = 0;
+    private int timesCorrect = 1;
     @XmlElement(name="timesIncorrect")
-    private int timesIncorrect = 0;
+    private int timesIncorrect = 1;
     @XmlElement(name="hint")
-    private String hint = "";
+    private String hint = "     ";
     @XmlElement(name="cardNote")
-    private String cardNote = "";
+    private String cardNote = "      ";
 
     public Card(){
         super();
@@ -179,10 +180,10 @@ public class Card extends Item{
     public static Card createNew() throws JAXBException{
         JAXBContext context = JAXBContext.newInstance(Card.class);
         Card card = new Card();
-        Node node = MotherTree.getInstance().getNodes().createElement("Card");
+        DOMResult result = new DOMResult();
         Marshaller marshaller = context.createMarshaller();
-        marshaller.marshal(card, node);
-        card.setNode(node);
+        marshaller.marshal(card, result);
+        card.setNode(result.getNode());
         return card;
         
         

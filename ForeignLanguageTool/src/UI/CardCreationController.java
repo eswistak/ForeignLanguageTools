@@ -13,8 +13,11 @@ import Logic.ActualAPI;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -67,35 +70,35 @@ public class CardCreationController extends Window {
         CardCreationController.card = card;
         CardCreationController.doc = doc;
         FXMLLoader loader = new FXMLLoader();
+        ClassLoader cl = CardCreationController.class.getClassLoader();
+        InputStream inputStream = cl.getResourceAsStream("UI/CardCreation.fxml");
+        Scene inputCard = null;
         try {
-            FileInputStream inputStream = new FileInputStream("UI\\CardCreation.fxml");
-            Scene inputCard = loader.load(inputStream);
-            Stage secondaryStage = new Stage();
-            secondaryStage.setScene(inputCard);
-            secondaryStage.initModality(Modality.APPLICATION_MODAL);
-            secondaryStage.show();
-        } catch (FileNotFoundException ex) {
-            System.out.println("Failed to initialize FXML, File Not Found");
+            inputCard = loader.load(inputStream);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(CardCreationController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Stage secondaryStage = new Stage();
+        secondaryStage.setScene(inputCard);
+        secondaryStage.initModality(Modality.APPLICATION_MODAL);
+        secondaryStage.show();
     }
     
     public CardCreationController(Doc doc){
         CardCreationController.doc = doc;
         FXMLLoader loader = new FXMLLoader();
+        ClassLoader cl = CardCreationController.class.getClassLoader();
+        InputStream inputStream = cl.getResourceAsStream("UI/CardCreation.fxml");
+        Scene inputCard = null;
         try {
-            FileInputStream inputStream = new FileInputStream("UI\\CardCreation.fxml");
-            Scene inputCard = loader.load(inputStream);
-            Stage secondaryStage = new Stage();
-            secondaryStage.setScene(inputCard);
-            secondaryStage.initModality(Modality.APPLICATION_MODAL);
-            secondaryStage.show();
-        } catch (FileNotFoundException ex) {
-            System.out.println("Failed to initialize FXML, File Not Found");
+            inputCard = loader.load(inputStream);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(CardCreationController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Stage secondaryStage = new Stage();
+        secondaryStage.setScene(inputCard);
+        secondaryStage.initModality(Modality.APPLICATION_MODAL);
+        secondaryStage.show();
     }
 
     

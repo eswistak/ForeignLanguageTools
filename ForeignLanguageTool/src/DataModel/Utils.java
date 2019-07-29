@@ -86,18 +86,18 @@ public class Utils {
     }
     
     public static boolean validateSchema(Document document){
-//        SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-//        try {
-//            Schema schema = factory.newSchema(new File("DataModel\\Schema.xsd"));
-//            Validator validator = schema.newValidator();
-//            
-//            DOMSource source = new DOMSource(document);
-//            validator.validate(source);
-//        } catch (SAXException ex) {
-//            return false;
-//        } catch (IOException ex) {
-//            return false;
-//        }
+        SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        try {
+            Schema schema = factory.newSchema(new File("DataModel\\Schema.xsd"));
+            Validator validator = schema.newValidator();
+            
+            DOMSource source = new DOMSource(document);
+            validator.validate(source);
+        } catch (SAXException ex) {
+            return false;
+        } catch (IOException ex) {
+            return false;
+        }
         
         return true;
     }

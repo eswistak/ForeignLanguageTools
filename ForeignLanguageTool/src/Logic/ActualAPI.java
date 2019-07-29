@@ -18,6 +18,9 @@ import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -214,8 +217,6 @@ public class ActualAPI implements API {
             card = Card.createNew();
             System.out.println(doc.getID());
             Node singleNode = performXMLSearch("User/LanguagePair/Group/Document[@ID='" + String.valueOf(doc.getID()) + "']").item(0);
-            Node importNode = MotherTree.getInstance().getNodes().importNode(card.getNode(), true);
-            card.setNode(importNode);
             singleNode.appendChild(card.getNode());
         }catch(JAXBException ex){
             System.out.println("JAXB failed to create new Card");

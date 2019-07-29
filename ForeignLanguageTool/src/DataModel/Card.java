@@ -15,6 +15,7 @@ import javax.xml.bind.Unmarshaller;
 import org.w3c.dom.Node;
 import javax.xml.bind.annotation.*;
 import javax.xml.transform.dom.DOMResult;
+import org.w3c.dom.Document;
 
 @XmlRootElement(name="Card")
 @XmlAccessorType(XmlAccessType.NONE)
@@ -180,16 +181,10 @@ public class Card extends Item{
     public static Card createNew() throws JAXBException{
         JAXBContext context = JAXBContext.newInstance(Card.class);
         Card card = new Card();
-        DOMResult result = new DOMResult();
+        Node node = MotherTree.getInstance().getNodes().createDocumentFragment();
         Marshaller marshaller = context.createMarshaller();
-        marshaller.marshal(card, result);
-        card.setNode(result.getNode());
+        marshaller.marshal(card, node);
+        card.setNode(node.getFirstChild());
         return card;
-        
-        
-    
-    }
-    
-
-        
+    }   
 }

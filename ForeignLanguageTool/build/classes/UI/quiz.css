@@ -1,0 +1,40 @@
+body {
+    background-color: powderblue;
+}
+.header {
+    block-size: 2.5vw;
+    flex-wrap: nowrap;
+    display: block;
+    font-size: 2.5vw
+}
+.footer {
+    block-size: 2.5vw;
+    text-align: center;
+    display: block;
+    font-size: 2.5vw
+
+}
+.main {
+
+    text-align: center;
+    block-size: 35.5vw;
+    display: inline-block;
+    width:100%;
+    font-size:8vw;
+    
+    
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+#correct {
+    border: 1px solid black;
+    display: inline;
+}
+#incorrect {
+    border: 1px solid black;
+    display: inline;
+}

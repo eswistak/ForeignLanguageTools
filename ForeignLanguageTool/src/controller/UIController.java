@@ -619,11 +619,6 @@ public class UIController implements Initializable {
 
     }
 
-
-
-    
-
-            alert.showAndWait();
     public void openPopup(String fxmlPath, Object cntrl) throws Exception {               
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));

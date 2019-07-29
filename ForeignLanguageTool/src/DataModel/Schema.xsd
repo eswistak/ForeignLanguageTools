@@ -1,94 +1,84 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="User">
+    <xs:annotation>
+      <xs:documentation>To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.</xs:documentation>
+    </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="name"/>
-        <xs:element ref="NativeLanguage"/>
-        <xs:element maxOccurs="unbounded" ref="LanguagePair"/>
+        <xs:element type="xs:string" name="name"/>
+        <xs:element type="xs:string" name="NativeLanguage"/>
+        <xs:element name="LanguagePair" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="native"/>
+              <xs:element type="xs:string" name="target"/>
+              <xs:element name="Group" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="name"/>
+                    <xs:element name="Document" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:choice maxOccurs="unbounded" minOccurs="0">
+                          <xs:element type="xs:string" name="title"/>
+                          <xs:element type="xs:string" name="text"/>
+                          <xs:element type="xs:string" name="translation"/>
+                          <xs:element name="Card">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:string" name="content" minOccurs="0"/>
+                                <xs:element type="xs:integer" name="index"/>
+                                <xs:element type="xs:string" name="wordAsAppears" minOccurs="0"/>
+                                <xs:element type="xs:string" name="generic" minOccurs="0"/>
+                                <xs:element type="xs:string" name="partOfSpeech" minOccurs="0"/>
+                                <xs:element type="xs:string" name="translationInContext" minOccurs="0"/>
+                                <xs:element type="xs:string" name="otherTranslation" minOccurs="0"/>
+                                <xs:element type="xs:integer" name="startChar"/>
+                                <xs:element type="xs:integer" name="endChar"/>
+                                <xs:element type="xs:integer" name="timesCorrect" minOccurs="0"/>
+                                <xs:element type="xs:integer" name="timesIncorrect" minOccurs="0"/>
+                                <xs:element type="xs:string" name="hint" minOccurs="0"/>
+                                <xs:element type="xs:string" name="cardNote" minOccurs="0"/>
+                              </xs:sequence>
+                              <xs:attribute type="xs:integer" name="ID" use="optional"/>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Note">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:string" name="content" minOccurs="0"/>
+                                <xs:element type="xs:integer" name="index"/>
+                                <xs:element type="xs:string" name="wordAsAppears" minOccurs="0"/>
+                                <xs:element type="xs:string" name="generic" minOccurs="0"/>
+                                <xs:element type="xs:string" name="partOfSpeech" minOccurs="0"/>
+                                <xs:element type="xs:string" name="translationInContext" minOccurs="0"/>
+                                <xs:element type="xs:string" name="otherTranslation" minOccurs="0"/>
+                                <xs:element type="xs:integer" name="startChar"/>
+                                <xs:element type="xs:integer" name="endChar"/>
+                                <xs:element type="xs:integer" name="timesCorrect" minOccurs="0"/>
+                                <xs:element type="xs:integer" name="timesIncorrect" minOccurs="0"/>
+                                <xs:element type="xs:string" name="hint" minOccurs="0"/>
+                                <xs:element type="xs:string" name="cardNote" minOccurs="0"/>
+                              </xs:sequence>
+                              <xs:attribute type="xs:integer" name="ID" use="optional"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:choice>
+                        <xs:attribute type="xs:integer" name="ID" use="optional"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:integer" name="ID" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:integer" name="ID" use="optional"/>
+          </xs:complexType>
+        </xs:element>
       </xs:sequence>
-      <xs:attribute name="ID" use="required" type="xs:integer"/>
+      <xs:attribute type="xs:integer" name="ID"/>
+      <xs:attribute type="xs:integer" name="count"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NativeLanguage" type="xs:NCName"/>
-  <xs:element name="LanguagePair">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="native"/>
-        <xs:element ref="target"/>
-        <xs:element maxOccurs="unbounded" ref="Group"/>
-      </xs:sequence>
-      <xs:attribute name="ID" use="required" type="xs:integer"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="native" type="xs:NCName"/>
-  <xs:element name="target" type="xs:NCName"/>
-  <xs:element name="Group">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="name"/>
-        <xs:element maxOccurs="unbounded" ref="Document"/>
-      </xs:sequence>
-      <xs:attribute name="ID" use="required" type="xs:integer"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="Document">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="title"/>
-        <xs:element ref="text"/>
-        <xs:element ref="translation"/>
-        <xs:element minOccurs="0" maxOccurs="unbounded" ref="Note"/>
-        <xs:element maxOccurs="unbounded" ref="Card"/>
-      </xs:sequence>
-      <xs:attribute name="ID" use="required" type="xs:integer"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="title" type="xs:string"/>
-  <xs:element name="text" type="xs:string"/>
-  <xs:element name="translation" type="xs:string"/>
-  <xs:element name="Note">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="content"/>
-        <xs:element ref="index"/>
-        <xs:element ref="startChar"/>
-        <xs:element ref="endChar"/>
-      </xs:sequence>
-      <xs:attribute name="ID" use="required" type="xs:integer"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="content" type="xs:string"/>
-  <xs:element name="Card">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="index"/>
-        <xs:element ref="wordAsAppears"/>
-        <xs:element ref="generic"/>
-        <xs:element ref="partOfSpeech"/>
-        <xs:element ref="translationInContext"/>
-        <xs:element ref="otherTranslation"/>
-        <xs:element ref="startChar"/>
-        <xs:element ref="endChar"/>
-        <xs:element ref="timesCorrect"/>
-        <xs:element ref="timesIncorrect"/>
-        <xs:element ref="hint"/>
-        <xs:element ref="cardNote"/>
-      </xs:sequence>
-      <xs:attribute name="ID" use="required" type="xs:integer"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="wordAsAppears" type="xs:NCName"/>
-  <xs:element name="generic" type="xs:string"/>
-  <xs:element name="partOfSpeech" type="xs:string"/>
-  <xs:element name="translationInContext" type="xs:string"/>
-  <xs:element name="otherTranslation" type="xs:string"/>
-  <xs:element name="timesCorrect" type="xs:integer"/>
-  <xs:element name="timesIncorrect" type="xs:integer"/>
-  <xs:element name="hint" type="xs:string"/>
-  <xs:element name="cardNote" type="xs:string"/>
-  <xs:element name="name" type="xs:string"/>
-  <xs:element name="index" type="xs:integer"/>
-  <xs:element name="startChar" type="xs:integer"/>
-  <xs:element name="endChar" type="xs:integer"/>
 </xs:schema>

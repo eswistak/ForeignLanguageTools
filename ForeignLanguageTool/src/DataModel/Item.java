@@ -58,7 +58,7 @@ public class Item {
     }
     
     protected void updateNode(int index, String text){
-        node.getChildNodes().item(index).setNodeValue(text);
+        node.getChildNodes().item(index).setTextContent(text);
     }
     
     //method is called on delete operation

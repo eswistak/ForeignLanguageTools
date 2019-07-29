@@ -56,7 +56,7 @@ public class CardCreationController extends Window {
     @FXML
     private TextArea otherDefsField;
     
-    public static Card card = null;
+    public static Card card;
     public static Doc doc;
     
     public CardCreationController(){
@@ -82,7 +82,7 @@ public class CardCreationController extends Window {
     }
     
     public CardCreationController(Doc doc){
-        this.doc = doc;
+        CardCreationController.doc = doc;
         FXMLLoader loader = new FXMLLoader();
         try {
             FileInputStream inputStream = new FileInputStream("UI\\CardCreation.fxml");
@@ -103,14 +103,13 @@ public class CardCreationController extends Window {
     private void saveAndCloseClickedEvent(){
         if(this.card == null){
             this.card = new Card();
-            card = ActualAPI.getInstance().createCard(doc, card);
+            card = ActualAPI.getInstance().createCard(CardCreationController.doc, card);
             card.setWordAsAppears(wordAsAppearsField.getText());
             card.setGeneric(genericField.getText());
             card.setTransInContext(defInContextField.getText());
             card.setPartOfSpeech(partOfSpeechField.getText());
             card.setOtherTrans(otherDefsField.getText());
             ActualAPI.getInstance().updateCard(card);
-            
         }else{
             card.setWordAsAppears(wordAsAppearsField.getText());
             card.setGeneric(genericField.getText());

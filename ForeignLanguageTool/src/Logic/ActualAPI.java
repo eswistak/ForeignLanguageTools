@@ -11,17 +11,16 @@ import DataModel.Group;
 import DataModel.LanguagePair;
 import DataModel.Note;
 import DataModel.User;
-import DataModel.Item;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.control.TreeItem;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -30,7 +29,6 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 
 /**
  *
@@ -149,7 +147,7 @@ public class ActualAPI implements API {
 
     @Override
     public List<Card> getAllCards(LanguagePair langPair) {
-        String xpathQuery = "User/LanguagePair[@ID='" + String.valueOf(langPair.getID()) + "']/Group/Document/Card";
+        String xpathQuery = "User/LanguagePair/Group/Document/Card";
         NodeList nodelist = performXMLSearch(xpathQuery);
         List<Card> result = new ArrayList<>();
         for(int i = 0; i<nodelist.getLength(); i++){
@@ -163,7 +161,22 @@ public class ActualAPI implements API {
         }
         return result;
     }
-    
+    // @Override
+    // public List<Card> getAllCards(LanguagePair langPair) {
+    //     String xpathQuery = "User/LanguagePair[@ID='" + String.valueOf(langPair.getID()) + "']/Group/Document/Card";
+    //     NodeList nodelist = performXMLSearch(xpathQuery);
+    //     List<Card> result = new ArrayList<>();
+    //     for(int i = 0; i<nodelist.getLength(); i++){
+    //         Node node = nodelist.item(i);
+    //         try {
+    //             Card card = Card.constructObject(node);
+    //             result.add(card);
+    //         } catch (JAXBException ex) {
+    //             Logger.getLogger(ActualAPI.class.getName()).log(Level.SEVERE, null, ex);
+    //         }
+    //     }
+    //     return result;
+    // }
     private NodeList performXMLSearch(String xpathQuery){
         Document document = MotherTree.getInstance().getNodes();
         XPathFactory fac = XPathFactory.newInstance();
@@ -182,7 +195,8 @@ public class ActualAPI implements API {
     public LanguagePair createLangPair(LanguagePair langPair) {
         try {
             langPair = LanguagePair.createNew();
-            MotherTree.getInstance().getNodes().appendChild(langPair.getNode());
+            Node singleNode = performXMLSearch("User").item(0);
+            singleNode.appendChild(langPair.getNode());
         } catch (JAXBException ex) {
             System.out.println("JAXB failed to create new LangPair");
         }
@@ -217,10 +231,7 @@ public class ActualAPI implements API {
     public Card createCard(Doc doc, Card card) {
         try{
             card = Card.createNew();
-            System.out.println(doc.getID());
             Node singleNode = performXMLSearch("User/LanguagePair/Group/Document[@ID='" + String.valueOf(doc.getID()) + "']").item(0);
-            Node importNode = MotherTree.getInstance().getNodes().importNode(card.getNode(), true);
-            card.setNode(importNode);
             singleNode.appendChild(card.getNode());
         }catch(JAXBException ex){
             System.out.println("JAXB failed to create new Card");

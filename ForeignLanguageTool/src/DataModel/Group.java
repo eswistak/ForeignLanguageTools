@@ -56,13 +56,13 @@ public class Group extends Item {
     
     //method is called on a create operation
     public static Group createNew() throws JAXBException{
-        JAXBContext context = JAXBContext.newInstance(Group.class);
+        JAXBContext context = JAXBContext.newInstance(Card.class);
         Group group = new Group();
-        Node node = MotherTree.getInstance().getNodes().createElement("Group");
+        Node node = MotherTree.getInstance().getNodes().createDocumentFragment();
         Marshaller marshaller = context.createMarshaller();
         marshaller.marshal(group, node);
-        group.setNode(node);
-        return group;
+        group.setNode(node.getFirstChild());
+        return group;   
    }
     
     @Override

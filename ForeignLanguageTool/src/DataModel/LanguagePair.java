@@ -69,13 +69,13 @@ public class LanguagePair extends Item {
     
     //method is called on a create operation
     public static LanguagePair createNew() throws JAXBException{
-        JAXBContext context = JAXBContext.newInstance(LanguagePair.class);
-        LanguagePair langpair = new LanguagePair();
-        Node node = MotherTree.getInstance().getNodes().createElement("LanguagePair");
+        JAXBContext context = JAXBContext.newInstance(Card.class);
+        LanguagePair pair = new LanguagePair();
+        Node node = MotherTree.getInstance().getNodes().createDocumentFragment();
         Marshaller marshaller = context.createMarshaller();
-        marshaller.marshal(langpair, node);
-        langpair.setNode(node);
-        return langpair;
+        marshaller.marshal(pair, node);
+        pair.setNode(node.getFirstChild());
+        return pair;
    }
     
     @Override

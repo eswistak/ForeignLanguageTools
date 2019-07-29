@@ -2,7 +2,7 @@
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
---><User ID="1">
+--><User ID="1" count="21">
     <name>Ethan Swistak</name>
     <NativeLanguage>English</NativeLanguage>
     <LanguagePair ID="2">
@@ -14,12 +14,6 @@ and open the template in the editor.
                 <title>Geld zum Fenster hinauswerfen</title>
                 <text>Mit Geld kann nicht jeder umgehen. Der eine spart jeden Cent, während der andere schon am Monatsanfang wieder pleite ist und gar nicht weiß, wofür er das Geld eigentlich ausgegeben hat.</text>
                 <translation>You can't always get by with just money. blah blah blah</translation>
-                <Note ID="8">
-                    <content>kann is the present form of konnen</content>
-                    <index>1</index>
-                    <startChar>0</startChar>
-                    <endChar>13</endChar>
-                </Note>
                 <Card ID="9">
                     <index>1</index>
                     <wordAsAppears>umgehen</wordAsAppears>
@@ -34,6 +28,12 @@ and open the template in the editor.
                     <hint>kann nicht jeder umgehen</hint>
                     <cardNote>means to deal with or get by, not deal in goods for example</cardNote>
                 </Card>
+                <Note ID="8">
+                    <content>kann is the present form of konnen</content>
+                    <index>1</index>
+                    <startChar>0</startChar>
+                    <endChar>13</endChar>
+                </Note>
                 <Card ID="10">
                     <index>2</index>
                     <wordAsAppears>jeder</wordAsAppears>
@@ -48,7 +48,7 @@ and open the template in the editor.
                     <hint>jeder tag</hint>
                     <cardNote/>
                 </Card>
-            <Card><Card ID="17"><index>1</index><wordAsAppears>   </wordAsAppears><generic>   </generic><partOfSpeech>   </partOfSpeech><translationInContext>   </translationInContext><otherTranslation>   </otherTranslation><startChar>1</startChar><endChar>1</endChar><timesCorrect>1</timesCorrect><timesIncorrect>1</timesIncorrect><hint>     </hint><cardNote>      </cardNote></Card></Card></Document>
+            </Document>
             <Document ID="11">
                 <title>Einen Korb Bekommen</title>
                 <text>Was ist an einem Korb so schlimm? Eigentlich gar nichts! Körbe sind schön und praktisch. Einen Korb voll mit Obst zu bekommen, ist zum Beispiel sehr schön. Aber manche Körbe bekommt niemand gerne.</text>
@@ -57,12 +57,6 @@ and open the template in the editor.
                     <content>nicht so schlim means not so bad, so schlim is kind of the same usage in English</content>
                     <index>1</index>
                     <startChar>21</startChar>
-                    <endChar>32</endChar>
-                </Note>
-                <Note ID="13">
-                    <content>Nothings so bad about a basket but if it's empty it kinda sucks, right?</content>
-                    <index>2</index>
-                    <startChar>0</startChar>
                     <endChar>32</endChar>
                 </Note>
                 <Card ID="14">
@@ -78,7 +72,13 @@ and open the template in the editor.
                     <timesIncorrect>1</timesIncorrect>
                     <hint>can also be a bad gift</hint>
                     <cardNote/>
-                </Card>              
+                </Card>
+                <Note ID="13">
+                    <content>Nothings so bad about a basket but if it's empty it kinda sucks, right?</content>
+                    <index>2</index>
+                    <startChar>0</startChar>
+                    <endChar>32</endChar>
+                </Note>              
             </Document>
         </Group>
         <Group ID="6">
@@ -162,4 +162,36 @@ and open the template in the editor.
             </Document>
         </Group>
     </LanguagePair>   
+<LanguagePair ID="26">
+    <native/>
+    <target/>
+    <Group ID="27">
+        <name>Test</name>
+        <Document ID="28">
+            <title>Test</title>
+            <text/>
+            <translation/>
+            <Card ID="29">
+                <index>1</index>
+                <wordAsAppears>Test</wordAsAppears>
+                <generic>   </generic>
+                <partOfSpeech>   </partOfSpeech>
+                <translationInContext>   </translationInContext>
+                <otherTranslation>   </otherTranslation>
+                <startChar>1</startChar>
+                <endChar>1</endChar>
+                <timesCorrect>1</timesCorrect>
+                <timesIncorrect>1</timesIncorrect>
+                <hint>     </hint>
+                <cardNote>      </cardNote>
+            </Card>
+            <Note ID="30">
+                <content>Note</content>
+                <index>0</index>
+                <startChar>0</startChar>
+                <endChar>0</endChar>
+            </Note>
+        </Document>
+    </Group>
+</LanguagePair>
 </User>

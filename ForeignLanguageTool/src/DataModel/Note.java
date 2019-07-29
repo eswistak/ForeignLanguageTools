@@ -89,13 +89,13 @@ public class Note extends Item {
     
     //method is called on a create operation
     public static Note createNew() throws JAXBException{
-        JAXBContext context = JAXBContext.newInstance(Note.class);
+        JAXBContext context = JAXBContext.newInstance(Card.class);
         Note note = new Note();
-        Node node = MotherTree.getInstance().getNodes().createElement("Note");
+        Node node = MotherTree.getInstance().getNodes().createDocumentFragment();
         Marshaller marshaller = context.createMarshaller();
         marshaller.marshal(note, node);
-        note.setNode(node);
-        return note;
+        note.setNode(node.getFirstChild());
+        return note;   
    }
 
 }

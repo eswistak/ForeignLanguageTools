@@ -40,6 +40,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.MenuItem;
@@ -384,9 +385,7 @@ public class UIController implements Initializable {
 
 
     @FXML
-    //TODO Tim
     private void menuViewQuizEvent(ActionEvent event) {
-
         System.out.println("View -> Quiz");
         TreeItem selection = treeViewMain.getSelectionModel().selectedItemProperty().getValue();
         LanguagePair LangPair = null;
@@ -451,6 +450,11 @@ public class UIController implements Initializable {
         }
 
     }
+    
+    @FXML
+    public void notesTableViewSelectedEvent(){
+        System.out.println("Notes Table View Selected");
+    }
 
    // open file explorer
 
@@ -488,15 +492,6 @@ public class UIController implements Initializable {
 
     }
     
-    private void saveFileRoutine(File file)
-			throws IOException{
-		// Creates a new file and writes the txtArea contents into it
-		String txt = textAreaMain.getText();
-		file.createNewFile();
-                try (FileWriter writer = new FileWriter(file)) {
-                writer.write(txt);
-        }
-	}
     private void showSaveFileChooser() {
 
 		FileChooser fileChooser = new FileChooser();
@@ -506,7 +501,7 @@ public class UIController implements Initializable {
 		if (savedFile != null) {
 
 			try {
-				saveFileRoutine(savedFile);
+				Utils.save(savedFile.getAbsolutePath());
 			}
 			catch(IOException e) {
 			
@@ -514,7 +509,13 @@ public class UIController implements Initializable {
 				actionStatus.setText("An ERROR occurred while saving the file!" +
 						savedFile.toString());
 				return;
-			}
+			} catch (ParserConfigurationException ex) {
+                        Logger.getLogger(UIController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SAXException ex) {
+                        Logger.getLogger(UIController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (TransformerException ex) {
+                        Logger.getLogger(UIController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
 			
 			actionStatus.setText("File saved: " + savedFile.toString());
 		}
@@ -648,7 +649,7 @@ public class UIController implements Initializable {
         return data;
 
     }
-
+    
     public void openPopup(String fxmlPath, Object cntrl) throws Exception {               
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));

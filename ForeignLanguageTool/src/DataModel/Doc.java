@@ -78,14 +78,13 @@ public class Doc extends Item{
     
     //method is called on a create operation
     public static Doc createNew() throws JAXBException{
-        JAXBContext context = JAXBContext.newInstance(Doc.class);
+        JAXBContext context = JAXBContext.newInstance(Card.class);
         Doc doc = new Doc();
-        Node node = MotherTree.getInstance().getNodes().createElement("Doc");
+        Node node = MotherTree.getInstance().getNodes().createDocumentFragment();
         Marshaller marshaller = context.createMarshaller();
         marshaller.marshal(doc, node);
-        doc.setNode(node);
-        return doc;
-    
+        doc.setNode(node.getFirstChild());
+        return doc;   
     }
     
     @Override

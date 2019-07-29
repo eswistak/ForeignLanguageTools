@@ -12,6 +12,7 @@ import DataModel.LanguagePair;
 import DataModel.Note;
 import DataModel.Utils;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;

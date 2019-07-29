@@ -507,9 +507,9 @@ public class UIController implements Initializable {
 
 
 
-//    @FXML
-//    private void menuViewQuizEvent(ActionEvent event) {
-//        System.out.println("View -> Quiz");
+    @FXML
+    private void menuViewQuizEvent(ActionEvent event) {
+        System.out.println("View -> Quiz");
 //        TreeItem selection = treeViewMain.getSelectionModel().selectedItemProperty().getValue();
 //        LanguagePair LangPair = null;
 //        if(selection != null && !(selection.getValue() instanceof User)) {
@@ -527,7 +527,7 @@ public class UIController implements Initializable {
 //            e.printStackTrace();
 //        }
 //
-//    }
+    }
 
 
 

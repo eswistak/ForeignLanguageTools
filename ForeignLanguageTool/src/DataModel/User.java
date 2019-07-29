@@ -21,6 +21,8 @@ public class User extends Item {
     String name = "";
     @XmlElement(name="NativeLanguage")
     String nativeLanguage = "";
+    @XmlAttribute(name="count")
+    int count = 0;
 
     public User(){
         super();
@@ -65,12 +67,12 @@ public class User extends Item {
     
     //method is called on a create operation
     public static User createNew() throws JAXBException{
-        JAXBContext context = JAXBContext.newInstance(User.class);
+        JAXBContext context = JAXBContext.newInstance(Card.class);
         User user = new User();
-        Node node = MotherTree.getInstance().getNodes().createElement("User");
+        Node node = MotherTree.getInstance().getNodes().createDocumentFragment();
         Marshaller marshaller = context.createMarshaller();
         marshaller.marshal(user, node);
-        user.setNode(node);
-        return user;
+        user.setNode(node.getFirstChild());
+        return user;   
     }
 }

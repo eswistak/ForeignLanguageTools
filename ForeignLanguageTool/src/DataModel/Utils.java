@@ -26,6 +26,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 
@@ -43,6 +44,9 @@ public class Utils {
         }else {
             System.out.println("Schema failed to validate");
         }
+        Element root = document.getDocumentElement();
+        int count = Integer.parseInt(root.getAttribute("count"));
+        Item.setCount(count);
     }
     
     
@@ -86,18 +90,19 @@ public class Utils {
     }
     
     public static boolean validateSchema(Document document){
-//        SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-//        try {
-//            Schema schema = factory.newSchema(new File("DataModel\\Schema.xsd"));
-//            Validator validator = schema.newValidator();
-//            
-//            DOMSource source = new DOMSource(document);
-//            validator.validate(source);
-//        } catch (SAXException ex) {
-//            return false;
-//        } catch (IOException ex) {
-//            return false;
-//        }
+        SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        try {
+            Schema schema = factory.newSchema(new File("DataModel\\Schema.xsd"));
+            Validator validator = schema.newValidator();
+            
+            DOMSource source = new DOMSource(document);
+            validator.validate(source);
+        } catch (SAXException ex) {
+            System.out.println(ex);
+            return false;
+        } catch (IOException ex) {
+            return false;
+        }
         
         return true;
     }

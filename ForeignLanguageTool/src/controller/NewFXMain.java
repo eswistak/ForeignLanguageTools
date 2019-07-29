@@ -41,6 +41,7 @@ public class NewFXMain extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         try {
             Utils.load();
         } catch (ParserConfigurationException | SAXException | IOException ex) {

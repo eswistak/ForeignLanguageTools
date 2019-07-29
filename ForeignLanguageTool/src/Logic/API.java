@@ -12,6 +12,7 @@ import DataModel.LanguagePair;
 import DataModel.Group;
 import DataModel.Doc;
 import DataModel.Card;
+import DataModel.Item;
 import DataModel.Note;
 
 /**

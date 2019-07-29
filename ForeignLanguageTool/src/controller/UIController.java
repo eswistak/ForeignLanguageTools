@@ -16,6 +16,7 @@ import DataModel.Card;
 import DataModel.Doc;
 import DataModel.Group;
 import DataModel.Item;
+import DataModel.User;
 import DataModel.LanguagePair;
 import DataModel.Note;
 import Logic.ActualAPI;
@@ -45,15 +46,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import javafx.util.Pair;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
 /**
@@ -482,9 +485,22 @@ public class UIController implements Initializable {
     private void menuViewQuizEvent(ActionEvent event) {
 
         System.out.println("View -> Quiz");
+        TreeItem selection = treeViewMain.getSelectionModel().selectedItemProperty().getValue();
+        LanguagePair LangPair = null;
+        if(selection != null && !(selection.getValue() instanceof User)) {
+            LangPair = getLangParent(selection);
+            
+        }
+        ;
         //Get the parent of document being viewed or parent of group selected
         //pass to getallcards
-        //pass result to quiz controller
+        //pass result to quiz controller;
+        QuizController cntrl = new QuizController(ActualAPI.getInstance().getAllCards(LangPair));
+        try{
+        openPopup("/UI/quiz.fxml", cntrl);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 
@@ -702,5 +718,25 @@ public class UIController implements Initializable {
             alert.setContentText(content);
 
             alert.showAndWait();
+    public void openPopup(String fxmlPath, Object cntrl) throws Exception {               
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
+            fxmlLoader.setController(cntrl);
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public LanguagePair getLangParent(TreeItem selection){
+    
+        TreeItem returnVal = selection;
+        while (!(returnVal.getValue() instanceof LanguagePair)){
+            returnVal = returnVal.getParent();
+        }
+        return (LanguagePair) returnVal.getValue();
     }
 }

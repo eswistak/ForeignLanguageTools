@@ -11,10 +11,14 @@ import DataModel.Group;
 import DataModel.LanguagePair;
 import DataModel.Note;
 import DataModel.User;
+import DataModel.Item;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.TreeItem;
 import javax.xml.bind.JAXBException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -24,6 +28,7 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 
 /**
  *
@@ -142,7 +147,7 @@ public class ActualAPI implements API {
 
     @Override
     public List<Card> getAllCards(LanguagePair langPair) {
-        String xpathQuery = "User/LanguagePair/Group/Document/Card";
+        String xpathQuery = "User/LanguagePair[@ID='" + String.valueOf(langPair.getID()) + "']/Group/Document/Card";
         NodeList nodelist = performXMLSearch(xpathQuery);
         List<Card> result = new ArrayList<>();
         for(int i = 0; i<nodelist.getLength(); i++){

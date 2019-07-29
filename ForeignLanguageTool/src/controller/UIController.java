@@ -19,41 +19,36 @@ import DataModel.Item;
 import DataModel.LanguagePair;
 import DataModel.Note;
 import Logic.ActualAPI;
+import java.awt.Font;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Callback;
-import javafx.util.Pair;
-
 
 
 /**
@@ -67,8 +62,8 @@ import javafx.util.Pair;
  */
 
 public class UIController implements Initializable {
-
-
+    private Text actionStatus;
+    private Stage savedStage;
 
     @FXML
 
@@ -169,8 +164,6 @@ public class UIController implements Initializable {
 
     private File importedFile;
     
-    private TreeItem<Item> root;
-
 
     /**
 
@@ -185,9 +178,18 @@ public class UIController implements Initializable {
         System.out.println("INIT");
 
         textAreaMain.setWrapText(true);
+
         
-        // don't let user edit the text-area
-        textAreaMain.setEditable(false);
+
+        // testing tableView
+
+//        createCardTableView();
+//
+//        createNoteTableView();
+
+        
+
+        // testing buildTreeView
 
         buildTreeView();
 
@@ -202,48 +204,9 @@ public class UIController implements Initializable {
     @FXML
     //TODO Implement Hyung Kang
     private void menuFileNewDocEvent(ActionEvent event) {
-        
-        TreeItem<Item> newItem = treeViewMain.getSelectionModel().getSelectedItem();
-        
-        // check if treeview is selected or not
-        if (newItem == null || newItem.getValue() instanceof LanguagePair == false) {
-            popUpDialog("Please select the language pair first from the tree view.");
-        } else if (newItem.getValue() instanceof LanguagePair) {
-            System.out.println("File -> New Document");
-            // add new doc to the current language pair
-            // New dialog
-            // ....
-            // pop-up window
-            Dialog<String> dialog = new Dialog<>();
-            dialog.setTitle("New Document");
-            dialog.setHeaderText("Create new Document");
-            
-            // button
-            ButtonType buttonType = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-            dialog.getDialogPane().getButtonTypes().addAll(buttonType, ButtonType.CANCEL);
-            
-            GridPane grid = new GridPane();
-            grid.setHgap(10);
-            grid.setVgap(10);
-            grid.setPadding(new Insets(20, 150, 10, 10));
-            
-            // text-field
-            TextField newDocName = new TextField();
-            
-            grid.add(new Label("New Document Name:"), 0, 0);
-            grid.add(newDocName, 1, 0);
-            dialog.getDialogPane().setContent(grid);
-            
-            // request focus on the native field by default
-            Platform.runLater(() -> newDocName.requestFocus());
-            
-            Optional<String> result = dialog.showAndWait();
-            
-            if (result.isPresent()) {
-                TreeItem<Item> targetLanguagePair = treeViewMain.getSelectionModel().getSelectedItem();
-                
-            }
-        }
+
+        System.out.println("File -> New Document");
+
     }
 
 
@@ -256,14 +219,18 @@ public class UIController implements Initializable {
 
     }
 
-
-
+   
     @FXML
     //TODO Implement Matt Rieser
     private void menuFileSaveEvent(ActionEvent event) {
-
+        
+            
         System.out.println("File -> Save");
-
+        
+        showSaveFileChooser();
+        
+    
+        
     }
 
 
@@ -275,11 +242,10 @@ public class UIController implements Initializable {
         System.out.println("File -> Load");
 
         openedFile = openFileExplorer();
-
         
-
         System.out.println("LOAD: " + openedFile.getAbsolutePath());
-
+        
+        
     }
 
     
@@ -287,80 +253,23 @@ public class UIController implements Initializable {
     @FXML
     //TODO Implement Hyung Kang
     private void menuFileCreateNewLangPairEvent(ActionEvent event) {
-        LanguagePair newLangPair = new LanguagePair();
-      
-        // pop-up window
-        Dialog<Pair<String, String>> dialog = new Dialog<>();
-        dialog.setTitle("New Language Pair");
-        dialog.setHeaderText("Create New Language Pair");
-        
-        // button
-        ButtonType buttonType = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(buttonType, ButtonType.CANCEL);
-        
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-        
-        // text-field for native and target variables
-        TextField nativeTextField = new TextField();
-        nativeTextField.setPromptText("Native");
-        TextField targetTextField = new TextField();
-        targetTextField.setPromptText("Target");
-        
-        grid.add(new Label("Native:"), 0, 0);
-        grid.add(nativeTextField, 1, 0);
-        grid.add(new Label("Target:"), 0, 1);
-        grid.add(targetTextField, 1, 1);
-        dialog.getDialogPane().setContent(grid);
-        
-        // request focus on the native field by defualt
-        Platform.runLater(() -> nativeTextField.requestFocus());
-        
-        // convert the result to a native-target when the ok button is clicked
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == buttonType) {
-                return new Pair<>(nativeTextField.getText(), targetTextField.getText());
-            }
-            return null;
-        });
-        
-        Optional<Pair<String, String>> result = dialog.showAndWait();
-        
-        // check result
-        result.ifPresent((Pair<String, String> pair) -> {
-            // check if text-field is empty
-            if (pair.getKey().isEmpty() || pair.getValue().isEmpty()) {
-                System.out.println("Empty Field N/A!");
-                popUpDialog("Please enter the native and target language.");
-            } else {
-                // set new language pair
-                newLangPair.setNat(pair.getKey());
-                newLangPair.setTarget(pair.getValue());
-                
-                TreeItem<Item> newPair = new TreeItem<>(newLangPair);
-                root.getChildren().add(newPair);
-   
-                System.out.println("Native: " + pair.getKey() + "\nTarget: " + pair.getValue());
-            }
-        });
-        
+
         System.out.println("File -> Create New Language Pair");
+
     }
+
+
 
     @FXML
     //TODO Implement Matt Rieser
     private void menuFileImportDocEvent(ActionEvent event) {
 
         System.out.println("File -> Import Document");
-
-        importedFile = openFileExplorer();
-
         
-
+        importedFile = openFileExplorer();
+        
         System.out.println("IMPORT: " + importedFile.getAbsolutePath());
-
+        
     }
 
     
@@ -370,6 +279,12 @@ public class UIController implements Initializable {
     private void menuFileExportDocEvent(ActionEvent event) {
 
         System.out.println("File -> Export Document");
+        
+        
+        
+        
+        
+       
 
     }
 
@@ -380,6 +295,10 @@ public class UIController implements Initializable {
     private void menuFileSaveExitEvent(ActionEvent event) {
 
         System.out.println("File -> Save & Exit");
+        
+        
+        
+        
 
     }
 
@@ -388,54 +307,11 @@ public class UIController implements Initializable {
     @FXML
     //TODO Implement Hyung Kang
     private void menuEditTextEvent(ActionEvent event) {
-        if (textAreaMain.getText().isEmpty()) {
-            popUpDialog("Please select the text first.");
-            return;
-        }
-        
-        // pop-up window
-        Dialog<String> dialog = new Dialog();
-        dialog.setTitle("Edit Text");
-        dialog.setHeaderText("Edit Text");
-
-        // button
-        ButtonType buttonType = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(buttonType, ButtonType.CANCEL);
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-
-        // text-area
-        TextArea newTextArea = new TextArea();
-        newTextArea.setWrapText(true);
-        newTextArea.setText(textAreaMain.getText());
-        
-        grid.add(newTextArea, 0, 0);
-        dialog.getDialogPane().setContent(grid);
-
-        // request focus on the native field by defualt
-        Platform.runLater(() -> newTextArea.requestFocus());
-        
-        Optional<String> result = dialog.showAndWait();
-        
-        
-        if (result.isPresent() && !newTextArea.getText().isEmpty()) {
-            // update the current text document 
-            Doc newDoc = (Doc) treeViewMain.getSelectionModel().getSelectedItem().getValue();
-            newDoc.setText(newTextArea.getText());
-            textAreaMain.setText(newDoc.getText());
-            
-            System.out.println("New Text:\n" + newTextArea.getText());
-        } else {
-            System.out.println("Edit text field is empty.");
-            popUpDialog("Text field is empty");
-            return;
-        }
 
         System.out.println("Edit -> Text");
+
     }
+
 
 
     @FXML
@@ -453,6 +329,7 @@ public class UIController implements Initializable {
     private void menuEditNoteEvent(ActionEvent event) {
 
         System.out.println("Edit -> Note");
+
     }
 
 
@@ -505,23 +382,14 @@ public class UIController implements Initializable {
 
         treeViewMain.getSelectionModel().selectedItemProperty().
 
-            addListener(((observable, oldValue, newValue) -> handleTreeViewMain(newValue)));
+            addListener(((observable, oldValue, newValue) -> handle(newValue)));
 
-    }
-    
-    // new notes tableview event
-    @FXML
-    
-    private void notesTableViewSelectedEvent(MouseEvent event) {
-        notesTableView.getSelectionModel().selectedItemProperty().
-                
-            addListener(((observable, oldValue, newValue) -> handleNotesTableView(newValue)));
     }
 
     
     // treeview handling
 
-    private void handleTreeViewMain(TreeItem<Item> newValue) {
+    private void handle(TreeItem<Item> newValue) {
         
         if(newValue.getValue() instanceof Doc){
             
@@ -532,11 +400,6 @@ public class UIController implements Initializable {
             createNoteTableView(doc);
         }
 
-    }
-    
-    // need to work on this method after Note-edit screen
-    private void handleNotesTableView(Note newValue) {
-        
     }
 
    // open file explorer
@@ -553,7 +416,17 @@ public class UIController implements Initializable {
 
             System.out.println("File N/A!");
 
-            popUpDialog("Please select the file.");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+            alert.setTitle("Error");
+
+            alert.setHeaderText(null);
+
+            alert.setContentText("Please select file.");
+
+            alert.showAndWait();
+
+            
 
             file = openFileExplorer();
 
@@ -564,7 +437,45 @@ public class UIController implements Initializable {
         return file;
 
     }
+    
+    private void saveFileRoutine(File file)
+			throws IOException{
+		// Creates a new file and writes the txtArea contents into it
+		String txt = textAreaMain.getText();
+		file.createNewFile();
+                try (FileWriter writer = new FileWriter(file)) {
+                writer.write(txt);
+        }
+	}
+    private void showSaveFileChooser() {
 
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Save file");
+		File savedFile = fileChooser.showSaveDialog(savedStage);
+
+		if (savedFile != null) {
+
+			try {
+				saveFileRoutine(savedFile);
+			}
+			catch(IOException e) {
+			
+				e.printStackTrace();
+				actionStatus.setText("An ERROR occurred while saving the file!" +
+						savedFile.toString());
+				return;
+			}
+			
+			actionStatus.setText("File saved: " + savedFile.toString());
+		}
+		else {
+			actionStatus.setText("File save cancelled.");
+		}
+	}
+
+
+    
+         
     
 
 
@@ -572,11 +483,7 @@ public class UIController implements Initializable {
 
     private void buildTreeView() {
         
-        /* I made a root private instance variable so that when
-        "Create new Language Pair" is pressed, new language pair can be
-        added into root treeview. -Hyung Kang-
-        */
-        root = new TreeItem(ActualAPI.getInstance().getUser());
+        TreeItem<Item> root = new TreeItem(ActualAPI.getInstance().getUser());
         
         for(LanguagePair langPair : ActualAPI.getInstance().getLangPair()){
             TreeItem<Item> langItem = new TreeItem(langPair);
@@ -692,15 +599,8 @@ public class UIController implements Initializable {
 
     }
 
-    private void popUpDialog(String content) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
-            alert.setTitle("Error");
 
-            alert.setHeaderText(null);
+    
 
-            alert.setContentText(content);
-
-            alert.showAndWait();
-    }
 }

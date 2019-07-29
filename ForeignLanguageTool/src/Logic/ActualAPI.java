@@ -19,7 +19,9 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.TreeItem;
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -175,29 +177,113 @@ public class ActualAPI implements API {
         }
         return null;
     }
-    
-    
-        /*
-    call Card.createNew()
-    return a blank card object
-    Doc the doc object that was passed in argument
-    Lookup the XML node in the MotherTree using @ID
-    Add card.getNode();
-    return that card
-    */
-    
-    /*
-    Create news
-        Card
-        Note
-        Doc
-        Group   
-        LangPair
-    */
-    
-    /*
-    Deletes
-    this.getNode().getParentNode().removeChild(this.getNode());
-    */
+
+    @Override
+    public LanguagePair createLangPair(LanguagePair langPair) {
+        try {
+            langPair = LanguagePair.createNew();
+            MotherTree.getInstance().getNodes().appendChild(langPair.getNode());
+        } catch (JAXBException ex) {
+            System.out.println("JAXB failed to create new LangPair");
+        }
+        return langPair;
+    }
+
+    @Override
+    public Group createGroup(LanguagePair langPair, Group group) {
+        try {
+            group = Group.createNew();
+            Node singleNode = performXMLSearch("User/LanguagePair[@ID='" + String.valueOf(langPair.getID()) + "']").item(0);
+            singleNode.appendChild(group.getNode());
+        } catch (JAXBException ex) {
+            System.out.println("JAXB failed to create new Group");
+        }     
+        return group;
+    }
+
+    @Override
+    public Doc createDoc(Group group, Doc doc) {
+        try{
+            doc = Doc.createNew();
+            Node singleNode = performXMLSearch("User/LanguagePair/Group[@ID='" + String.valueOf(group.getID()) + "']").item(0);
+            singleNode.appendChild(doc.getNode());
+        }catch(JAXBException ex){
+            System.out.println("JAXB failed to create new Doc");
+        }
+        return doc;
+    }
+
+    @Override
+    public Card createCard(Doc doc, Card card) {
+        try{
+            card = Card.createNew();
+            System.out.println(doc.getID());
+            Node singleNode = performXMLSearch("User/LanguagePair/Group/Document[@ID='" + String.valueOf(doc.getID()) + "']").item(0);
+            Node importNode = MotherTree.getInstance().getNodes().importNode(card.getNode(), true);
+            card.setNode(importNode);
+            singleNode.appendChild(card.getNode());
+        }catch(JAXBException ex){
+            System.out.println("JAXB failed to create new Card");
+        }
+        return card;
+    }
+
+    @Override
+    public Note createNote(Doc doc, Note note) {
+        try{
+            note = Note.createNew();
+            Node singleNode = performXMLSearch("User/LanguagePair/Group/Document[@ID='" + String.valueOf(doc.getID()) + "']").item(0);
+            singleNode.appendChild(note.getNode());
+        }catch(JAXBException ex){
+            System.out.println("JAXB failed to create new Note");
+        }
+        return note;
+    }
+
+    @Override
+    public void updateGroup(Group group) {
+        group.update();
+    }
+
+    @Override
+    public void updateDoc(Doc doc) {
+        doc.update();
+    }
+
+    @Override
+    public void updateCard(Card card) {
+        System.out.println(card.toString());
+        card.update();
+    }
+
+    @Override
+    public void updateNote(Note note) {
+        note.update();
+    }
+
+    @Override
+    public void deleteLangPair(LanguagePair langPair) {
+        langPair.delete(langPair.getNode());
+    }
+
+    @Override
+    public void deleteGroup(Group group) {
+        group.delete(group.getNode());
+    }
+
+    @Override
+    public void deleteDoc(Doc doc) {
+        doc.delete(doc.getNode());
+    }
+
+    @Override
+    public void deleteCard(Card card) {
+        card.delete(card.getNode());
+    }
+
+    @Override
+    public void deleteNote(Note note) {
+        note.delete(note.getNode());
+    }
     
 }

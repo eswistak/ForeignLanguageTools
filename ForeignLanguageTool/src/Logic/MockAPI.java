@@ -25,6 +25,41 @@ public class MockAPI implements API{
     public static MockAPI getInstance() {
         return MockAPIHolder.INSTANCE;
     }
+
+    @Override
+    public void updateGroup(Group group) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateDoc(Doc doc) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteLangPair(LanguagePair langPair) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteGroup(Group group) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteDoc(Doc doc) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteCard(Card card) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteNote(Note note) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     private static class MockAPIHolder {
 
@@ -88,5 +123,52 @@ public class MockAPI implements API{
     }
     
     
+        @Override
+    public LanguagePair createLangPair(LanguagePair Langpair) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Group createGroup(LanguagePair langPair, Group group) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Doc createDoc(Group group, Doc doc) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Card createCard(Doc doc, Card card) {
+        System.out.println("Card created");
+        return card;
+    }
+
+    @Override
+    public Note createNote(Doc doc, Note note) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+    public void updateGroup(LanguagePair langPair) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+ 
+    public void updateDocument(Doc doc) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateCard(Card card) {
+        System.out.println("Card Updated");
+    }
+
+    @Override
+    public void updateNote(Note note) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+
 
 }

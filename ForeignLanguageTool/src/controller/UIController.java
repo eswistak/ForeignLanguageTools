@@ -41,6 +41,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
@@ -506,15 +507,27 @@ public class UIController implements Initializable {
 
 
 
-    @FXML
-    //TODO Tim
-    private void menuViewQuizEvent(ActionEvent event) {
-
-        System.out.println("View -> Quiz");
-        //Get the parent of document being viewed or parent of group selected
-        //pass to getallcards
-        //pass result to quiz controller
-    }
+//    @FXML
+//    private void menuViewQuizEvent(ActionEvent event) {
+//        System.out.println("View -> Quiz");
+//        TreeItem selection = treeViewMain.getSelectionModel().selectedItemProperty().getValue();
+//        LanguagePair LangPair = null;
+//        if(selection != null && !(selection.getValue() instanceof User)) {
+//            LangPair = getLangParent(selection);
+//            
+//        }
+//        ;
+//        //Get the parent of document being viewed or parent of group selected
+//        //pass to getallcards
+//        //pass result to quiz controller;
+//        QuizController cntrl = new QuizController(ActualAPI.getInstance().getAllCards(LangPair));
+//        try{
+//        openPopup("/UI/quiz.fxml", cntrl);
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//
+//    }
 
 
 
@@ -734,4 +747,27 @@ public class UIController implements Initializable {
 
             alert.showAndWait();
     }
+    
+    public void openPopup(String fxmlPath, Object cntrl) throws Exception {               
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
+            fxmlLoader.setController(cntrl);
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public LanguagePair getLangParent(TreeItem selection){
+    
+        TreeItem returnVal = selection;
+        while (!(returnVal.getValue() instanceof LanguagePair)){
+            returnVal = returnVal.getParent();
+        }
+        return (LanguagePair) returnVal.getValue();
+    }
+
 }

@@ -42,12 +42,14 @@ public class QuizController  implements Initializable{
     private String word;
     private boolean frontOrNot;
     private int thisCard;
+    private int totalCorrect;
+    private int totalIncorrect;
 
     /**
-     * Accepts the firstName, lastName and stores them to specific instance variables
+     * Accepts the cards and stores them to specific instance variables
      * 
      * @param cards
-     * @param lastName
+     * 
      */
     public QuizController(List<Card> cards) {
         //firstNameString.set(firstName);
@@ -56,6 +58,12 @@ public class QuizController  implements Initializable{
     @FXML
 
     private Text cardNum;
+    @FXML
+
+    private Text numIncorrect;
+    @FXML
+
+    private Text numCorrect;
     @FXML
     
     WebView cardView;
@@ -110,12 +118,17 @@ public class QuizController  implements Initializable{
         // TODO
         frontOrNot = true;
         thisCard = 0;
+        totalCorrect = 0;
+        totalIncorrect = 0;
         getCardDetails(thisCard);
         cardNum.setText((thisCard+1)+"/"+cardList.size());
+        numCorrect.setText(String.valueOf(totalCorrect));
+        numIncorrect.setText(String.valueOf(totalIncorrect));
         // URL quiz = this.getClass().getResource("/UI/languageQuiz.html");
         webEngine = cardView.getEngine();
         // webEngine.load(quiz.toString());
         webEngine.loadContent(front);
+        webEngine.setUserStyleSheetLocation(getClass().getResource("/UI/quiz.css").toString());
     }    
 
     @FXML
@@ -123,11 +136,12 @@ public class QuizController  implements Initializable{
     private void nextCard(ActionEvent event) {
 
         System.out.println("nextCard");
-        if(thisCard<cardList.size()){
+        if(thisCard<cardList.size()-1){
             thisCard++;
         }else{
             thisCard=0;
         }
+        cardNum.setText((thisCard+1)+"/"+cardList.size());
         getCardDetails(thisCard);
     }
     @FXML
@@ -138,8 +152,9 @@ public class QuizController  implements Initializable{
         if(thisCard>0){
             thisCard--;
         }else{
-            thisCard=cardList.size();
+            thisCard=cardList.size()-1;
         }
+        cardNum.setText((thisCard+1)+"/"+cardList.size());
         getCardDetails(thisCard);
     }
     @FXML
@@ -160,8 +175,9 @@ public class QuizController  implements Initializable{
     private void markCorrect(ActionEvent event) {
 
         System.out.println("correct");
-        cardSel.setTimesIncorrect(numIncorr++);
+        cardSel.setTimesCorrect(numIncorr++);
         cardSel.update();
+        numCorrect.setText(String.valueOf(totalCorrect++));
     }
     @FXML
 
@@ -170,7 +186,7 @@ public class QuizController  implements Initializable{
         System.out.println("incorrect");
         cardSel.setTimesIncorrect(numIncorr++);
         cardSel.update();
-
+        numIncorrect.setText(String.valueOf(totalIncorrect++));
     }
     private void getCardDetails(int cardNum){
         cardSel = (Card) cardList.get(cardNum);

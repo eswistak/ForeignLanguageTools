@@ -23,6 +23,7 @@ import DataModel.Utils;
 import Logic.ActualAPI;
 import UI.CardCreationController;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -373,7 +374,7 @@ public class UIController implements Initializable {
 
 
     @FXML
-
+    //TODO Remove this from fxml as well
     private void menuViewQuizSettingEvent(ActionEvent event) {
 
         System.out.println("View -> Quiz Setting");
@@ -405,7 +406,13 @@ public class UIController implements Initializable {
         }
     }
 
+   @FXML
+    //TODO Remove this from fxml as well
+    private void notesTableViewSelectedEvent(ActionEvent event) {
 
+        System.out.println("Help -> About");
+
+    }
 
     @FXML
 

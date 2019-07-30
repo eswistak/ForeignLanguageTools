@@ -7,6 +7,7 @@ Purpose:
 package controller;
 
 import DataModel.Card;
+import Logic.ActualAPI;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -31,6 +32,7 @@ public class QuizController  implements Initializable{
     //private StringProperty firstNameString = new SimpleStringProperty();
     private List cardList;
     private Card cardSel;
+    private String ownerDoc;
     private String hint;
     private String note;
     private String generic;
@@ -69,47 +71,8 @@ public class QuizController  implements Initializable{
     WebView cardView;
     private WebEngine webEngine;
     
-    String front = "<!DOCTYPE html>" +
-    "<html>" +
-        "<head>" +
-            "<link rel='stylesheet' href='quiz.css'>" +
-        "</head>"+
-        "<body>"+
-            "<div>"+
-                "<div class='header'>"+
-                    "<div id='source' class='left'>Speaking Chinese</div>"+
-                    "<div class='right'>"+
-                        "<div id='correct'>"+numCorr+"</div>"+
-                        "<div id='incorrect'>"+numIncorr+"</div>"+
-                    "</div>"+
-                "</div>"+
-                "<div class='main'><strong>" + word + "</strong></div>"+
-                "<div class='footer'>Hint: " + hint + "</div>"+
-            "</div>"+
-        "</body>"+
-    "</html>";
-    String back = "<!DOCTYPE html>" +
-    "<html>" +
-        "<head>" +
-            "<link rel='stylesheet' href='quiz.css'>" +
-        "</head>"+
-        "<body>"+
-            "<div>"+
-                "<div class='header'>"+
-                    "<div id='source' class='left'>Speaking Chinese</div>"+
-                    "<div class='right'>"+
-                        "<div id='correct'>"+numCorr+"</div>"+
-                        "<div id='incorrect'>"+numIncorr+"</div>"+
-                    "</div>"+
-                "</div>"+
-                "<div class='main'>"+
-                    "<span id='spType'>"+partSp+"</span>"+
-                    "<span id='def'>"+trans+"</span>"+
-                "</div>"+
-                "<div class='footer'>"+note+"</div>"+
-            "</div>"+
-        "</body>"+
-    "</html>";
+    String front;
+    String back;
     /**
      * Initializes the controller class.
      */
@@ -143,6 +106,8 @@ public class QuizController  implements Initializable{
         }
         cardNum.setText((thisCard+1)+"/"+cardList.size());
         getCardDetails(thisCard);
+        webEngine.loadContent(front);
+        frontOrNot=true;
     }
     @FXML
 
@@ -156,6 +121,8 @@ public class QuizController  implements Initializable{
         }
         cardNum.setText((thisCard+1)+"/"+cardList.size());
         getCardDetails(thisCard);
+        webEngine.loadContent(front);
+        frontOrNot=true;
     }
     @FXML
 
@@ -175,21 +142,30 @@ public class QuizController  implements Initializable{
     private void markCorrect(ActionEvent event) {
 
         System.out.println("correct");
-        cardSel.setTimesCorrect(numIncorr++);
-        cardSel.update();
-        numCorrect.setText(String.valueOf(totalCorrect++));
+        cardSel.setTimesCorrect(numCorr+1);
+        ActualAPI.getInstance().updateCard(cardSel);
+        //cardSel.update();
+        totalCorrect++;
+        numCorrect.setText(String.valueOf(totalCorrect));
+        getCardDetails(thisCard);
+        showCurrentSide();
     }
     @FXML
 
     private void markIncorrect(ActionEvent event) {
 
         System.out.println("incorrect");
-        cardSel.setTimesIncorrect(numIncorr++);
-        cardSel.update();
-        numIncorrect.setText(String.valueOf(totalIncorrect++));
+        cardSel.setTimesIncorrect(numIncorr+1);
+        ActualAPI.getInstance().updateCard(cardSel);
+        //cardSel.update();
+        totalIncorrect++;
+        numIncorrect.setText(String.valueOf(totalIncorrect));
+        getCardDetails(thisCard);
+        showCurrentSide();
     }
     private void getCardDetails(int cardNum){
         cardSel = (Card) cardList.get(cardNum);
+        ownerDoc = ActualAPI.getInstance().getDoc(cardSel).getTitle();
         hint = cardSel.getHint();
         note = cardSel.getCardNote();
         generic = cardSel.getGeneric();
@@ -199,5 +175,53 @@ public class QuizController  implements Initializable{
         numIncorr = cardSel.getTimesIncorrect();
         trans = cardSel.getTransInContext();
         word = cardSel.getWordAsAppears();
+        front = "<!DOCTYPE html>" +
+        "<html>" +
+            "<head>" +
+                "<link rel='stylesheet' href='quiz.css'>" +
+            "</head>"+
+            "<body>"+
+                "<div>"+
+                    "<div class='header'>"+
+                        "<div id='source' class='left'>"+ownerDoc+"</div>"+
+                        "<div class='right'>"+
+                            "<div id='correct'>"+numCorr+"</div>"+
+                            "<div id='incorrect'>"+numIncorr+"</div>"+
+                        "</div>"+
+                    "</div>"+
+                    "<div class='main'><strong>" + word + "</strong></div>"+
+                    "<div class='footer'>Hint: " + hint + "</div>"+
+                "</div>"+
+            "</body>"+
+        "</html>";
+        back = "<!DOCTYPE html>" +
+        "<html>" +
+            "<head>" +
+                "<link rel='stylesheet' href='quiz.css'>" +
+            "</head>"+
+            "<body>"+
+                "<div>"+
+                    "<div class='header'>"+
+                        "<div id='source' class='left'>"+ownerDoc+"</div>"+
+                        "<div class='right'>"+
+                            "<div id='correct'>"+numCorr+"</div>"+
+                            "<div id='incorrect'>"+numIncorr+"</div>"+
+                        "</div>"+
+                    "</div>"+
+                    "<div class='main'>"+
+                        "<span id='spType'>"+partSp+" </span>"+
+                        "<span id='def'>"+trans+"</span>"+
+                    "</div>"+
+                    "<div class='footer'>"+note+"</div>"+
+                "</div>"+
+            "</body>"+
+        "</html>";
+    }
+    private void showCurrentSide(){
+        if(frontOrNot){
+            webEngine.loadContent(front);
+        }else{
+            webEngine.loadContent(back);
+        }
     }
 }

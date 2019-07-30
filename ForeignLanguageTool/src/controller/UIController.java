@@ -60,8 +60,10 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Pair;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -367,9 +369,64 @@ public class UIController implements Initializable {
     @FXML
     //TODO Implement Tim Waite
     private void menuViewCurrentDeckEvent(ActionEvent event) {
-
+        System.out.println(event.getSource());
+        Stage stage = (Stage) textAreaMain.getScene().getWindow();
+        TableColumn<TestItem, String> popupWordColumn = new TableColumn("Word");
+        TableColumn<TestItem, String>  popupDefinitionColumn = new TableColumn("Definition");
+        TableColumn<TestItem, String> popupGenericColumn = new TableColumn("Generic");
         System.out.println("View -> Current Deck");
+        TreeItem selection = treeViewMain.getSelectionModel().selectedItemProperty().getValue();
+        Popup popup = new Popup();
+        popup.autoHideProperty().setValue(true);
+        popup.centerOnScreen();
+        TableView popupTableView = new TableView();
+        ObservableList<Card> data = null;
+        if(selection != null && !(selection.getValue() instanceof User)) {
+            Doc doc = getDocParent(selection);
+            if(null==doc){
+                LanguagePair lang = getLangParent(selection);
+                data = getCardsData(lang);
+            }else{
+                data = getCardsData(doc);
+            }
+            popupTableView.getColumns().add(popupWordColumn);
+            popupTableView.getColumns().add(popupDefinitionColumn);
+            popupTableView.getColumns().add(popupGenericColumn);
+            popupWordColumn.setCellValueFactory(new Callback(){
+                @Override
+                public Object call(Object obj){
+                    final Object dataObj = ((TableColumn.CellDataFeatures) obj).getValue();
+                    if(dataObj instanceof Card){
+                        return new ReadOnlyStringWrapper(String.valueOf(((Card)dataObj).getWordAsAppears()));
+                    }
+                    return null;
+                }
+            });
 
+            popupDefinitionColumn.setCellValueFactory(new Callback(){
+                @Override
+                public Object call(Object obj){
+                    final Object dataObj = ((TableColumn.CellDataFeatures) obj).getValue();
+                    if(dataObj instanceof Card){
+                        return new ReadOnlyStringWrapper(String.valueOf(((Card)dataObj).getTransInContext()));
+                    }
+                    return null;
+                    }
+            });
+            popupGenericColumn.setCellValueFactory(new Callback(){
+                @Override
+                public Object call(Object obj){
+                    final Object dataObj = ((TableColumn.CellDataFeatures) obj).getValue();
+                    if(dataObj instanceof Card){
+                        return new ReadOnlyStringWrapper(String.valueOf(((Card)dataObj).getGeneric()));
+                    }
+                    return null;
+                    }
+            });
+            popupTableView.setItems(data);
+            popup.getContent().add(popupTableView);
+            popup.show(stage);
+        }
     }
 
 
@@ -383,7 +440,9 @@ public class UIController implements Initializable {
     }
 
 
-
+            //Get the parent of document being viewed or parent of group selected
+            //pass to getallcards
+            //pass result to quiz controller;
     @FXML
     private void menuViewQuizEvent(ActionEvent event) {
         System.out.println("View -> Quiz");
@@ -392,17 +451,16 @@ public class UIController implements Initializable {
         if(selection != null && !(selection.getValue() instanceof User)) {
             LangPair = getLangParent(selection);
             
-        }
-        ;
-        //Get the parent of document being viewed or parent of group selected
-        //pass to getallcards
-        //pass result to quiz controller;
-        QuizController cntrl = new QuizController(ActualAPI.getInstance().getAllCards(LangPair));
-        try{
-        openPopup("/UI/quiz.fxml", cntrl);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        
+
+            //System.out.println(System.getProperty("user.dir"));
+            QuizController cntrl = new QuizController(ActualAPI.getInstance().getAllCards(LangPair));
+            try{
+            openPopup("/UI/quiz.fxml", cntrl);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        };
     }
 
    @FXML
@@ -667,8 +725,36 @@ public class UIController implements Initializable {
     
         TreeItem returnVal = selection;
         while (!(returnVal.getValue() instanceof LanguagePair)){
-            returnVal = returnVal.getParent();
+            if(null !=returnVal.getParent()){
+                returnVal = returnVal.getParent();
+            }else{
+                return null;
+            }
         }
         return (LanguagePair) returnVal.getValue();
+    }
+    public Doc getDocParent(TreeItem selection){
+    
+        TreeItem returnVal = selection;
+        while (!(returnVal.getValue() instanceof Doc)){
+            if(null !=returnVal.getParent()){
+                returnVal = returnVal.getParent();
+            }else{
+                return null;
+            }
+        }
+        return (Doc) returnVal.getValue();
+    }
+
+    private ObservableList<Card> getCardsData(LanguagePair lang) {
+
+        ObservableList<Card> data = FXCollections.observableArrayList();
+
+        List<Card> cards = ActualAPI.getInstance().getAllCards(lang);
+        
+        data.addAll(cards);
+
+        return data;
+
     }
 }

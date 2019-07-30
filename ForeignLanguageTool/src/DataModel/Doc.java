@@ -65,7 +65,7 @@ public class Doc extends Item{
             ((Doc) retval).setNode(node);
             return (Doc)retval;
         }else {
-            throw new JAXBException("the object" + Doc.class.getSimpleName() + "did not parse correctly");
+            throw new JAXBException("the object " + Doc.class.getSimpleName() + " did not parse correctly");
         }
     }
     

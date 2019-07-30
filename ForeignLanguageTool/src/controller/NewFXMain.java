@@ -8,6 +8,8 @@ package controller;
 import DataModel.Utils;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -28,8 +30,9 @@ public class NewFXMain extends Application {
         
         FXMLLoader loader = new FXMLLoader();
 
-        FileInputStream fileInputStream = new FileInputStream("UI\\UI.fxml");
-        Scene root = loader.load(fileInputStream);
+        ClassLoader cl = NewFXMain.class.getClassLoader();
+        InputStream stream = cl.getResourceAsStream("UI/UI.fxml");
+        Scene root = loader.load(stream);
         
         primaryStage.setScene(root);
         

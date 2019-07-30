@@ -11,6 +11,10 @@ import Logic.MotherTree;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.XMLConstants;
@@ -34,10 +38,10 @@ public class Utils {
     
     
     public static void load() throws ParserConfigurationException, SAXException, IOException {
-        File xmlFile = new File("DataModel\\TestData.xml");
+        InputStream xmlDoc = Utils.class.getResourceAsStream("TestData.xml");
         DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = builderFactory.newDocumentBuilder();
-        Document document = builder.parse(xmlFile);
+        Document document = builder.parse(xmlDoc);
         if(validateSchema(document)){
             MotherTree tree = MotherTree.getInstance();
             tree.setNodes(document); 
@@ -52,6 +56,7 @@ public class Utils {
     
     public static void load(String URL) throws ParserConfigurationException, SAXException, IOException {
         File xmlFile = new File(URL);
+        //https://stackoverflow.com/questions/37104523/convert-org-w3c-dom-document-to-file-file
         DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = builderFactory.newDocumentBuilder();
         Document document = builder.parse(xmlFile);
@@ -67,9 +72,15 @@ public class Utils {
         Document file = MotherTree.getInstance().getNodes();
         if(validateSchema(file)){
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            Result output = new StreamResult(new File("DataModel\\output.xml"));
+            File jarFile = null;
+            try {
+                jarFile = new File(Utils.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+            } catch (Exception ex) {
+                System.out.println("URL failed to function correctly");
+            }
+            FileWriter outputFile = new FileWriter(jarFile.getParentFile().getPath() + "\\programOutput.xml");
+            StreamResult output = new StreamResult(outputFile);
             Source input = new DOMSource(file);
-
             transformer.transform(input, output);             
         }else{
             System.out.println("Schema failed to validate");
@@ -91,8 +102,9 @@ public class Utils {
     
     public static boolean validateSchema(Document document){
         SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        URL url = Utils.class.getResource("Schema.xsd");  
         try {
-            Schema schema = factory.newSchema(new File("DataModel\\Schema.xsd"));
+            Schema schema = factory.newSchema(url);
             Validator validator = schema.newValidator();
             
             DOMSource source = new DOMSource(document);

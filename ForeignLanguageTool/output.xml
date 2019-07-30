@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+--><User ID="1" count="21">
+    <name>Ethan Swistak</name>
+    <NativeLanguage>English</NativeLanguage>
+    <LanguagePair ID="2">
+        <native>English</native>
+        <target>German</target>
+        <Group ID="4">
+            <name>Das Sagt Man So!</name>
+            <Document ID="7">
+                <title>Geld zum Fenster hinauswerfen</title>
+                <text>Mit Geld kann nicht jeder umgehen. Der eine spart jeden Cent, während der andere schon am Monatsanfang wieder pleite ist und gar nicht weiß, wofür er das Geld eigentlich ausgegeben hat.</text>
+                <translation>You can't always get by with just money. blah blah blah</translation>
+                <Card ID="9">
+                    <index>1</index>
+                    <wordAsAppears>umgehen</wordAsAppears>
+                    <generic>umgehen</generic>
+                    <partOfSpeech>verb</partOfSpeech>
+                    <translationInContext>get by</translationInContext>
+                    <otherTranslation>to deal</otherTranslation>
+                    <startChar>25</startChar>
+                    <endChar>32</endChar>
+                    <timesCorrect>3</timesCorrect>
+                    <timesIncorrect>1</timesIncorrect>
+                    <hint>kann nicht jeder umgehen</hint>
+                    <cardNote>means to deal with or get by, not deal in goods for example</cardNote>
+                </Card>
+                <Note ID="8">
+                    <content>kann is the present form of konnen</content>
+                    <index>1</index>
+                    <startChar>0</startChar>
+                    <endChar>13</endChar>
+                </Note>
+                <Card ID="10">
+                    <index>2</index>
+                    <wordAsAppears>jeder</wordAsAppears>
+                    <generic>jeder</generic>
+                    <partOfSpeech>adj</partOfSpeech>
+                    <translationInContext>always</translationInContext>
+                    <otherTranslation/>
+                    <startChar>19</startChar>
+                    <endChar>24</endChar>
+                    <timesCorrect>0</timesCorrect>
+                    <timesIncorrect>0</timesIncorrect>
+                    <hint>jeder tag</hint>
+                    <cardNote/>
+                </Card>
+            </Document>
+            <Document ID="11">
+                <title>Einen Korb Bekommen</title>
+                <text>Was ist an einem Korb so schlimm? Eigentlich gar nichts! Körbe sind schön und praktisch. Einen Korb voll mit Obst zu bekommen, ist zum Beispiel sehr schön. Aber manche Körbe bekommt niemand gerne.</text>
+                <translation>What's so bad about a basket? Actually nothing at all! Baskets are beautiful and practical. Getting a basket full of fruit, for example, is very nice. But some baskets nobody likes to get.</translation>
+                <Note ID="12">
+                    <content>nicht so schlim means not so bad, so schlim is kind of the same usage in English</content>
+                    <index>1</index>
+                    <startChar>21</startChar>
+                    <endChar>32</endChar>
+                </Note>
+                <Card ID="14">
+                    <index>2</index>
+                    <wordAsAppears>Korb</wordAsAppears>
+                    <generic/>
+                    <partOfSpeech>N</partOfSpeech>
+                    <translationInContext>basket</translationInContext>
+                    <otherTranslation/>
+                    <startChar>19</startChar>
+                    <endChar>23</endChar>
+                    <timesCorrect>2</timesCorrect>
+                    <timesIncorrect>1</timesIncorrect>
+                    <hint>can also be a bad gift</hint>
+                    <cardNote/>
+                </Card>
+                <Note ID="13">
+                    <content>Nothings so bad about a basket but if it's empty it kinda sucks, right?</content>
+                    <index>2</index>
+                    <startChar>0</startChar>
+                    <endChar>32</endChar>
+                </Note>              
+            </Document>
+        </Group>
+        <Group ID="6">
+            <name>Sayings</name>
+            <Document ID="15">
+                <title>Kurt Tucholsky</title>
+                <text>Sprache ist eine Waffe- Haltet Sie scharf</text>
+                <translation>Language is a weapon - keep it sharp.</translation>
+                <Card ID="16">
+                    <index>2</index>
+                    <wordAsAppears>Haltet</wordAsAppears>
+                    <generic>halten</generic>
+                    <partOfSpeech>N</partOfSpeech>
+                    <translationInContext>keep</translationInContext>
+                    <otherTranslation>to stop</otherTranslation>
+                    <startChar>23</startChar>
+                    <endChar>29</endChar>
+                    <timesCorrect>2</timesCorrect>
+                    <timesIncorrect>1</timesIncorrect>
+                    <hint>Haltet Sie scharf</hint>
+                    <cardNote/>
+                </Card>
+            <Card ID="34"><index>1</index><wordAsAppears/><generic/><partOfSpeech/><translationInContext/><otherTranslation/><startChar>1</startChar><endChar>1</endChar><timesCorrect>1</timesCorrect><timesIncorrect>1</timesIncorrect><hint>     </hint><cardNote>      </cardNote></Card></Document>         
+        </Group>
+    </LanguagePair>
+    <LanguagePair ID="3">
+        <native>English</native>
+        <target>Chinese</target>
+        <Group ID="5">
+            <name>Poetry</name>
+            <Document ID="19">
+                <title>A visit to Qiantang lake in spring</title>
+                <text>
+                    孤山寺北贾亭西
+                    水面初平云脚低
+                    几处早莺争暖树
+                    谁家新燕啄春泥
+                    乱花渐欲迷人眼
+                    浅草才能没马蹄
+                    最爱湖东行不足
+                    绿杨阴里白沙堤
+                </text>
+                <translation>
+                    Gushan Temple is to the north, Jiating pavilion west,
+                    The water's surface now is calm, the bottom of the clouds low.
+                    In several places, the first orioles are fighting in warm trees,
+                    By every house new swallows peck at spring mud.
+                    Disordered flowers have grown almost enough to confuse the eye,
+                    Bright grass is able now to hide the hooves of horses.
+                    I most love the east of the lake, I cannot come often enough
+                    Within the shade of green poplars on White Sand Embankment.
+                </translation>
+                <Card ID="20">
+                    <index>1</index>
+                    <wordAsAppears>迷</wordAsAppears>
+                    <generic/>
+                    <partOfSpeech/>
+                    <translationInContext>confuse</translationInContext>
+                    <otherTranslation>lost</otherTranslation>
+                    <startChar>34</startChar>
+                    <endChar>34</endChar>
+                    <timesCorrect>0</timesCorrect>
+                    <timesIncorrect>0</timesIncorrect>
+                    <hint>乱花渐欲迷人眼</hint>
+                    <cardNote/>
+                </Card>
+                <Card ID="21">
+                    <index>2</index>
+                    <wordAsAppears>寺</wordAsAppears>
+                    <generic/>
+                    <partOfSpeech>N</partOfSpeech>
+                    <translationInContext>temple</translationInContext>
+                    <otherTranslation/>
+                    <startChar>3</startChar>
+                    <endChar>3</endChar>
+                    <timesCorrect>2</timesCorrect>
+                    <timesIncorrect>0</timesIncorrect>
+                    <hint>孤山寺北贾亭西</hint>
+                    <cardNote>this can be used after names to denote some kind of temple's name, as in gushan寺</cardNote>
+                </Card>
+            </Document>
+        </Group>
+    </LanguagePair>   
+</User>

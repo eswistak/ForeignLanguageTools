@@ -145,23 +145,42 @@ public class ActualAPI implements API {
         return result;
     }
 
+    /**
+     *
+     * @param card
+     * @return
+     */
     @Override
-    public List<Card> getAllCards(LanguagePair langPair) {
-        String xpathQuery = "User/LanguagePair/Group/Document/Card";
+    public Doc getDoc(Card card) {
+        String xpathQuery = "User/LanguagePair/Group/Document/Card[@ID='" + String.valueOf(card.getID() + "']/ancestor::Document");
         NodeList nodelist = performXMLSearch(xpathQuery);
-        List<Card> result = new ArrayList<>();
+        Doc doc = null;
         for(int i = 0; i<nodelist.getLength(); i++){
             Node node = nodelist.item(i);
             try {
-                Card card = Card.constructObject(node);
-                result.add(card);
+                doc = Doc.constructObject(node);
             } catch (JAXBException ex) {
                 Logger.getLogger(ActualAPI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return result;
+        return doc;
     }
-    
+     @Override
+     public List<Card> getAllCards(LanguagePair langPair) {
+         String xpathQuery = "User/LanguagePair[@ID='" + String.valueOf(langPair.getID()) + "']/Group/Document/Card";
+         NodeList nodelist = performXMLSearch(xpathQuery);
+         List<Card> result = new ArrayList<>();
+         for(int i = 0; i<nodelist.getLength(); i++){
+             Node node = nodelist.item(i);
+             try {
+                 Card card = Card.constructObject(node);
+                 result.add(card);
+             } catch (JAXBException ex) {
+                 Logger.getLogger(ActualAPI.class.getName()).log(Level.SEVERE, null, ex);
+             }
+         }
+         return result;
+     }
     private NodeList performXMLSearch(String xpathQuery){
         Document document = MotherTree.getInstance().getNodes();
         XPathFactory fac = XPathFactory.newInstance();

@@ -12,6 +12,7 @@ import DataModel.LanguagePair;
 import DataModel.Group;
 import DataModel.Doc;
 import DataModel.Card;
+import DataModel.Item;
 import DataModel.Note;
 
 /**
@@ -26,6 +27,7 @@ public interface API {
     public List<Card> getCards(Doc doc);
     public List<Note> getNote(Doc doc);
     public List<Card> getAllCards(LanguagePair langPair);
+    public Doc getDoc(Card card);
 
     //Create methods
     public LanguagePair createLangPair(LanguagePair langPair);

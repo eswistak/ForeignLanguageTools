@@ -63,8 +63,8 @@ public class LanguagePair extends Item {
     
     //method is called on an update operation
     public void update(){
-        super.updateNode(0, nat);
-        super.updateNode(1, target);
+        super.updateNode("native", nat);
+        super.updateNode("target", target);
     }
     
     //method is called on a create operation

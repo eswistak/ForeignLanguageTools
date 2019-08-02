@@ -81,10 +81,10 @@ public class Note extends Item {
     
     //method is called on an update operation
     public void update(){
-        super.updateNode(0, content);
-        super.updateNode(1, String.valueOf(index));
-        super.updateNode(2, String.valueOf(startChar));
-        super.updateNode(3, String.valueOf(endChar));
+        super.updateNode("content", content);
+        super.updateNode("index", String.valueOf(index));
+        super.updateNode("startChar", String.valueOf(startChar));
+        super.updateNode("endChar", String.valueOf(endChar));
     }
     
     //method is called on a create operation

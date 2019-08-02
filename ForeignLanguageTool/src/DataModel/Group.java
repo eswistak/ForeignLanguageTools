@@ -51,7 +51,7 @@ public class Group extends Item {
     
     //method is called on an update operation
     public void update(){
-        super.updateNode(0, name);
+        super.updateNode("name", name);
     }
     
     //method is called on a create operation

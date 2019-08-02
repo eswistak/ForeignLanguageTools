@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logic;
+package Testing;
 
 import DataModel.Card;
 import DataModel.Doc;
@@ -11,6 +11,7 @@ import DataModel.Group;
 import DataModel.LanguagePair;
 import DataModel.Note;
 import DataModel.Utils;
+import Logic.MotherTree;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +24,7 @@ import org.xml.sax.SAXException;
  *
  * @author Ethan Swistak
  */
-public class TestingLogic {
+public class TestingCreate {
 
     /**
      * @param args the command line arguments
@@ -35,11 +36,11 @@ public class TestingLogic {
         try {
             Utils.load();
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(TestingLogic.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestingCreate.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
-            Logger.getLogger(TestingLogic.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestingCreate.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TestingLogic.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestingCreate.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         LanguagePair langPair = null;
@@ -55,7 +56,7 @@ public class TestingLogic {
             card = Card.createNew();
             note = Note.createNew();
         } catch (JAXBException ex) {
-            Logger.getLogger(TestingLogic.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestingCreate.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         langPair.setNat("English");

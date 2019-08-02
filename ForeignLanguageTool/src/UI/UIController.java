@@ -8,7 +8,7 @@
 
  */
 
-package controller;
+package UI;
 
 
 
@@ -22,6 +22,7 @@ import DataModel.Note;
 import DataModel.Utils;
 import Logic.ActualAPI;
 import UI.CardCreationController;
+import controller.TestItem;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileInputStream;
@@ -291,7 +292,7 @@ public class UIController implements Initializable {
         } catch (IOException ex) {
             System.out.println("The file was not found");
         } catch (TransformerException ex) {
-            System.out.println("TransformerS! More than meets the eye!");
+            System.out.println("Transformer exception");
         }
     }
 
@@ -475,12 +476,13 @@ public class UIController implements Initializable {
 
 
     @FXML
-    private void menuEditFlashcardEvent(ActionEvent event) {
+    private void menuEditFlashcardEvent() {
         
         if(viewingDoc == null){
             
         }else{
-            CardCreationController subWindow = new CardCreationController(this.viewingDoc, this.cardsTableView.getSelectionModel().getSelectedItem());
+            Card viewingCard = this.cardsTableView.getSelectionModel().getSelectedItem();
+            CardCreationController subWindow = new CardCreationController(this.viewingDoc, viewingCard);
         }
     }
 

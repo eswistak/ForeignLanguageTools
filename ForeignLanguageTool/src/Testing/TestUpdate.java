@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logic;
+package Testing;
 
 import DataModel.Card;
 import DataModel.Doc;
@@ -11,6 +11,8 @@ import DataModel.Group;
 import DataModel.LanguagePair;
 import DataModel.Note;
 import DataModel.Utils;
+import Logic.ActualAPI;
+import Logic.MotherTree;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
@@ -25,7 +27,7 @@ import org.xml.sax.SAXException;
  *
  * @author Ethan Swistak
  */
-public class TestingLogic2 {
+public class TestUpdate {
 
     /**
      * @param args the command line arguments
@@ -37,11 +39,11 @@ public class TestingLogic2 {
         try {
             Utils.load();
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(TestingLogic.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestingCreate.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
-            Logger.getLogger(TestingLogic.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestingCreate.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TestingLogic.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestingCreate.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         LanguagePair langPair = new LanguagePair();
@@ -74,16 +76,27 @@ public class TestingLogic2 {
         
         ActualAPI.getInstance().updateNote(note);
         
+        LanguagePair langPair2 = ActualAPI.getInstance().getLangPair().get(0);
+        
+        Card card2 = ActualAPI.getInstance().getAllCards(langPair2).get(0);
+        
+        card2.setTimesCorrect(5);
+        card2.setTimesIncorrect(3);
+        
+        ActualAPI.getInstance().updateCard(card2);
+        ActualAPI.getInstance().updateCard(card2);
+        ActualAPI.getInstance().updateCard(card2);
+        
         try {
             Utils.save();
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(TestingLogic2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestUpdate.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
-            Logger.getLogger(TestingLogic2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestUpdate.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TestingLogic2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestUpdate.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransformerException ex) {
-            Logger.getLogger(TestingLogic2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestUpdate.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

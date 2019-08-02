@@ -59,6 +59,8 @@ public class CardCreationController extends Window {
     @FXML
     private TextArea otherDefsField;
     
+    @FXML TextArea hint;
+    
     public static Card card;
     public static Doc doc;
     
@@ -67,7 +69,6 @@ public class CardCreationController extends Window {
     }
     
     public CardCreationController(Doc doc, Card card){
-        CardCreationController.card = card;
         CardCreationController.doc = doc;
         FXMLLoader loader = new FXMLLoader();
         ClassLoader cl = CardCreationController.class.getClassLoader();
@@ -81,6 +82,13 @@ public class CardCreationController extends Window {
         Stage secondaryStage = new Stage();
         secondaryStage.setScene(inputCard);
         secondaryStage.initModality(Modality.APPLICATION_MODAL);
+        this.card = card;
+        wordAsAppearsField.setText(card.getWordAsAppears());
+        genericField.setText(card.getGeneric());
+        defInContextField.setText(card.getTransInContext());
+        partOfSpeechField.setText(card.getPartOfSpeech());
+        otherDefsField.setText(card.getOtherTrans());
+        hint.setText(card.getHint());
         secondaryStage.show();
     }
     

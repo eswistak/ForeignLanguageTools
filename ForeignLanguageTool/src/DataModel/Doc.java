@@ -71,9 +71,9 @@ public class Doc extends Item{
     
     //method is called on an update operation
     public void update(){
-        super.updateNode(0, title);
-        super.updateNode(1, text);
-        super.updateNode(2, translation);
+        super.updateNode("title", title);
+        super.updateNode("text", text);
+        super.updateNode("translation", translation);
     }
     
     //method is called on a create operation

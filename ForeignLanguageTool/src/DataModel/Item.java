@@ -14,6 +14,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 
@@ -57,8 +58,9 @@ public class Item {
         this.node = node;
     }
     
-    protected void updateNode(int index, String text){
-        node.getChildNodes().item(index).setTextContent(text);
+    protected void updateNode(String tagname, String text){
+        Element element = (Element)((Element)node).getElementsByTagName(tagname).item(0);
+        element.setTextContent(text);
     }
     
     //method is called on delete operation

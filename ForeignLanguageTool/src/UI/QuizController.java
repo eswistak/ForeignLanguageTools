@@ -4,7 +4,7 @@ Author: Ethan Swistak
 Date: Jul 25, 2019
 Purpose:
 */
-package controller;
+package UI;
 
 import DataModel.Card;
 import Logic.ActualAPI;

@@ -61,8 +61,8 @@ public class User extends Item {
     
     //method is called on an update operation
     public void update(){
-        super.updateNode(0, name);
-        super.updateNode(1, nativeLanguage);
+        super.updateNode("name", name);
+        super.updateNode("NativeLanguage", nativeLanguage);
     }
     
     //method is called on a create operation

@@ -60,6 +60,11 @@ public class MockAPI implements API{
     public void deleteNote(Note note) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Doc getDoc(Card card) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     private static class MockAPIHolder {
 

@@ -163,18 +163,18 @@ public class Card extends Item{
     
     //method is called on an update operation
     public void update(){
-        super.updateNode(0, String.valueOf(index));
-        super.updateNode(1, wordAsAppears);
-        super.updateNode(2, generic);
-        super.updateNode(3, partOfSpeech);
-        super.updateNode(4, transInContext);
-        super.updateNode(5, otherTrans);
-        super.updateNode(6, String.valueOf(startChar));
-        super.updateNode(7, String.valueOf(endChar));
-        super.updateNode(8, String.valueOf(timesCorrect));
-        super.updateNode(9, String.valueOf(timesIncorrect));
-        super.updateNode(10, hint);
-        super.updateNode(11, cardNote);
+        super.updateNode("index", String.valueOf(index));
+        super.updateNode("wordAsAppears", wordAsAppears);
+        super.updateNode("generic", generic);
+        super.updateNode("partOfSpeech", partOfSpeech);
+        super.updateNode("translationInContext", transInContext);
+        super.updateNode("otherTranslation", otherTrans);
+        super.updateNode("startChar", String.valueOf(startChar));
+        super.updateNode("endChar", String.valueOf(endChar));
+        super.updateNode("timesCorrect", String.valueOf(timesCorrect));
+        super.updateNode("timesIncorrect", String.valueOf(timesIncorrect));
+        super.updateNode("hint", hint);
+        super.updateNode("cardNote", cardNote);
     }
     
     //method is called on a create operation

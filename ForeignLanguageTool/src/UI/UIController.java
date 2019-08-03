@@ -23,6 +23,8 @@ import DataModel.Utils;
 import Logic.ActualAPI;
 import UI.CardCreationController;
 import controller.TestItem;
+import java.awt.Color;
+import java.awt.Paint;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileInputStream;
@@ -77,6 +79,9 @@ import javafx.stage.Stage;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
+
+
+import javafx.scene.web.HTMLEditor;
 
 
 
@@ -156,8 +161,9 @@ public class UIController implements Initializable {
 
     @FXML
 
-    private TextArea textAreaMain;
-
+    //private TextArea textAreaMain;
+    private HTMLEditor textAreaMain;
+        
     @FXML
 
     protected TreeView<Item> treeViewMain;
@@ -210,18 +216,33 @@ public class UIController implements Initializable {
 
         System.out.println("INIT");
 
-        textAreaMain.setWrapText(true);
+        //textAreaMain.setWrapText(true);
         
         // don't let user edit the text-area
-        textAreaMain.setEditable(false);
+        //textAreaMain.setEditable(false);
 
         buildTreeView();
 
         treeViewMain.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        hideHTMLEditorToolbars(textAreaMain);
     }    
     //TODO Actually implement any method with a println
 
 
+    /* HIDES THE HTML TOOLBAR */
+    public static void hideHTMLEditorToolbars(final HTMLEditor editor) {
+        editor.setVisible(false);
+        Platform.runLater(() -> {
+            Node[] nodes = editor.lookupAll(".tool-bar").toArray(new Node[0]);
+            for (Node node : nodes) {
+                node.setVisible(false);
+                node.setManaged(false);
+            }
+            editor.setVisible(true);
+        });
+    }
+    
+    
     @FXML
     //TODO Implement Hyung Kang
     private void menuFileNewDocEvent(ActionEvent event) {
@@ -425,7 +446,7 @@ public class UIController implements Initializable {
     @FXML
     //TODO Implement Hyung Kang
     private void menuEditTextEvent(ActionEvent event) {
-        if (textAreaMain.getText().isEmpty()) {
+        if (textAreaMain.getHtmlText().isEmpty()) {
             popUpDialog("Please select the text first.");
             return;
         }
@@ -447,7 +468,7 @@ public class UIController implements Initializable {
         // text-area
         TextArea newTextArea = new TextArea();
         newTextArea.setWrapText(true);
-        newTextArea.setText(textAreaMain.getText());
+        newTextArea.setText(textAreaMain.getHtmlText());
         
         grid.add(newTextArea, 0, 0);
         dialog.getDialogPane().setContent(grid);
@@ -462,7 +483,7 @@ public class UIController implements Initializable {
             // update the current text document 
             Doc newDoc = (Doc) treeViewMain.getSelectionModel().getSelectedItem().getValue();
             newDoc.setText(newTextArea.getText());
-            textAreaMain.setText(newDoc.getText());
+            textAreaMain.setHtmlText(newDoc.getText());
             
             System.out.println("New Text:\n" + newTextArea.getText());
         } else {
@@ -633,20 +654,82 @@ public class UIController implements Initializable {
 
     
     // treeview handling
-
     private void handleTreeViewMain(TreeItem<Item> newValue) {
         
         if(newValue.getValue() instanceof Doc){
-            
+
             Doc doc = (Doc)newValue.getValue();
             doc.getID();
             this.viewingDoc = doc;
 
-            textAreaMain.setText(doc.getText());
+            StringBuilder s = new StringBuilder(doc.getText());
+
+            List<Card> cards = ActualAPI.getInstance().getCards(doc);
+            List<Note> notes = ActualAPI.getInstance().getNote(doc);
+            
+            //Highlight all cards
+            for(int i=0;i<cards.size();i++) {
+                Card c = cards.get(i);
+                int start = c.getStartChar();
+                int end = c.getEndChar();
+
+                s.insert(end,"</mark>");
+                s.insert(start,"<mark>");
+                
+                updateOthers(end,7,cards,notes);
+                updateOthers(start,6,cards,notes);
+            }
+            
+            //Underline all notes         
+            for(int i=0;i<notes.size();i++) {
+                Note n = notes.get(i);
+                int start = n.getStartChar();
+                int end = n.getEndChar();
+
+                s.insert(end,"</u>");
+                s.insert(start,"<u>");
+                
+                updateOthers(end,4,cards,notes);
+                updateOthers(start,3,cards,notes);
+            }
+            
+            textAreaMain.setHtmlText(s.toString());
+            
             createCardTableView(doc);
             createNoteTableView(doc);
         }
 
+    }
+    //Helps format the text for handleTreeViewMain
+    private void updateOthers(int index,int amount,List<Card> cards,List<Note> notes){
+        for(int i=0;i<cards.size();i++) {
+            Card c = cards.get(i);
+            int start = c.getStartChar();
+            int end = c.getEndChar();
+            
+            if(start>index) {
+                start+=amount;
+                c.setStartChar(start);
+            }
+            if(end>index) {
+                end+=amount;
+                c.setEndChar(end);
+            }
+        }
+        for(int i=0;i<notes.size();i++) {
+            Note n = notes.get(i);
+            int start = n.getStartChar();
+            int end = n.getEndChar();
+            if(start>index) {
+                start+=amount;
+                n.setStartChar(start);
+            }
+            if(end>index) {
+                end+=amount;
+                n.setEndChar(end);
+            }
+        }
+        
     }
     
     // need to work on this method after Note-edit screen

@@ -25,8 +25,8 @@ and open the template in the editor.
                     <partOfSpeech>verb</partOfSpeech>
                     <translationInContext>get by</translationInContext>
                     <otherTranslation>to deal</otherTranslation>
-                    <startChar>25</startChar>
-                    <endChar>32</endChar>
+                    <startChar>26</startChar>
+                    <endChar>33</endChar>
                     <timesCorrect>3</timesCorrect>
                     <timesIncorrect>1</timesIncorrect>
                     <hint>kann nicht jeder umgehen</hint>
@@ -45,8 +45,8 @@ and open the template in the editor.
                     <partOfSpeech>adj</partOfSpeech>
                     <translationInContext>always</translationInContext>
                     <otherTranslation></otherTranslation>
-                    <startChar>19</startChar>
-                    <endChar>24</endChar>
+                    <startChar>20</startChar>
+                    <endChar>25</endChar>
                     <timesCorrect>0</timesCorrect>
                     <timesIncorrect>0</timesIncorrect>
                     <hint>jeder tag</hint>
@@ -60,7 +60,7 @@ and open the template in the editor.
                 <Note ID='12'>
                     <content>nicht so schlim means not so bad, so schlim is kind of the same usage in English</content>
                     <index>1</index>
-                    <startChar>21</startChar>
+                    <startChar>0</startChar>
                     <endChar>32</endChar>
                 </Note>
                 <Card ID='14'>
@@ -70,8 +70,8 @@ and open the template in the editor.
                     <partOfSpeech>N</partOfSpeech>
                     <translationInContext>basket</translationInContext>
                     <otherTranslation></otherTranslation>
-                    <startChar>19</startChar>
-                    <endChar>23</endChar>
+                    <startChar>17</startChar>
+                    <endChar>21</endChar>
                     <timesCorrect>2</timesCorrect>
                     <timesIncorrect>1</timesIncorrect>
                     <hint>can also be a bad gift</hint>
@@ -80,7 +80,7 @@ and open the template in the editor.
                 <Note ID='13'>
                     <content>Nothings so bad about a basket but if it's empty it kinda sucks, right?</content>
                     <index>2</index>
-                    <startChar>0</startChar>
+                    <startChar>22</startChar>
                     <endChar>32</endChar>
                 </Note>              
             </Document>
@@ -98,8 +98,8 @@ and open the template in the editor.
                     <partOfSpeech>N</partOfSpeech>
                     <translationInContext>keep</translationInContext>
                     <otherTranslation>to stop</otherTranslation>
-                    <startChar>23</startChar>
-                    <endChar>29</endChar>
+                    <startChar>24</startChar>
+                    <endChar>30</endChar>
                     <timesCorrect>2</timesCorrect>
                     <timesIncorrect>1</timesIncorrect>
                     <hint>Haltet Sie scharf</hint>
@@ -115,16 +115,7 @@ and open the template in the editor.
             <name>Poetry</name>
             <Document ID='19'>
                 <title>A visit to Qiantang lake in spring</title>
-                <text>
-                    孤山寺北贾亭西
-                    水面初平云脚低
-                    几处早莺争暖树
-                    谁家新燕啄春泥
-                    乱花渐欲迷人眼
-                    浅草才能没马蹄
-                    最爱湖东行不足
-                    绿杨阴里白沙堤
-                </text>
+                <text>孤山寺北贾亭西水面初平云脚低几处早莺争暖树谁家新燕啄春泥乱花渐欲迷人眼浅草才能没马蹄最爱湖东行不足绿杨阴里白沙堤</text>
                 <translation>
                     Gushan Temple is to the north, Jiating pavilion west,
                     The water's surface now is calm, the bottom of the clouds low.
@@ -142,8 +133,8 @@ and open the template in the editor.
                     <partOfSpeech></partOfSpeech>
                     <translationInContext>confuse</translationInContext>
                     <otherTranslation>lost</otherTranslation>
-                    <startChar>34</startChar>
-                    <endChar>34</endChar>
+                    <startChar>32</startChar>
+                    <endChar>33</endChar>
                     <timesCorrect>0</timesCorrect>
                     <timesIncorrect>0</timesIncorrect>
                     <hint>乱花渐欲迷人眼</hint>
@@ -156,7 +147,7 @@ and open the template in the editor.
                     <partOfSpeech>N</partOfSpeech>
                     <translationInContext>temple</translationInContext>
                     <otherTranslation></otherTranslation>
-                    <startChar>3</startChar>
+                    <startChar>2</startChar>
                     <endChar>3</endChar>
                     <timesCorrect>2</timesCorrect>
                     <timesIncorrect>0</timesIncorrect>

@@ -513,7 +513,34 @@ public class UIController implements Initializable {
     //TODO Implement Hyung Kang, we don't yet have a note edit screen, should build one
     private void menuEditNoteEvent(ActionEvent event) {
 
-        System.out.println("Edit -> Note");
+        Note n = this.notesTableView.getSelectionModel().getSelectedItem();
+        
+        Dialog<String> dialog = new Dialog();
+        dialog.setTitle("Edit Note");
+        dialog.setHeaderText("Edit Note");
+
+        // button
+        ButtonType buttonType = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(buttonType, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+        
+        TextArea newTextArea = new TextArea();
+        newTextArea.setWrapText(true);
+        newTextArea.setText(n.getContent());
+
+        grid.add(newTextArea, 0, 0);
+        dialog.getDialogPane().setContent(grid);
+
+        // request focus on the native field by defualt
+        Platform.runLater(() -> newTextArea.requestFocus());
+        
+        Optional<String> result = dialog.showAndWait();
+        
+        n.setContent(newTextArea.getText());
     }
 
 
@@ -613,14 +640,6 @@ public class UIController implements Initializable {
                 e.printStackTrace();
             }
         };
-    }
-
-   @FXML
-    //TODO Remove this from fxml as well
-    private void notesTableViewSelectedEvent(ActionEvent event) {
-
-        System.out.println("Help -> About");
-
     }
 
     @FXML

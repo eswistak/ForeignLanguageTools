@@ -102,7 +102,9 @@
                   </BorderPane>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <TableView fx:id="cardsTableView" prefHeight="200.0" prefWidth="200.0">
+                        
+                         
+                         <TableView fx:id="cardsTableView" prefHeight="200.0" prefWidth="200.0">
                           <columns>
                             <TableColumn fx:id="cardsWordColumn" prefWidth="95.73342740535736" text="Word" />
                             <TableColumn fx:id="cardsDefinitionColumn" prefWidth="105.06665802001953" text="Definition" />
@@ -121,7 +123,11 @@
                               </ContextMenu>
                            </contextMenu>
                         </TableView>
+                        
+                        
                         <Pane prefHeight="200.0" prefWidth="200.0" />
+                        
+                        
                         <TableView fx:id="notesTableView" onMouseClicked="#notesTableViewSelectedEvent" prefHeight="200.0" prefWidth="200.0">
                           <columns>
                             <TableColumn fx:id="notesIndexColumn" prefWidth="65.0" text="Index" />
@@ -130,7 +136,21 @@
                            <tooltip>
                               <Tooltip text="List of notes associated with document" />
                            </tooltip>
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#menuEditNoteEvent" text="Edit Note" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
                         </TableView>
+                     
+                     
+                     
+                     
+                     
+                     
+                     
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">

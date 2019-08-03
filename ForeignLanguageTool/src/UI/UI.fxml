@@ -21,6 +21,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import javafx.scene.web.HTMLEditor?>
+
 <Scene xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.UIController">
    <root>
       <TitledPane prefHeight="626.0" prefWidth="909.0">
@@ -100,7 +102,9 @@
                   </BorderPane>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <TableView fx:id="cardsTableView" prefHeight="200.0" prefWidth="200.0">
+                        
+                         
+                         <TableView fx:id="cardsTableView" prefHeight="200.0" prefWidth="200.0">
                           <columns>
                             <TableColumn fx:id="cardsWordColumn" prefWidth="95.73342740535736" text="Word" />
                             <TableColumn fx:id="cardsDefinitionColumn" prefWidth="105.06665802001953" text="Definition" />
@@ -119,7 +123,11 @@
                               </ContextMenu>
                            </contextMenu>
                         </TableView>
+                        
+                        
                         <Pane prefHeight="200.0" prefWidth="200.0" />
+                        
+                        
                         <TableView fx:id="notesTableView" onMouseClicked="#notesTableViewSelectedEvent" prefHeight="200.0" prefWidth="200.0">
                           <columns>
                             <TableColumn fx:id="notesIndexColumn" prefWidth="65.0" text="Index" />
@@ -128,7 +136,21 @@
                            <tooltip>
                               <Tooltip text="List of notes associated with document" />
                            </tooltip>
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#menuEditNoteEvent" text="Edit Note" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
                         </TableView>
+                     
+                     
+                     
+                     
+                     
+                     
+                     
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -148,14 +170,16 @@
                   </HBox>
                   <Pane GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <TextArea fx:id="textAreaMain" prefHeight="408.0" prefWidth="679.0">
+                        <HTMLEditor fx:id="textAreaMain" prefHeight="408.0" prefWidth="679.0">
+                        <!--TextArea fx:id="textAreaMain" prefHeight="908.0" prefWidth="979.0"-->
                            <contextMenu>
                               <ContextMenu>
                                  <items>
                                     <MenuItem fx:id="menuFileNewFlashcard" mnemonicParsing="false" onAction="#menuFileNewFlashcardEvent" text="New Flashcard" />
                                  </items>
                               </ContextMenu>
-                           </contextMenu></TextArea>
+                           </contextMenu>
+                        </HTMLEditor>
                      </children>
                   </Pane>
                </children>

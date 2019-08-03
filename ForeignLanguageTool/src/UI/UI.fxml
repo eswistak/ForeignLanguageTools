@@ -21,6 +21,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import javafx.scene.web.HTMLEditor?>
+
 <Scene xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.UIController">
    <root>
       <TitledPane prefHeight="626.0" prefWidth="909.0">
@@ -148,14 +150,16 @@
                   </HBox>
                   <Pane GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <TextArea fx:id="textAreaMain" prefHeight="408.0" prefWidth="679.0">
+                        <HTMLEditor fx:id="textAreaMain" prefHeight="408.0" prefWidth="679.0">
+                        <!--TextArea fx:id="textAreaMain" prefHeight="908.0" prefWidth="979.0"-->
                            <contextMenu>
                               <ContextMenu>
                                  <items>
                                     <MenuItem fx:id="menuFileNewFlashcard" mnemonicParsing="false" onAction="#menuFileNewFlashcardEvent" text="New Flashcard" />
                                  </items>
                               </ContextMenu>
-                           </contextMenu></TextArea>
+                           </contextMenu>
+                        </HTMLEditor>
                      </children>
                   </Pane>
                </children>

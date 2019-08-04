@@ -52,7 +52,7 @@
                       <Menu fx:id="languagesMenu" mnemonicParsing="false" text="Languages">
                            <items>
                               <MenuItem mnemonicParsing="false" text="Set Native Language" />
-                              <MenuItem mnemonicParsing="false" text="New Language Pair" />
+                              <MenuItem mnemonicParsing="false" onAction="#menuFileCreateNewLangPairEvent" text="New Language Pair" />
                               <MenuItem mnemonicParsing="false" onAction="#deleteLanguagePair" text="Delete Language Pair" />
                               <SeparatorMenuItem mnemonicParsing="false" />
                            </items>
@@ -84,7 +84,6 @@
                                        <contextMenu>
                                           <ContextMenu>
                                             <items>
-                                                <MenuItem fx:id="menuFileCreateNewLangPair" mnemonicParsing="false" onAction="#menuFileCreateNewLangPairEvent" text="New Language Pair" />
                                                 <MenuItem fx:id="menuFileNewDoc1" mnemonicParsing="false" onAction="#menuFileNewDocEvent" text="New Group" />
                                             <MenuItem fx:id="menuFileNewDoc" mnemonicParsing="false" onAction="#menuFileNewDocEvent" text="New Document" />
                                             </items>
@@ -118,7 +117,8 @@
                            <contextMenu>
                               <ContextMenu>
                                 <items>
-                                  <MenuItem mnemonicParsing="false" onAction="#menuEditFlashcardEvent" text="Edit Card" />
+                                  <MenuItem mnemonicParsing="false" onAction="#menuEditFlashcardEvent" text=" Edit Card" />
+                                    <MenuItem mnemonicParsing="false" onAction="#cardDeleteEvent" text="Delete Card" />
                                 </items>
                               </ContextMenu>
                            </contextMenu>
@@ -140,6 +140,7 @@
                               <ContextMenu>
                                 <items>
                                   <MenuItem mnemonicParsing="false" onAction="#menuEditNoteEvent" text="Edit Note" />
+                                    <MenuItem mnemonicParsing="false" onAction="#notesDeleteEvent" text="Delete Note" />
                                 </items>
                               </ContextMenu>
                            </contextMenu>

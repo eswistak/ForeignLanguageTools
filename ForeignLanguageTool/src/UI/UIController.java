@@ -257,6 +257,9 @@ public class UIController implements Initializable {
         //textAreaMain.setEditable(false);
         treeViewMain.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         hideHTMLEditorToolbars(textAreaMain);
+        setTableDoubleClick(cardsTableView);
+        setTableDoubleClick(notesTableView);
+    }    
 
         List<LanguagePair> pairs = ActualAPI.getInstance().getLangPair();
         for (LanguagePair pair : pairs) {
@@ -285,6 +288,23 @@ public class UIController implements Initializable {
                 node.setManaged(false);
             }
             editor.setVisible(true);
+        });
+    }
+    
+    private void setTableDoubleClick(TableView table) {
+        table.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override 
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                    if (table.equals(cardsTableView)) {
+                        menuEditFlashcardEvent();
+                    }
+                    if (table.equals(notesTableView)) {
+                        menuEditNoteEvent();
+                    }
+                    //System.out.println(table.getSelectionModel().getSelectedItem());                   
+                }
+            }
         });
     }
 
@@ -578,7 +598,7 @@ public class UIController implements Initializable {
 
     @FXML
     //TODO Implement Hyung Kang, we don't yet have a note edit screen, should build one
-    private void menuEditNoteEvent(ActionEvent event) {
+    private void menuEditNoteEvent() {
 
         Note n = this.notesTableView.getSelectionModel().getSelectedItem();
 
@@ -1011,5 +1031,4 @@ public class UIController implements Initializable {
         return data;
 
     }
-
 }

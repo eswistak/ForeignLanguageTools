@@ -173,7 +173,4 @@ public class MockAPI implements API{
     public void updateNote(Note note) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-
-
 }

@@ -259,21 +259,11 @@ public class UIController implements Initializable {
         hideHTMLEditorToolbars(textAreaMain);
         setTableDoubleClick(cardsTableView);
         setTableDoubleClick(notesTableView);
-    }    
+       
 
         List<LanguagePair> pairs = ActualAPI.getInstance().getLangPair();
         for (LanguagePair pair : pairs) {
-            MenuItem item = new MenuItem();
-            item.setText(pair.getNat() + "->" + pair.getTarget());
-            item.getProperties().put(LanguagePair.class, pair);
-            item.setId(String.valueOf(pair.getID()));
-            item.setOnAction(new EventHandler<ActionEvent>() {
-                public void handle(ActionEvent e) {
-                    viewingLanguage = (LanguagePair)item.getProperties().get(LanguagePair.class);
-                    buildTreeView();
-                }
-            });
-            languagesMenu.getItems().add(item);
+            setLanguagePairMenuItem(pair);
         }
     }
     //TODO Actually implement any method with a println
@@ -291,6 +281,20 @@ public class UIController implements Initializable {
         });
     }
     
+    private void setLanguagePairMenuItem(LanguagePair pair) {
+        MenuItem item = new MenuItem();
+        item.setText(pair.getNat() + "->" + pair.getTarget());
+        item.getProperties().put(LanguagePair.class, pair);
+        item.setId(String.valueOf(pair.getID()));
+        item.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                viewingLanguage = (LanguagePair)item.getProperties().get(LanguagePair.class);
+                buildTreeView();
+            }
+        });
+        languagesMenu.getItems().add(item);
+    }
+
     private void setTableDoubleClick(TableView table) {
         table.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override 
@@ -473,7 +477,7 @@ public class UIController implements Initializable {
 
                 TreeItem<Item> newPair = new TreeItem<>(newLangPair);
                 root.getChildren().add(newPair);
-
+                setLanguagePairMenuItem(newLangPair);
                 System.out.println("Native: " + pair.getKey() + "\nTarget: " + pair.getValue());
             }
         });

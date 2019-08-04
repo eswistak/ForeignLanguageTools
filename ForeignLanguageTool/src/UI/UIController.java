@@ -41,6 +41,7 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -225,6 +226,8 @@ public class UIController implements Initializable {
 
         treeViewMain.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         hideHTMLEditorToolbars(textAreaMain);
+        setTableDoubleClick(cardsTableView);
+        setTableDoubleClick(notesTableView);
     }    
     //TODO Actually implement any method with a println
 
@@ -242,7 +245,23 @@ public class UIController implements Initializable {
         });
     }
     
-    
+    private void setTableDoubleClick(TableView table) {
+        table.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override 
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                    if (table.equals(cardsTableView)) {
+                        menuEditFlashcardEvent();
+                    }
+                    if (table.equals(notesTableView)) {
+                        menuEditNoteEvent();
+                    }
+                    //System.out.println(table.getSelectionModel().getSelectedItem());                   
+                }
+            }
+        });
+    }
+
     @FXML
     //TODO Implement Hyung Kang
     private void menuFileNewDocEvent(ActionEvent event) {
@@ -511,7 +530,7 @@ public class UIController implements Initializable {
 
     @FXML
     //TODO Implement Hyung Kang, we don't yet have a note edit screen, should build one
-    private void menuEditNoteEvent(ActionEvent event) {
+    private void menuEditNoteEvent() {
 
         Note n = this.notesTableView.getSelectionModel().getSelectedItem();
         
@@ -970,4 +989,5 @@ public class UIController implements Initializable {
         return data;
 
     }
+    
 }

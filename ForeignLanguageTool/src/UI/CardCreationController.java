@@ -45,19 +45,19 @@ public class CardCreationController extends Window {
     private Button cancelButton;
     
     @FXML
-    private TextField wordAsAppearsField;
+    protected TextField wordAsAppearsField;
     
     @FXML
-    private TextField genericField;
+    protected TextField genericField;
     
     @FXML
-    private TextField defInContextField;
+    protected TextField defInContextField;
     
     @FXML
-    private TextField partOfSpeechField;
+    protected TextField partOfSpeechField;
     
     @FXML
-    private TextArea otherDefsField;
+    protected TextArea otherDefsField;
     
     @FXML TextArea hint;
     

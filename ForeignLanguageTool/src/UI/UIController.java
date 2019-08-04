@@ -360,9 +360,6 @@ public class UIController implements Initializable {
 
     @FXML
     private void menuFileLoadEvent(ActionEvent event) {
-
-        System.out.println("File -> Load");
-
         openedFile = openFileExplorer();
 
         try {
@@ -726,6 +723,20 @@ public class UIController implements Initializable {
         notesTableView.getSelectionModel().selectedItemProperty().
                 addListener(((observable, oldValue, newValue) -> handleNotesTableView(newValue)));
     }
+    
+    @FXML
+    private void notesDeleteEvent(){
+        Note note = notesTableView.getSelectionModel().getSelectedItem();
+        ActualAPI.getInstance().deleteNote(note);
+        notesTableView.getItems().remove(note);
+    }
+    
+    @FXML
+    private void cardDeleteEvent(){
+        Card card = cardsTableView.getSelectionModel().getSelectedItem();
+        ActualAPI.getInstance().deleteCard(card);
+        cardsTableView.getItems().remove(card);
+    }
 
     // treeview handling
     private void handleTreeViewMain(TreeItem<Item> newValue) {
@@ -811,7 +822,7 @@ public class UIController implements Initializable {
 
     // need to work on this method after Note-edit screen
     private void handleNotesTableView(Note newValue) {
-
+            
     }
 
     // open file explorer

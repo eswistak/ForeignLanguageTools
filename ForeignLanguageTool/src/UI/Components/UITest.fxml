@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<Scene xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Components.BaseMenu">
+   <root>
+      <TitledPane prefHeight="626.0" prefWidth="909.0">
+         <content>
+            <GridPane alignment="center" hgap="10" vgap="10">
+               <rowConstraints>
+                  <RowConstraints maxHeight="343.1999969482422" minHeight="0.0" prefHeight="24.000022888183615" />
+                  <RowConstraints maxHeight="600.0" minHeight="256.8000030517578" prefHeight="421.6" />
+                  <RowConstraints maxHeight="185.59998779296876" minHeight="0.0" prefHeight="35.80000000000001" />
+                  <RowConstraints maxHeight="185.59998779296876" minHeight="10.0" prefHeight="123.80000000000001" />
+               </rowConstraints>
+               <columnConstraints>
+                  <ColumnConstraints maxWidth="995.2000732421875" minWidth="198.3999816894532" prefWidth="199.19996948242195" />
+                  <ColumnConstraints maxWidth="802.4000183105469" minWidth="4.7999267578125" prefWidth="801.6000305175781" />
+               </columnConstraints>
+               <children>
+                  <MenuBar prefHeight="0.0" prefWidth="403.0" GridPane.columnSpan="2147483647">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="File" />
+                        <fx:include source="LanguagesMenu.fxml" />
+                      <Menu mnemonicParsing="false" text="Quiz" />
+                        <Menu mnemonicParsing="false" text="Help" />
+                    </menus>
+                  </MenuBar>
+                  <BorderPane prefHeight="600.0" prefWidth="1000.0" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
+                     <left>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <content>
+                              <ScrollPane />
+                           </content>
+                        </ScrollPane>
+                     </left>
+                  </BorderPane>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        
+                        
+                        <Pane prefHeight="200.0" prefWidth="200.0" />
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Cards" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" />
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Notes" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <Pane GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+         </content>
+      </TitledPane>
+   </root>
+</Scene>

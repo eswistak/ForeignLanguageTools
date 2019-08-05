@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Scene xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Components.AddLanguage">
+   <VBox prefHeight="200.0" prefWidth="348.0">
+      <children>
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+               <Label text="Native Language">
+                  <HBox.margin>
+                     <Insets right="10.0" />
+                  </HBox.margin>
+               </Label>
+               <TextField fx:id="nat" />
+            </children>
+            <VBox.margin>
+               <Insets top="50.0" />
+            </VBox.margin>
+         </HBox>
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+               <Label text="Target Language">
+                  <HBox.margin>
+                     <Insets right="10.0" />
+                  </HBox.margin>
+               </Label>
+               <TextField fx:id="target" />
+            </children>
+         </HBox>
+         <Pane prefHeight="84.0" prefWidth="348.0">
+            <children>
+               <Label fx:id="warning" text="Please enter a language for your Native and Target Language" textFill="#ed0505" />
+            </children>
+         </Pane>
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+               <FlowPane>
+                  <children>
+                     <Button fx:id="okButton" mnemonicParsing="false" onAction="#okButton" text="OK" />
+                  </children>
+               </FlowPane>
+               <FlowPane>
+                  <children>
+                     <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButton" text="Cancel" />
+                  </children>
+               </FlowPane>
+            </children>
+         </HBox>
+      </children>
+   </VBox>
+</Scene>

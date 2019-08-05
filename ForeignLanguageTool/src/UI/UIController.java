@@ -75,6 +75,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
+import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javax.xml.parsers.ParserConfigurationException;
@@ -85,6 +86,7 @@ import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Window;
 
 /**
  *
@@ -258,6 +260,7 @@ public class UIController implements Initializable {
         treeViewMain.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         hideHTMLEditorToolbars(textAreaMain);
         setTableDoubleClick(cardsTableView);
+
         setTableDoubleClick(notesTableView);
        
 
@@ -727,7 +730,20 @@ public class UIController implements Initializable {
 
     private void menuHelpAboutEvent(ActionEvent event) {
 
-        System.out.println("Help -> About");
+        Stage popupwindow=new Stage();
+      
+        popupwindow.initModality(Modality.APPLICATION_MODAL);
+        popupwindow.setTitle("About");
+        
+        VBox layout = new VBox();
+        WebView view = new WebView();
+        URL url = UIController.class.getClassLoader().getResource("UI/Help/About.html");
+        view.getEngine().load(url.toString());
+        
+        layout.getChildren().add(view);
+        Scene scene = new Scene(layout, 800.0, 800.0);
+        popupwindow.setScene(scene);
+        popupwindow.showAndWait();
 
     }
 
@@ -1035,4 +1051,6 @@ public class UIController implements Initializable {
         return data;
 
     }
+    
+
 }

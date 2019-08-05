@@ -1,0 +1,147 @@
+/*
+File: Model.java
+Author: Ethan Swistak
+Date: Aug 4, 2019
+Purpose:
+*/
+
+package UI.Components;
+
+import DataModel.*;
+import Logic.ActualAPI;
+import java.util.*;
+import javafx.beans.value.*;
+import javafx.collections.*;
+import javafx.beans.property.*;
+import javafx.scene.control.TreeItem;
+
+
+public class Model {
+    
+//Backing objects for selection
+    //language that is currently selected
+    private final ObjectProperty<LanguagePair> currentLanguage = new SimpleObjectProperty();
+    //group that is currently selected
+    private final ObjectProperty<Group> currentGroup = new SimpleObjectProperty();
+    //note that is currently selected
+    private final ObjectProperty<Note> currentNote = new SimpleObjectProperty();
+    //card that is currently selected
+    private final ObjectProperty<Card> currentCard = new SimpleObjectProperty();
+    //root of tree view that is being displayed
+    private final ObjectProperty<TreeItem> treeViewRoot = new SimpleObjectProperty();
+    //document that is currently being displayed
+    private final ObjectProperty<Doc> currentDocument = new SimpleObjectProperty();
+    
+//Displaying types for list properties
+    //backing for list of available languages
+    private final ObservableList<LanguagePair> availableLanguages = FXCollections.observableList(new LinkedList<LanguagePair>());
+    //backing for list of cards in current document
+    private final ObservableList<Card> cardsList = FXCollections.observableList(new LinkedList<Card>());
+    //backing for list of notes in current document
+    private final ObservableList<Note> notesList = FXCollections.observableList(new LinkedList<Note>());
+    
+    
+    private Model() {
+    }
+    
+    public static Model getInstance() {
+        return ModelHolder.INSTANCE;
+    }
+
+    private static class ModelHolder {
+
+        private static final Model INSTANCE = new Model();
+    }
+    
+    
+    public final ObjectProperty<LanguagePair> currentLanguageProperty(){
+        return currentLanguage;
+    }
+    
+    public void setCurrentLanguage(LanguagePair pair){
+            currentLanguage.set(pair);
+    }
+    
+    public LanguagePair getCurrentLanguage(){
+        return currentLanguage.get();
+    }
+    
+    
+    public final ObjectProperty<Group> currentGroupProperty(){
+        return currentGroup;
+    }
+    
+    public void setCurrentGroup(Group group){
+        currentGroup.set(group);
+    }
+    
+    public Group getCurrentGroup(){
+        return currentGroup.get();
+    }
+    
+    
+    public final ObjectProperty<Doc> currentDocumentProperty(){
+        return currentDocument;
+    }
+    
+    public void setCurrentDocument(Doc doc){
+        currentDocument.set(doc);
+    }
+    
+    public Doc getCurrentDocument(){
+        return currentDocument.get();
+    }
+    
+    
+    public final ObjectProperty<Card> currentCardProperty(){
+        return currentCard;
+    }
+    
+    public void setCurrentCard(Card card){
+        currentCard.set(card);
+    }
+    
+    public Card getCurrentCard(){
+        return currentCard.get();
+    }
+    
+    
+    public final ObjectProperty<Note> currentNoteProperty(){
+        return currentNote;
+    }
+    
+    public void setCurrentNote(Note note){
+        currentNote.set(note);
+    }
+    
+    public Note getCurrentNote(){
+        return currentNote.get();
+    }
+    
+    
+    public final ObjectProperty<TreeItem> treeViewRootProperty(){
+        return treeViewRoot;
+    }
+    
+    public void setTreeViewRoot(TreeItem root){
+        treeViewRoot.set(root);
+    }
+    
+    public TreeItem getTreeViewRoot(){
+        return treeViewRoot.get();
+    }
+    
+    
+    public final ObservableList<LanguagePair> availableLanguagesProperty(){
+        return availableLanguages;
+    }
+    
+    public final ObservableList<Card> cardsListProperty(){
+        return cardsList;
+    }
+    
+    public final ObservableList<Note> notesListProperty(){
+        return notesList;
+    }
+
+}

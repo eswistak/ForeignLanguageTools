@@ -1,14 +1,15 @@
 /*
-File: AddLanguage.java
+File: NewLanguageController.java
 Author: Ethan Swistak
 Date: Aug 4, 2019
 Purpose:
 */
 
-package UI.Components;
+package UI.Components.Popups;
 
 import DataModel.LanguagePair;
 import Logic.ActualAPI;
+import UI.Components.Model;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -19,7 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
-public class AddLanguage implements Initializable {
+public class NewLanguageController implements Initializable {
     
     @FXML
     TextField nat;

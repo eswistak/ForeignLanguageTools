@@ -2,9 +2,7 @@
 
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -13,9 +11,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Scene xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Components.BaseMenu">
+<Scene fx:id="scene" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Components.BaseMenu">
    <root>
-      <TitledPane prefHeight="626.0" prefWidth="909.0">
+      <TitledPane>
          <content>
             <GridPane alignment="center" hgap="10" vgap="10">
                <rowConstraints>
@@ -31,34 +29,30 @@
                <children>
                   <MenuBar prefHeight="0.0" prefWidth="403.0" GridPane.columnSpan="2147483647">
                     <menus>
-                      <Menu mnemonicParsing="false" text="File" />
+                        <fx:include source="FileMenu.fxml" />
                         <fx:include source="LanguagesMenu.fxml" />
-                      <Menu mnemonicParsing="false" text="Quiz" />
-                        <Menu mnemonicParsing="false" text="Help" />
+                        <fx:include source="QuizMenu.fxml" />
+                        <fx:include source="Help.fxml" />
                     </menus>
                   </MenuBar>
                   <BorderPane prefHeight="600.0" prefWidth="1000.0" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
-                     <left>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                           <content>
-                              <ScrollPane />
-                           </content>
-                        </ScrollPane>
-                     </left>
+                     <center>
+                        <fx:include source="TreeView.fxml" />
+                     </center>
                   </BorderPane>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        
-                        
+                        <fx:include source="CardsTableView.fxml" />
                         <Pane prefHeight="200.0" prefWidth="200.0" />
+                        <fx:include source="NotesTableView.fxml" />
                      
+                           
                      
+                           
                      
+                           
                      
-                     
-                     
-                     
-                     </children>
+                           </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
@@ -75,7 +69,11 @@
                         </Pane>
                      </children>
                   </HBox>
-                  <Pane GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <center>
+                        <fx:include maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" source="TextArea.fxml" />
+                     </center>
+                  </BorderPane>
                </children>
             </GridPane>
          </content>

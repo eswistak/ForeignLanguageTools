@@ -4,7 +4,7 @@ Author: Ethan Swistak
 Date: Jul 25, 2019
 Purpose:
 */
-package UI;
+package UI.Components.Quiz;
 
 import DataModel.Card;
 import Logic.ActualAPI;
@@ -91,7 +91,7 @@ public class QuizController  implements Initializable{
         webEngine = cardView.getEngine();
         // webEngine.load(quiz.toString());
         webEngine.loadContent(front);
-        webEngine.setUserStyleSheetLocation(getClass().getResource("/UI/quiz.css").toString());
+        webEngine.setUserStyleSheetLocation(getClass().getClassLoader().getResource("UI/Components/Quiz/quiz.css").toString());
     }    
 
     @FXML

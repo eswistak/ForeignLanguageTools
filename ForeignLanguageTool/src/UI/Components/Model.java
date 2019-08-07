@@ -22,7 +22,7 @@ public class Model {
     //language that is currently selected
     private final ObjectProperty<LanguagePair> currentLanguage = new SimpleObjectProperty();
     //group that is currently selected
-    private final ObjectProperty<Group> currentGroup = new SimpleObjectProperty();
+    private final ObjectProperty<Item> currentTreeItem = new SimpleObjectProperty();
     //note that is currently selected
     private final ObjectProperty<Note> currentNote = new SimpleObjectProperty();
     //card that is currently selected
@@ -31,6 +31,10 @@ public class Model {
     private final ObjectProperty<TreeItem> treeViewRoot = new SimpleObjectProperty();
     //document that is currently being displayed
     private final ObjectProperty<Doc> currentDocument = new SimpleObjectProperty();
+    //Native language
+    private final ObjectProperty<String> nativeLang = new SimpleObjectProperty();
+    //Closed?
+    private final BooleanProperty isClosed = new SimpleBooleanProperty(false);
     
 //Displaying types for list properties
     //backing for list of available languages
@@ -39,6 +43,7 @@ public class Model {
     private final ObservableList<Card> cardsList = FXCollections.observableList(new LinkedList<Card>());
     //backing for list of notes in current document
     private final ObservableList<Note> notesList = FXCollections.observableList(new LinkedList<Note>());
+    
     
     
     private Model() {
@@ -67,16 +72,16 @@ public class Model {
     }
     
     
-    public final ObjectProperty<Group> currentGroupProperty(){
-        return currentGroup;
+    public final ObjectProperty<Item> currentTreeItemProperty(){
+        return currentTreeItem;
     }
     
-    public void setCurrentGroup(Group group){
-        currentGroup.set(group);
+    public void setCurrentTreeItem(Item item){
+        currentTreeItem.set(item);
     }
     
-    public Group getCurrentGroup(){
-        return currentGroup.get();
+    public Item getCurrentTreeItem(){
+        return currentTreeItem.get();
     }
     
     
@@ -105,6 +110,18 @@ public class Model {
         return currentCard.get();
     }
     
+    public final ObjectProperty<String> nativeLangProperty(){
+        return nativeLang;
+    }
+    
+    public void setNativeLang(String lang){
+        nativeLang.set(lang);
+    }
+    
+    public String getNativeLang(){
+        return nativeLang.get();
+    }
+    
     
     public final ObjectProperty<Note> currentNoteProperty(){
         return currentNote;
@@ -129,6 +146,22 @@ public class Model {
     
     public TreeItem getTreeViewRoot(){
         return treeViewRoot.get();
+    }
+    
+    public final BooleanProperty isClosedProperty(){
+        return isClosed;
+    }
+    
+    public void setClosed(){
+        if(isClosed.get()){
+            isClosed.set(false);
+        }else{
+            isClosed.set(true);
+        }
+    }
+    
+    public boolean isClosed(){
+        return isClosed.get();
     }
     
     

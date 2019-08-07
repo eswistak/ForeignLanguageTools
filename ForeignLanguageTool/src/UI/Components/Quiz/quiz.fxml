@@ -3,14 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.web.*?>
+<?import javafx.scene.web.WebView?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
@@ -18,15 +17,15 @@
       <children>
             <Group layoutX="550.0" layoutY="105.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                <children>
-                  <Button fx:id="next" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" onAction="#nextCard" text="Next" />
-                  <Button fx:id="prev" layoutY="37.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" onAction="#prevCard" text="Prev" />
+                  <Button fx:id="next" mnemonicParsing="false" onAction="#nextCard" prefHeight="25.0" prefWidth="68.0" text="Next" />
+                  <Button fx:id="prev" layoutY="37.0" mnemonicParsing="false" onAction="#prevCard" prefHeight="25.0" prefWidth="68.0" text="Prev" />
                </children>
             </Group>
-            <Button fx:id="flip" layoutX="550.0" layoutY="147.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" onAction="#flipCard" text="Flip" AnchorPane.bottomAnchor="156.0" AnchorPane.rightAnchor="20.0" />
+            <Button fx:id="flip" layoutX="550.0" layoutY="147.0" mnemonicParsing="false" onAction="#flipCard" prefHeight="25.0" prefWidth="68.0" text="Flip" AnchorPane.bottomAnchor="156.0" AnchorPane.rightAnchor="20.0" />
             <Group layoutX="550.0" layoutY="242.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
                <children>
-                  <Button fx:id="correct" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" onAction="#markCorrect" text="Correct" />
-                  <Button fx:id="incorrect" layoutY="38.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" onAction="#markIncorrect" text="Incorrect" />
+                  <Button fx:id="correct" mnemonicParsing="false" onAction="#markCorrect" prefHeight="25.0" prefWidth="68.0" text="Correct" />
+                  <Button fx:id="incorrect" layoutY="38.0" mnemonicParsing="false" onAction="#markIncorrect" prefHeight="25.0" prefWidth="68.0" text="Incorrect" />
                </children>
             </Group>
             <WebView fx:id="cardView" layoutX="79.0" layoutY="75.0" prefHeight="259.0" prefWidth="397.0" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="75.0" />

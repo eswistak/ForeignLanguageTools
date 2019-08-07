@@ -5,7 +5,7 @@ Date: Jul 25, 2019
 Purpose:
 */
 
-package UI;
+package UI.Components.Popups;
 
 import DataModel.Card;
 import DataModel.Doc;
@@ -73,7 +73,7 @@ public class CardCreationController implements Initializable {
         this.card = card;
         FXMLLoader loader = new FXMLLoader();
         ClassLoader cl = CardCreationController.class.getClassLoader();
-        InputStream inputStream = cl.getResourceAsStream("UI/CardCreation.fxml");
+        InputStream inputStream = cl.getResourceAsStream("UI/Components/Popups/CardCreation.fxml");
         Scene inputCard = null;
         try {
             inputCard = loader.load(inputStream);
@@ -95,7 +95,7 @@ public class CardCreationController implements Initializable {
         this.card = null;
         FXMLLoader loader = new FXMLLoader();
         ClassLoader cl = CardCreationController.class.getClassLoader();
-        InputStream inputStream = cl.getResourceAsStream("UI/CardCreation.fxml");
+        InputStream inputStream = cl.getResourceAsStream("UI/Components/Popups/CardCreation.fxml");
         Scene inputCard = null;
         try {
             inputCard = loader.load(inputStream);

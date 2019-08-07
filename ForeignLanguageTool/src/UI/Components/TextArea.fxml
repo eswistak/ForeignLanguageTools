@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Components.TextAreaController">
+   <children>
+      <TextArea fx:id="area" editable="false" prefColumnCount="1" prefHeight="37.0" prefRowCount="1" prefWidth="40.5" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#createNewCardEvent" text="New Flashcard" />
+                  <MenuItem mnemonicParsing="false" text="New Flashcard with Word" />
+                  <MenuItem mnemonicParsing="false" text="New Flashcard Translated" />
+                  <MenuItem mnemonicParsing="false" onAction="#createNoteEvent" text="New Misc Note" />
+                  <MenuItem mnemonicParsing="false" text="New Note with Phrase" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
+      </TextArea>
+   </children>
+</AnchorPane>

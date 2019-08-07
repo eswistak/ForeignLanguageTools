@@ -8,6 +8,7 @@ Purpose:
 package UI.Components;
 
 import DataModel.LanguagePair;
+import Logic.ActualAPI;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,6 +28,7 @@ import javafx.stage.Stage;
 public class LanguagesMenu implements Initializable {
     
     private Model model = Model.getInstance();
+    private ActualAPI api = ActualAPI.getInstance();
     
     @FXML
     private Menu langMenu;
@@ -74,13 +76,18 @@ public class LanguagesMenu implements Initializable {
         });
         
         for(LanguagePair pair :model.availableLanguagesProperty()){
-            langMenu.getItems().add(new MenuItem(pair.getNat() + "->" + pair.getTarget()));
+            MenuItem item = new MenuItem(pair.getNat() + "->" + pair.getTarget());
+            langMenu.getItems().add(item);
+            item.setOnAction((value)->{
+                    model.setCurrentLanguage(pair);
+                    System.out.println("Language Pair Changed");
+             });
         }
     }
     
     @FXML
-    public void addNewLang(){
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("UI/Components/NewLanguage.fxml"));
+    public void setNativeLang(){
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("UI/Components/Popups/SetNativeLang.fxml"));
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         try {
@@ -89,6 +96,26 @@ public class LanguagesMenu implements Initializable {
             ex.printStackTrace();
         }
         stage.showAndWait();
+    }
+    
+    @FXML
+    public void addNewLang(){
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("UI/Components/Popups/NewLanguage.fxml"));
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        try {
+            stage.setScene(loader.load());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        stage.showAndWait();
+    }
+    
+    @FXML
+    public void deleteLang(){
+        LanguagePair pair = model.getCurrentLanguage();
+        api.deleteLangPair(pair);
+        model.availableLanguagesProperty().remove(pair);
     }
 
 }

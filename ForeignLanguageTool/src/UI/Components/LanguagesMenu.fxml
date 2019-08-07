@@ -6,9 +6,9 @@
 
 <Menu fx:id="langMenu" mnemonicParsing="false" text="Languages" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Components.LanguagesMenu">
   <items>
-      <MenuItem fx:id="setNativeLanguageItem" mnemonicParsing="false" text="Set Native Language" />
+      <MenuItem fx:id="setNativeLanguageItem" mnemonicParsing="false" onAction="#setNativeLang" text="Set Native Language" />
     <MenuItem fx:id="newLanguagePairItem" mnemonicParsing="false" onAction="#addNewLang" text="New Language Pair" />
-      <MenuItem fx:id="deleteLanguagePairItem" mnemonicParsing="false" text="Delete Language Pair" />
+      <MenuItem fx:id="deleteLanguagePairItem" mnemonicParsing="false" onAction="#deleteLang" text="Delete Language Pair" />
       <SeparatorMenuItem fx:id="separator" mnemonicParsing="false" />
   </items>
 </Menu>

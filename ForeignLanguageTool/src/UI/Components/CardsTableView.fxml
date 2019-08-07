@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Tooltip?>
+
+<TableView fx:id="cardsTableView" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Components.CardsTableViewController">
+   <columns>
+      <TableColumn fx:id="cardsWordColumn" prefWidth="95.73342740535736" text="Word" />
+      <TableColumn fx:id="cardsDefinitionColumn" prefWidth="105.06665802001953" text="Definition" />
+   </columns>
+   <columnResizePolicy>
+      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+   </columnResizePolicy>
+   <tooltip>
+      <Tooltip text="List of cards associated with document" />
+   </tooltip>
+   <contextMenu>
+      <ContextMenu>
+         <items>
+            <MenuItem mnemonicParsing="false" onAction="#menuEditFlashcardEvent" text=" Edit Card" />
+            <MenuItem mnemonicParsing="false" onAction="#cardDeleteEvent" text="Delete Card" />
+         </items>
+      </ContextMenu>
+   </contextMenu>
+</TableView>

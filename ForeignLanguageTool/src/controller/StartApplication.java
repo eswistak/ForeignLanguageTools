@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Testing;
+package controller;
 
 import DataModel.LanguagePair;
 import DataModel.Utils;
@@ -29,20 +29,24 @@ import org.xml.sax.SAXException;
  *
  * @author Ethan Swistak
  */
-public class TestComponents extends Application {
+public class StartApplication extends Application {
     
     Model model = Model.getInstance();
     ActualAPI api = ActualAPI.getInstance();
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        List<LanguagePair> pairs = api.getLangPair();
-        model.availableLanguagesProperty().addAll(pairs);
+        initializeModel();
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("UI/Components/UITest.fxml"));
         Scene scene = loader.load();
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
+    }
+    
+    private void initializeModel(){
+        List<LanguagePair> pairs = api.getLangPair();
+        model.availableLanguagesProperty().addAll(pairs);
     }
 
     /**
@@ -52,11 +56,11 @@ public class TestComponents extends Application {
         try {
             Utils.load();      
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(TestComponents.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StartApplication.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
-            Logger.getLogger(TestComponents.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StartApplication.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TestComponents.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StartApplication.class.getName()).log(Level.SEVERE, null, ex);
         }
         launch(args);
     }

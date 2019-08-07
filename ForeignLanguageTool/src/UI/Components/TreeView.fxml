@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TreeView?>
+
+<TreeView fx:id="treeView" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Components.TreeViewController">
+   <contextMenu>
+      <ContextMenu>
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#addGroup" text="New Group" />
+            <MenuItem mnemonicParsing="false" onAction="#deleteGroup" text="Delete Group" />
+            <MenuItem mnemonicParsing="false" onAction="#addDocument" text="New Document" />
+            <MenuItem mnemonicParsing="false" onAction="#deleteDoc" text="Delete Document" />
+        </items>
+      </ContextMenu>
+   </contextMenu>
+</TreeView>

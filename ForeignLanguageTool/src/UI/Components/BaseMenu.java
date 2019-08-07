@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
 public class BaseMenu implements Initializable {
@@ -22,10 +23,16 @@ public class BaseMenu implements Initializable {
     @FXML
     Scene scene;
 
-
+    ActualAPI api = ActualAPI.getInstance();
+    Model model = Model.getInstance();
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
+        //closes the window if closed is set to true
+        model.isClosedProperty().addListener((Obj, oldVal, newVal)->{
+            if(newVal.booleanValue())((Stage)scene.getWindow()).close();
+            });
     }
 
 }

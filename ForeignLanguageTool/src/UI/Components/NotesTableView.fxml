@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Tooltip?>
+
+<TableView fx:id="notesTableView" onMouseClicked="#notesTableViewSelectedEvent" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Components.NotesTableViewController">
+   <columns>
+      <TableColumn fx:id="notesIndexColumn" prefWidth="65.0" text="Index" />
+      <TableColumn fx:id="notesNoteColumn" prefWidth="135.0" text="Note" />
+   </columns>
+   <tooltip>
+      <Tooltip text="List of notes associated with document" />
+   </tooltip>
+   <contextMenu>
+      <ContextMenu>
+         <items>
+            <MenuItem mnemonicParsing="false" onAction="#menuEditNoteEvent" text="Edit Note" />
+            <MenuItem mnemonicParsing="false" onAction="#notesDeleteEvent" text="Delete Note" />
+         </items>
+      </ContextMenu>
+   </contextMenu>
+</TableView>

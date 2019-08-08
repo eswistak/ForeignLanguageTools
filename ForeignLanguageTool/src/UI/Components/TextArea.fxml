@@ -12,10 +12,10 @@
             <ContextMenu>
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#createNewCardEvent" text="New Flashcard" />
-                  <MenuItem mnemonicParsing="false" text="New Flashcard with Word" />
-                  <MenuItem mnemonicParsing="false" text="New Flashcard Translated" />
-                  <MenuItem mnemonicParsing="false" onAction="#createNoteEvent" text="New Misc Note" />
-                  <MenuItem mnemonicParsing="false" text="New Note with Phrase" />
+                <MenuItem mnemonicParsing="false" onAction="#newCardWordEvent" text="New Flashcard with Word" />
+                <MenuItem mnemonicParsing="false" onAction="#newCardDefineEvent" text="New Flashcard Translated" />
+                <MenuItem mnemonicParsing="false" onAction="#createNoteEvent" text="New Misc Note" />
+                <MenuItem mnemonicParsing="false" text="New Note with Phrase" />
               </items>
             </ContextMenu>
          </contextMenu>

@@ -9,13 +9,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import static java.net.URLEncoder.encode;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.w3c.dom.Document;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -23,7 +20,7 @@ import org.w3c.dom.Document;
  */
 
 public class Define {
-    private static List<String> LangCodes;
+    private static Map<String, String> LangCodes;
     private Define() {
         setLangCodes();
     }
@@ -32,12 +29,19 @@ public class Define {
         try{
             String items = sendGet("https://ssl.gstatic.com/inputtools/js/ln/16/en.js");
             items = items.substring(items.indexOf(locNames)+locNames.length(), items.indexOf("];"));
-            LangCodes = new ArrayList<String>(Arrays.asList(items.split(",(?![^(]*\\))")));
+            LangCodes = new HashMap<String, String>();
+
+            for (String lang : items.split(",(?![^(]*\\))")) {
+                lang = lang.replaceAll("\'","");
+                String[] langVals = lang.split(":");
+
+                LangCodes.put(langVals[0].toUpperCase(),langVals[1].toUpperCase());
+            }
         }catch(Exception exception){
             System.out.println(exception.toString());
         }
     }
-    public static List<String> getLangCodes(){
+    public static Map<String, String> getLangCodes(){
         return LangCodes;
     }
     public static String getDefinition(String sourceLang, String targetLang, String sourceText){
@@ -46,7 +50,7 @@ public class Define {
             String url="https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + sourceLang + "&tl=" + targetLang + "&dt=t&q=" + encode(sourceText, "UTF-8");
             try{
                 items = sendGet(url);
-                //items = items.substring(items.indexOf(locNames)+locNames.length(), items.indexOf("];"));
+                items = items.substring(4, items.indexOf("\","));
                 return items;
             }catch(Exception exception){
                 System.out.println(exception.toString());

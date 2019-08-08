@@ -5,10 +5,16 @@
  */
 package UI.Components;
 
+import DataModel.Card;
+import DataModel.LanguagePair;
 import DataModel.Note;
 import Logic.ActualAPI;
+import Logic.Define;
 import UI.Components.Popups.CardCreationController;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -18,6 +24,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.IndexRange;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 
@@ -41,6 +48,7 @@ public class TextAreaController implements Initializable {
         model.currentDocumentProperty().addListener((e)->{
             area.setText(model.getCurrentDocument().getText());
         });
+        Define.setLangCodes();
     }
     
     @FXML
@@ -82,5 +90,48 @@ public class TextAreaController implements Initializable {
         api.updateNote(n);
         model.notesListProperty().add(n);
     }
-    
+    @FXML
+    private void newCardWordEvent() {
+        String selectedStr = "";
+
+        selectedStr = area.getSelectedText();
+        IndexRange range = area.getSelection();
+        
+        Card wordcard = new Card();
+        wordcard = ActualAPI.getInstance().createCard(model.getCurrentDocument(), wordcard);
+        wordcard.setWordAsAppears(selectedStr);
+        wordcard.setStartChar(range.getStart());
+        wordcard.setEndChar(range.getEnd());
+        CardCreationController newCard = new CardCreationController(model.getCurrentDocument(), wordcard);
+        
+    }
+//
+    @FXML
+    private void newCardDefineEvent() {
+        String selectedStr = "";
+
+        selectedStr = area.getSelectedText();
+        IndexRange range = area.getSelection();
+        
+        Card definecard = new Card();
+        definecard = ActualAPI.getInstance().createCard(model.getCurrentDocument(), definecard);
+        LanguagePair langPair = (LanguagePair) model.currentLanguageProperty().get();
+        String natural = langPair.getNat().toUpperCase();
+        String target = langPair.getTarget().toUpperCase();
+        Map<String, String> LangCodes = Define.getLangCodes();
+        System.out.println(natural+" "+target);
+        String naturalCode = LangCodes.get(natural);
+        String targetCode =  LangCodes.get(target);
+
+        String translate = Define.getDefinition(targetCode, naturalCode, selectedStr);
+        definecard.setWordAsAppears(selectedStr);
+        // definecard.setGeneric("Test");
+        definecard.setTransInContext(translate);
+        definecard.setStartChar(range.getStart());
+        definecard.setEndChar(range.getEnd());
+        // definecard.setPartOfSpeech("Test");
+        // definecard.setOtherTrans("Test");
+        CardCreationController newCard = new CardCreationController(model.getCurrentDocument(), definecard);
+        
+    }
 }

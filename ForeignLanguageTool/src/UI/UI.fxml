@@ -177,8 +177,8 @@
                               <ContextMenu>
                                  <items>
                                     <MenuItem fx:id="menuFileNewFlashcard" mnemonicParsing="false" onAction="#menuFileNewFlashcardEvent" text="New Flashcard" />
-                                    <MenuItem mnemonicParsing="false" text="New Flashcard with Word" />
-                                    <MenuItem mnemonicParsing="false" text="New Flashcard with Word and Def" />
+                                    <MenuItem fx:id="menuFlashcardWord" mnemonicParsing="false" text="New Flashcard with Word" onAction="#menuFlashcardWordEvent" />
+                                    <MenuItem fx:id="menuFlashcardDefine" mnemonicParsing="false" text="New Flashcard with Word and Def" onAction="#menuFlashcardDefineEvent" />
                                     <MenuItem mnemonicParsing="false" text="New Misc Note" />
                                     <MenuItem mnemonicParsing="false" text="New Note To Phrase" />
                                  </items>

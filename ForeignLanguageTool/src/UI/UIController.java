@@ -18,6 +18,7 @@ import DataModel.LanguagePair;
 import DataModel.Note;
 import DataModel.Utils;
 import Logic.ActualAPI;
+import Logic.Define;
 import static Testing.SelectionExtractor.SELECT_TEXT;
 import UI.CardCreationController;
 import controller.TestItem;
@@ -29,7 +30,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -138,6 +143,25 @@ public class UIController implements Initializable {
             + "    return text;\n"
             + "})()";
 
+    private static final String SELECTED_TEXT_START
+            = "(function getSelectionText() {\n"
+            + "    var text = \"\";\n"
+            + "    if (window.getSelection) {\n"
+            + "        text = window.getSelection().getRangeAt(0).startOffset;\n"
+            + "    } else if (document.selection && document.selection.type != \"Control\") {\n"
+            + "        text = document.selection.getRangeAt(0).startOffset;\n"
+            + "    }\n"
+            + "    if (window.getSelection) {\n"
+            + "      if (window.getSelection().empty) {  // Chrome\n"
+            + "        window.getSelection().empty();\n"
+            + "      } else if (window.getSelection().removeAllRanges) {  // Firefox\n"
+            + "        window.getSelection().removeAllRanges();\n"
+            + "      }\n"
+            + "    } else if (document.selection) {  // IE?\n"
+            + "      document.selection.empty();\n"
+            + "    }"
+            + "    return text;\n"
+            + "})()";
     //***********Text Field Context Menu Fields*********
     @FXML
 
@@ -262,7 +286,7 @@ public class UIController implements Initializable {
         setTableDoubleClick(cardsTableView);
 
         setTableDoubleClick(notesTableView);
-       
+        Define.setLangCodes();
 
         List<LanguagePair> pairs = ActualAPI.getInstance().getLangPair();
         for (LanguagePair pair : pairs) {
@@ -363,11 +387,81 @@ public class UIController implements Initializable {
     }
 
     @FXML
+    private void menuFlashcardWordEvent(ActionEvent event) {
+        String selectedStr = "";
+        
+        WebView webView = (WebView) textAreaMain.lookup("WebView");
+        if (webView != null) {
+            WebEngine engine = webView.getEngine();
+            Object selection = engine.executeScript(SELECT_TEXT);
+            if (selection instanceof String) {
+                selectedStr = (String) selection;
+            }
+//            Object wordStart = engine.executeScript(SELECTED_TEXT_START);
+//            System.out.println(wordStart);
+//            if (selection instanceof String) {
+//                selectedStr = (String) selection;
+//            }
+        }
+
+        Card wordcard = new Card();
+        wordcard = ActualAPI.getInstance().createCard(viewingDoc, wordcard);
+        wordcard.setWordAsAppears(selectedStr);
+        CardCreationController newCard = new CardCreationController(viewingDoc, wordcard);
+        
+    }
+    @FXML
     private void menuFileNewFlashcardEvent(ActionEvent event) {
 
         CardCreationController newCard = new CardCreationController(viewingDoc);
     }
 
+    @FXML
+    private void menuFlashcardDefineEvent(ActionEvent event) {
+        String selectedStr = "";
+        
+        WebView webView = (WebView) textAreaMain.lookup("WebView");
+        if (webView != null) {
+            WebEngine engine = webView.getEngine();
+            Object selection = engine.executeScript(SELECT_TEXT);
+            if (selection instanceof String) {
+                selectedStr = (String) selection;
+            }
+//            Object wordStart = engine.executeScript(SELECTED_TEXT_START);
+//            System.out.println(wordStart);
+//            if (selection instanceof String) {
+//                selectedStr = (String) selection;
+//            }
+        }
+
+        Card definecard = new Card();
+        definecard = ActualAPI.getInstance().createCard(viewingDoc, definecard);
+        String natural = viewingLanguage.getNat().toUpperCase();
+        String target = viewingLanguage.getTarget().toUpperCase();
+        List<String> LangStr = Define.getLangCodes();
+        Map<String, String> LangCodes = new HashMap<String, String>();
+        System.out.println(LangStr.size());
+        for (String lang : LangStr) {
+            lang = lang.replaceAll("\'","");
+            String[] langVals = lang.split(":");
+        
+            LangCodes.put(langVals[0].toUpperCase(),langVals[1].toUpperCase());
+        }
+        
+        String naturalCode = LangCodes.get(natural);
+        String targetCode =  LangCodes.get(target);
+
+        String translate = Define.getDefinition(targetCode, naturalCode, selectedStr);
+        translate = translate.substring(4, translate.indexOf("\","));
+        definecard.setWordAsAppears(selectedStr);
+        // definecard.setGeneric("Test");
+        definecard.setTransInContext(translate);
+        // definecard.setPartOfSpeech("Test");
+        // definecard.setOtherTrans("Test");
+        CardCreationController newCard = new CardCreationController(viewingDoc, definecard);
+        
+    }
+    
     @FXML
     //TODO Implement Matt Rieser
     private void menuFileSaveEvent(ActionEvent event) {

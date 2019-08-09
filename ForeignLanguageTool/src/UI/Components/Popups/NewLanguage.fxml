@@ -4,7 +4,7 @@
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -20,7 +20,7 @@
                      <Insets right="10.0" />
                   </HBox.margin>
                </Label>
-               <TextField fx:id="nat" />
+               <ChoiceBox fx:id="nat" />
             </children>
             <VBox.margin>
                <Insets top="50.0" />
@@ -33,7 +33,7 @@
                      <Insets right="10.0" />
                   </HBox.margin>
                </Label>
-               <TextField fx:id="target" />
+               <ChoiceBox fx:id="target" />
             </children>
          </HBox>
          <Pane prefHeight="84.0" prefWidth="348.0">

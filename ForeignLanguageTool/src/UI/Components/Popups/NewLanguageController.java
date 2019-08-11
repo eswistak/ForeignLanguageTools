@@ -9,12 +9,16 @@ package UI.Components.Popups;
 
 import DataModel.LanguagePair;
 import Logic.ActualAPI;
+import Logic.Define;
 import UI.Components.Model;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -23,10 +27,10 @@ import javafx.stage.Stage;
 public class NewLanguageController implements Initializable {
     
     @FXML
-    TextField nat;
+    ChoiceBox<String> nat;
     
     @FXML
-    TextField target;
+    ChoiceBox<String> target;
     
     @FXML
     Button okButton;
@@ -43,18 +47,23 @@ public class NewLanguageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String nativelang = api.getUser().getNativeLanguage();
-        nat.setText(nativelang);
+        Define.setLangCodes();
+        Map<String, String> LangCodes = Define.getLangCodes();
+
+        nat.setItems(FXCollections.observableArrayList(LangCodes.keySet()));
+        target.setItems(FXCollections.observableArrayList(LangCodes.keySet()));
+        nat.setValue(nativelang);
         warning.setVisible(false);
     }
     
     @FXML
     private void okButton(){
-        if(nat.getText()==""||target.getText()==null){
+        if(nat.getValue()==""||target.getValue()==null){
             warning.setVisible(true);
         }else{
             LanguagePair pair = api.createLangPair(new LanguagePair());
-            pair.setNat(nat.getText());
-            pair.setTarget(target.getText());
+            pair.setNat(nat.getValue());
+            pair.setTarget(target.getValue());
             pair.update();
             model.availableLanguagesProperty().add(pair);
             ((Stage)okButton.getScene().getWindow()).close();

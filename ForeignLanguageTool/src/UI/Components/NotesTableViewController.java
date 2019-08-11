@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -72,10 +73,11 @@ public class NotesTableViewController implements Initializable {
         });
 
         notesTableView.setItems(model.notesListProperty());
+        setTableDoubleClick();
     }    
 
     @FXML
-    private void menuEditNoteEvent(ActionEvent event) {
+    private void menuEditNoteEvent() {
          Note n = this.notesTableView.getSelectionModel().getSelectedItem();
 
         Dialog<String> dialog = new Dialog();
@@ -120,4 +122,14 @@ public class NotesTableViewController implements Initializable {
         model.currentNoteProperty().set(selectedNote);
     }
     
+        private void setTableDoubleClick() {
+        notesTableView.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override 
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                    menuEditNoteEvent();                 
+                }
+            }
+        });
+    }
 }

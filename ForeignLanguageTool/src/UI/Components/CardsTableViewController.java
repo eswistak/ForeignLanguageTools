@@ -13,10 +13,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 /**
@@ -65,7 +67,7 @@ public class CardsTableViewController implements Initializable {
         });
 
         cardsTableView.setItems(model.cardsListProperty());
-        
+        setTableDoubleClick();
     }    
 
     @FXML
@@ -84,5 +86,14 @@ public class CardsTableViewController implements Initializable {
         api.deleteCard(cardToDelete);
         cardsTableView.getItems().remove(cardToDelete);
     }
-    
+    private void setTableDoubleClick() {
+        cardsTableView.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override 
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                    menuEditFlashcardEvent();              
+                }
+            }
+        });
+    }
 }

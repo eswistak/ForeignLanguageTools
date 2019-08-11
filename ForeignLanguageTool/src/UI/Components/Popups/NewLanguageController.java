@@ -7,10 +7,10 @@ Purpose:
 
 package UI.Components.Popups;
 
-import DataModel.LanguagePair;
+import DataModel.DTO.LanguagePair;
 import Logic.ActualAPI;
 import Logic.Define;
-import UI.Components.Model;
+import UI.Model.Model;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -20,7 +20,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 

@@ -5,11 +5,11 @@
  */
 package Testing;
 
-import DataModel.Card;
-import DataModel.Doc;
-import DataModel.Group;
-import DataModel.LanguagePair;
-import DataModel.Note;
+import DataModel.DTO.Card;
+import DataModel.DTO.Doc;
+import DataModel.DTO.Group;
+import DataModel.DTO.LanguagePair;
+import DataModel.DTO.Note;
 import DataModel.Utils;
 import Logic.ActualAPI;
 import Logic.MotherTree;

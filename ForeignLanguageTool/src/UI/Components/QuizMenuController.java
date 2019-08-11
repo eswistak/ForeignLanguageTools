@@ -5,7 +5,8 @@
  */
 package UI.Components;
 
-import DataModel.LanguagePair;
+import UI.Model.Model;
+import DataModel.DTO.LanguagePair;
 import Logic.ActualAPI;
 import UI.Components.Quiz.QuizController;
 import java.net.URL;

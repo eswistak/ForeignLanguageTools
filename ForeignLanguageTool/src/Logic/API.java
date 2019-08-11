@@ -1,19 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package Logic;
 
 import java.util.List;
-import DataModel.User;
-import DataModel.LanguagePair;
-import DataModel.Group;
-import DataModel.Doc;
-import DataModel.Card;
-import DataModel.Item;
-import DataModel.Note;
+import DataModel.DTO.User;
+import DataModel.DTO.LanguagePair;
+import DataModel.DTO.Group;
+import DataModel.DTO.Doc;
+import DataModel.DTO.Card;
+import DataModel.DTO.Item;
+import DataModel.DTO.Note;
 
 /**
  *

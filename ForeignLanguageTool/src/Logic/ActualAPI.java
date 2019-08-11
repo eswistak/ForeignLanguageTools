@@ -1,26 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Logic;
 
-import DataModel.Card;
-import DataModel.Doc;
-import DataModel.Group;
-import DataModel.LanguagePair;
-import DataModel.Note;
-import DataModel.User;
+import DataModel.DTO.Card;
+import DataModel.DTO.Doc;
+import DataModel.DTO.Group;
+import DataModel.DTO.LanguagePair;
+import DataModel.DTO.Note;
+import DataModel.DTO.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -31,7 +22,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- *
+ * I feel most of these methods are pretty self explanatory in the context of the application, so no Javadocs
+ * 
  * @author Andrew Barbarosa
  */
 public class ActualAPI implements API {
@@ -145,11 +137,6 @@ public class ActualAPI implements API {
         return result;
     }
 
-    /**
-     *
-     * @param card
-     * @return
-     */
     @Override
     public Doc getDoc(Card card) {
         String xpathQuery = "User/LanguagePair/Group/Document/Card[@ID='" + String.valueOf(card.getID() + "']/ancestor::Document");
@@ -267,7 +254,6 @@ public class ActualAPI implements API {
 
     @Override
     public void updateCard(Card card) {
-        System.out.println(card.toString());
         card.update();
     }
 

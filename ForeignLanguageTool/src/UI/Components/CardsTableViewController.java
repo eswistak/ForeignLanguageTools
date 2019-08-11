@@ -5,8 +5,9 @@
  */
 package UI.Components;
 
-import DataModel.Card;
-import DataModel.Doc;
+import UI.Model.Model;
+import DataModel.DTO.Card;
+import DataModel.DTO.Doc;
 import Logic.ActualAPI;
 import UI.Components.Popups.CardCreationController;
 import java.net.URL;
@@ -72,12 +73,10 @@ public class CardsTableViewController implements Initializable {
 
     @FXML
     private void menuEditFlashcardEvent() {
-
-        if (model.currentTreeItemProperty().get() instanceof Doc) {
-            Doc doc = (Doc)model.currentTreeItemProperty().get();
-            Card viewingCard = this.cardsTableView.getSelectionModel().getSelectedItem();
-            CardCreationController subWindow = new CardCreationController(doc, viewingCard);
-        }
+        Doc doc = (Doc)model.currentTreeItemProperty().get();
+        Card viewingCard = this.cardsTableView.getSelectionModel().getSelectedItem();
+        CardCreationController subWindow = new CardCreationController(doc, viewingCard);
+        cardsTableView.refresh();
     }
 
     @FXML

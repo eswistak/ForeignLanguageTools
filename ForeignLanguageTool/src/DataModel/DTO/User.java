@@ -5,7 +5,7 @@ Date: Jul 5, 2019
 Purpose:
 */
 
-package DataModel;
+package DataModel.DTO;
 
 import Logic.MotherTree;
 import javax.xml.bind.*;

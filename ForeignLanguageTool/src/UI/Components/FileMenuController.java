@@ -6,7 +6,7 @@
 package UI.Components;
 
 import DataModel.Utils;
-import UI.Components.Model;
+import UI.Model.Model;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;

@@ -1,14 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Logic;
 
 import org.w3c.dom.Document;
 
 /**
- *
+ * This class holds the persistence datastore for the application
+ * since it's not a great persistence solution, you've still got to manually sync everything
+ * but it works!
+ * 
+ * 
  * @author Ethan Swistak
  */
 public class MotherTree {

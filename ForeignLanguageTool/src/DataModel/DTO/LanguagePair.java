@@ -9,7 +9,7 @@ Purpose:
 
 //blah blah blah blah blah is this comment long enough yet?
 
-package DataModel;
+package DataModel.DTO;
 
 import Logic.MotherTree;
 import javax.xml.bind.*;

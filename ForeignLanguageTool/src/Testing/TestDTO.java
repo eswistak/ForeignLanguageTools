@@ -3,8 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DataModel;
+package Testing;
 
+import DataModel.DTO.Doc;
+import DataModel.DTO.User;
+import DataModel.DTO.Item;
+import DataModel.DTO.Group;
+import DataModel.DTO.LanguagePair;
+import DataModel.DTO.Note;
+import DataModel.DTO.Card;
+import DataModel.Utils;
 import Logic.MotherTree;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -22,7 +30,7 @@ import org.w3c.dom.NodeList;
  *
  * @author Ethan Swistak
  */
-public class Test {
+public class TestDTO {
 
     /**
      * @param args the command line arguments
@@ -93,9 +101,9 @@ public class Test {
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (JAXBException ex) {
-            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestDTO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (XPathExpressionException ex) {
-            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestDTO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

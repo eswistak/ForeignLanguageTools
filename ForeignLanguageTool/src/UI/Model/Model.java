@@ -2,15 +2,20 @@
 File: Model.java
 Author: Ethan Swistak
 Date: Aug 4, 2019
-Purpose:
+Purpose: The GUI components all share a single data source that they can subscribe to in order to listen for changes. This allows us to break up the GUI into components
+and smoothly update as the state of the GUI changes. For ObservableProperties, I found that have a objectProperty() method was sufficient, but since I've been
+indoctrinated into Java, I felt like we needed getters and setters. You could probably cut this class down a lot without those.
 */
 
-package UI.Components;
+package UI.Model;
 
+import DataModel.DTO.Doc;
+import DataModel.DTO.Item;
+import DataModel.DTO.LanguagePair;
+import DataModel.DTO.Note;
+import DataModel.DTO.Card;
 import DataModel.*;
-import Logic.ActualAPI;
 import java.util.*;
-import javafx.beans.value.*;
 import javafx.collections.*;
 import javafx.beans.property.*;
 import javafx.scene.control.TreeItem;

@@ -7,7 +7,8 @@ Purpose:
 
 package UI.Components;
 
-import DataModel.LanguagePair;
+import UI.Model.Model;
+import DataModel.DTO.LanguagePair;
 import Logic.ActualAPI;
 import java.net.URL;
 import java.util.List;

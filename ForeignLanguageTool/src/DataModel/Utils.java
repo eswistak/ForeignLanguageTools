@@ -7,16 +7,13 @@ Purpose:
 
 package DataModel;
 
+import DataModel.DTO.Item;
 import Logic.MotherTree;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.*;
 import javax.xml.transform.Result;
@@ -36,7 +33,14 @@ import org.xml.sax.SAXException;
 
 public class Utils {
     
-    
+    /**
+     * Loads test data file from a default source
+     * 
+     * 
+     * @throws ParserConfigurationException if the parser is not set up correctly(this rarely happens)
+     * @throws SAXException if the input file does not conform to the schema(this shouldn't happen assuming that the schema stays the same)
+     * @throws IOException if the location where you're reading in the file is not correct or the file doesn't exist
+     */
     public static void load() throws ParserConfigurationException, SAXException, IOException {
         InputStream xmlDoc = Utils.class.getResourceAsStream("TestData.xml");
         DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
@@ -53,7 +57,14 @@ public class Utils {
         Item.setCount(count);
     }
     
-    
+    /**
+     * Loads an XML document that conforms to the schema from a given file location
+     * 
+     * @param URL the location where you want to load the file from
+     * @throws ParserConfigurationException if the parser is not set up correctly(this rarely happens)
+     * @throws SAXException if the input file does not conform to the schema(this shouldn't happen assuming that the schema stays the same)
+     * @throws IOException if the location where you're reading in the file is not correct or the file doesn't exist
+     */
     public static void load(String URL) throws ParserConfigurationException, SAXException, IOException {
         File xmlFile = new File(URL);
         //https://stackoverflow.com/questions/37104523/convert-org-w3c-dom-document-to-file-file
@@ -68,6 +79,14 @@ public class Utils {
         }
     }
     
+    /**
+     * Saves the file to a default location, this is set so that it exports the file to just outside the JAR file
+     * 
+     * @throws ParserConfigurationException if the parser is not set up correctly(this rarely happens)
+     * @throws SAXException if the input file does not conform to the schema(this shouldn't happen assuming that the schema stays the same)
+     * @throws IOException if the location where you're reading in the file is not correct or the file doesn't exist
+     * @throws TransformerException the system is having trouble converting the XML document to a certain type of output
+     */
     public static void save() throws ParserConfigurationException, SAXException, IOException, TransformerException {
         Document file = MotherTree.getInstance().getNodes();
         if(validateSchema(file)){
@@ -87,6 +106,15 @@ public class Utils {
         }
     }
     
+    /**
+     * Saves the XML file to whatever location you select
+     * 
+     * @param URL
+     * @throws ParserConfigurationException if the parser is not set up correctly(this rarely happens)
+     * @throws SAXException if the input file does not conform to the schema(this shouldn't happen assuming that the schema stays the same)
+     * @throws IOException if the location where you're reading in the file is not correct or the file doesn't exist
+     * @throws TransformerException the system is having trouble converting the XML document to a certain type of output
+     */
     public static void save(String URL) throws ParserConfigurationException, SAXException, IOException, TransformerException {
         Document file = MotherTree.getInstance().getNodes();
         if(validateSchema(file)){
@@ -100,6 +128,12 @@ public class Utils {
         }
     }
     
+    /**
+     *This validates an XML document against the schema used by the program
+     * 
+     * @param document an XML document
+     * @return whether the document is a valid ForeignLanguageTool XML document
+     */
     public static boolean validateSchema(Document document){
         SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         URL url = Utils.class.getResource("Schema.xsd");  
@@ -120,7 +154,10 @@ public class Utils {
     }
     
     
-    
+    /**
+     * If you screwed up the XML file somehow you can run this method to reset it back to the way it was before
+     * 
+     */
     public static void reset(){
         String testFile = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
 "<!--\n" +

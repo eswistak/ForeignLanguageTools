@@ -6,7 +6,7 @@ Purpose:
 */
 package UI.Components.Quiz;
 
-import DataModel.Card;
+import DataModel.DTO.Card;
 import Logic.ActualAPI;
 import java.net.URL;
 import java.util.List;

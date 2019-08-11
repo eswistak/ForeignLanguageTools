@@ -7,8 +7,8 @@ Purpose:
 
 package UI.Components.Popups;
 
-import DataModel.Card;
-import DataModel.Doc;
+import DataModel.DTO.Card;
+import DataModel.DTO.Doc;
 import Logic.ActualAPI;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -5,8 +5,9 @@
  */
 package UI.Components;
 
-import DataModel.Card;
-import DataModel.Note;
+import UI.Model.Model;
+import DataModel.DTO.Card;
+import DataModel.DTO.Note;
 import Logic.ActualAPI;
 import java.net.URL;
 import java.util.Optional;
@@ -107,6 +108,7 @@ public class NotesTableViewController implements Initializable {
 
         n.setContent(newTextArea.getText());
         api.updateNote(n);
+        notesTableView.refresh();
     }
 
     @FXML

@@ -5,9 +5,10 @@
  */
 package UI.Components;
 
-import DataModel.Doc;
-import DataModel.Group;
-import DataModel.Item;
+import UI.Model.Model;
+import DataModel.DTO.Doc;
+import DataModel.DTO.Group;
+import DataModel.DTO.Item;
 import Logic.ActualAPI;
 import java.io.IOException;
 import java.net.URL;
@@ -29,7 +30,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -181,7 +181,9 @@ public class TreeViewController implements Initializable {
             Doc doc = (Doc)model.getCurrentTreeItem();
             api.deleteDoc(doc);
             refreshTreeView();
-            
+            model.currentDocumentProperty().set(new Doc());
+            model.cardsListProperty().clear();
+            model.notesListProperty().clear();
         }
     }
     

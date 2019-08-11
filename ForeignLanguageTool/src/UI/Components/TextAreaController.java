@@ -5,9 +5,10 @@
  */
 package UI.Components;
 
-import DataModel.Card;
-import DataModel.LanguagePair;
-import DataModel.Note;
+import UI.Model.Model;
+import DataModel.DTO.Card;
+import DataModel.DTO.LanguagePair;
+import DataModel.DTO.Note;
 import Logic.ActualAPI;
 import Logic.Define;
 import UI.Components.Popups.CardCreationController;
@@ -90,6 +91,7 @@ public class TextAreaController implements Initializable {
         api.updateNote(n);
         model.notesListProperty().add(n);
     }
+    
     @FXML
     private void newCardWordEvent() {
         String selectedStr = "";
@@ -105,7 +107,7 @@ public class TextAreaController implements Initializable {
         CardCreationController newCard = new CardCreationController(model.getCurrentDocument(), wordcard);
         
     }
-//
+
     @FXML
     private void newCardDefineEvent() {
         String selectedStr = "";

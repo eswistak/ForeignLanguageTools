@@ -6,7 +6,7 @@
 package UI.Components.Popups;
 
 import Logic.ActualAPI;
-import UI.Components.Model;
+import UI.Model.Model;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

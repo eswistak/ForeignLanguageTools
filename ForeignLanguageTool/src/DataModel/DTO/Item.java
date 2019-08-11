@@ -2,10 +2,10 @@
 File: Item.java
 Author: Ethan Swistak
 Date: Jul 5, 2019
-Purpose:
+Purpose: Provides a superclass for all of the...well let's call them DTO's (Data Transfer Objects) that exist, including Docs, Cards, and LanguagePairs
 */
 
-package DataModel;
+package DataModel.DTO;
 
 import java.io.StringWriter;
 import javax.xml.bind.JAXBContext;
@@ -17,14 +17,14 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-
+//The XmlSeeAlso allows us to Marshal and UnMarshal an object that has a superclass
 @XmlSeeAlso({User.class, LanguagePair.class, Group.class, Doc.class, Card.class, Note.class})
 public class Item {
     
-    @XmlTransient
+    @XmlTransient//The counter is used to assign a unique ID to each DTO
     private static int count=0;
     private int ID;
-    @XmlTransient
+    @XmlTransient//This is the actual XML node that maps back to the XML persistence store, I thought it would be easier to manipulate them this way but in hindsight, you probably could refactor the code to eliminate this
     private Node node;
     
     public Item(){
@@ -40,7 +40,7 @@ public class Item {
         Item.count = count;
     }
 
-    @XmlAttribute(name="ID")
+    @XmlAttribute(name="ID")//For a superclass, you need to have JAXB mapped to the getter instead of the field iteslf
     public int getID() {
         return ID;
     }
@@ -58,6 +58,7 @@ public class Item {
         this.node = node;
     }
     
+    //Called on an update operation, to sync up field values with XML persistence store
     protected void updateNode(String tagname, String text){
         Element element = (Element)((Element)node).getElementsByTagName(tagname).item(0);
         element.setTextContent(text);
@@ -68,6 +69,11 @@ public class Item {
         this.getNode().getParentNode().removeChild(this.getNode());
     }
     
+    /**
+     * This is purely for testing purposes
+     * 
+     * @return XML representation of item's node
+     */
     @Override
     public String toString() {
         try {

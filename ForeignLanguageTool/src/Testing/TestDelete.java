@@ -5,6 +5,13 @@
  */
 package Testing;
 
+import DataModel.DTO.Doc;
+import DataModel.DTO.User;
+import DataModel.DTO.Item;
+import DataModel.DTO.Group;
+import DataModel.DTO.LanguagePair;
+import DataModel.DTO.Note;
+import DataModel.DTO.Card;
 import DataModel.*;
 
 import DataModel.Utils;

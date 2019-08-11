@@ -5,10 +5,10 @@
  */
 package controller;
 
-import DataModel.LanguagePair;
+import DataModel.DTO.LanguagePair;
 import DataModel.Utils;
 import Logic.ActualAPI;
-import UI.Components.Model;
+import UI.Model.Model;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -29,7 +29,7 @@ import org.xml.sax.SAXException;
  *
  * @author Ethan Swistak
  */
-public class StartApplication extends Application {
+public class ApplicationStart extends Application {
     
     Model model = Model.getInstance();
     ActualAPI api = ActualAPI.getInstance();
@@ -56,11 +56,11 @@ public class StartApplication extends Application {
         try {
             Utils.load();      
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(StartApplication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ApplicationStart.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
-            Logger.getLogger(StartApplication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ApplicationStart.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(StartApplication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ApplicationStart.class.getName()).log(Level.SEVERE, null, ex);
         }
         launch(args);
     }

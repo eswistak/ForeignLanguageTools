@@ -2,17 +2,22 @@
 File: MockAPI.java
 Author: Ethan Swistak
 Date: Jul 21, 2019
-Purpose:
+Purpose: So the idea here was to make it possible to concurrently develop the front and backends simultaneously,
+it didn't work as well in practice as we'd hoped so there's not a lot here. I think one step better would have been to create a
+APIFactory method, this could be overridden for testing and used to inject a mock API. After the second week we already had the backend built out anyway
+so it was easier to just test the entire application in one go after that.
+
+It was a little bit difficult to wrap your mind around expected output, especially when mocking up, for instance, an update or delete method.
 */
 
 package Logic;
 
-import DataModel.Card;
-import DataModel.Doc;
-import DataModel.Group;
-import DataModel.LanguagePair;
-import DataModel.Note;
-import DataModel.User;
+import DataModel.DTO.Card;
+import DataModel.DTO.Doc;
+import DataModel.DTO.Group;
+import DataModel.DTO.LanguagePair;
+import DataModel.DTO.Note;
+import DataModel.DTO.User;
 import java.util.ArrayList;
 import java.util.List;
 

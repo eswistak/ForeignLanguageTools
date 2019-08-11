@@ -5,8 +5,8 @@
  */
 package Testing;
 
-import DataModel.LanguagePair;
-import UI.Components.Model;
+import DataModel.DTO.LanguagePair;
+import UI.Model.Model;
 
 /**
  *

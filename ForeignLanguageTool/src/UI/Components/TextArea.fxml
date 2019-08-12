@@ -4,10 +4,11 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.web.HTMLEditor?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Components.TextAreaController">
    <children>
-      <TextArea fx:id="area" editable="false" prefColumnCount="1" prefHeight="37.0" prefRowCount="1" prefWidth="40.5" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HTMLEditor fx:id="area" prefHeight="37.0" prefWidth="40.5" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <contextMenu>
             <ContextMenu>
               <items>
@@ -19,6 +20,6 @@
               </items>
             </ContextMenu>
          </contextMenu>
-      </TextArea>
+      </HTMLEditor>
    </children>
 </AnchorPane>
